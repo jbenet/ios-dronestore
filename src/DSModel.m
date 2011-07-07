@@ -41,7 +41,8 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 }
 
 + (DSModel *) modelWithVersion:(DSVersion *)version {
-  return [[[DSModel alloc] initWithVersion:version] autorelease];
+  Class model = [self modelWithDSType:version.type];
+  return [[[model alloc] initWithVersion:version] autorelease];
 }
 
 - (void) dealloc {

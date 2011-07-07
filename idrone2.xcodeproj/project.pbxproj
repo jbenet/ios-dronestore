@@ -151,6 +151,22 @@
 		D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
 		D9EAF0B713C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
 		D9EAF0B813C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
+		D9EAF0BD13C62B7D0089E9F7 /* DSDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */; };
+		D9EAF0BE13C62B7D0089E9F7 /* DSDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */; };
+		D9EAF0BF13C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
+		D9EAF0C013C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
+		D9EAF0C113C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
+		D9EAF0C213C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
+		D9EAF0C313C62B7D0089E9F7 /* DSDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0BB13C62B730089E9F7 /* DSDrone.h */; };
+		D9EAF0C413C62B7D0089E9F7 /* DSDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0BB13C62B730089E9F7 /* DSDrone.h */; };
+		D9EAF0C513C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
+		D9EAF0C613C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
+		D9EAF0C713C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
+		D9EAF0C813C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
+		D9EAF0CB13C62BA70089E9F7 /* test_datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0C913C62BA60089E9F7 /* test_datastore.m */; };
+		D9EAF0CC13C62BA70089E9F7 /* test_datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0C913C62BA60089E9F7 /* test_datastore.m */; };
+		D9EAF0CD13C62BA70089E9F7 /* test_drone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0CA13C62BA70089E9F7 /* test_drone.m */; };
+		D9EAF0CE13C62BA70089E9F7 /* test_drone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0CA13C62BA70089E9F7 /* test_drone.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +263,12 @@
 		D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPerson.m; sourceTree = "<group>"; };
 		D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+ObjCTypeSize.h"; sourceTree = "<group>"; };
 		D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+ObjCTypeSize.m"; sourceTree = "<group>"; };
+		D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDatastore.h; sourceTree = "<group>"; };
+		D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDatastore.m; sourceTree = "<group>"; };
+		D9EAF0BB13C62B730089E9F7 /* DSDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSDrone.h; sourceTree = "<group>"; };
+		D9EAF0BC13C62B780089E9F7 /* DSDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSDrone.m; sourceTree = "<group>"; };
+		D9EAF0C913C62BA60089E9F7 /* test_datastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_datastore.m; sourceTree = "<group>"; };
+		D9EAF0CA13C62BA70089E9F7 /* test_drone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_drone.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,6 +382,8 @@
 				D9EAF0AA13C4FED30089E9F7 /* test_merge.m */,
 				D9EAF0AB13C4FED40089E9F7 /* TestPerson.h */,
 				D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */,
+				D9EAF0C913C62BA60089E9F7 /* test_datastore.m */,
+				D9EAF0CA13C62BA70089E9F7 /* test_drone.m */,
 				D9EAF04513C365F60089E9F7 /* test_attribute.m */,
 				D9EAF04613C365F60089E9F7 /* test_key.m */,
 				D9EAF04713C365F60089E9F7 /* test_model.m */,
@@ -422,6 +446,10 @@
 				D9EAF02013C365C90089E9F7 /* DSAttribute.m */,
 				D9EAF02113C365C90089E9F7 /* DSKey.h */,
 				D9EAF02213C365C90089E9F7 /* DSKey.m */,
+				D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */,
+				D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */,
+				D9EAF0BB13C62B730089E9F7 /* DSDrone.h */,
+				D9EAF0BC13C62B780089E9F7 /* DSDrone.m */,
 				D9EAF02313C365C90089E9F7 /* DSModel.h */,
 				D9EAF02413C365C90089E9F7 /* DSModel.m */,
 				D9EAF09A13C374830089E9F7 /* DSMerge.h */,
@@ -459,6 +487,8 @@
 				D9EAF04313C365C90089E9F7 /* iDrone.h in Headers */,
 				D9EAF09C13C374850089E9F7 /* DSMerge.h in Headers */,
 				D9EAF0B313C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
+				D9EAF0BD13C62B7D0089E9F7 /* DSDatastore.h in Headers */,
+				D9EAF0C313C62B7D0089E9F7 /* DSDrone.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +513,8 @@
 				D9EAF04413C365C90089E9F7 /* iDrone.h in Headers */,
 				D9EAF09D13C374850089E9F7 /* DSMerge.h in Headers */,
 				D9EAF0B413C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
+				D9EAF0BE13C62B7D0089E9F7 /* DSDatastore.h in Headers */,
+				D9EAF0C413C62B7D0089E9F7 /* DSDrone.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +674,8 @@
 				D9EAF04013C365C90089E9F7 /* DSVersion.m in Sources */,
 				D9EAF09E13C374850089E9F7 /* DSMerge.m in Sources */,
 				D9EAF0B513C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
+				D9EAF0BF13C62B7D0089E9F7 /* DSDatastore.m in Sources */,
+				D9EAF0C513C62B7D0089E9F7 /* DSDrone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,6 +706,10 @@
 				D9EAF0AD13C4FED40089E9F7 /* test_merge.m in Sources */,
 				D9EAF0AF13C4FED40089E9F7 /* TestPerson.m in Sources */,
 				D9EAF0B713C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
+				D9EAF0C113C62B7D0089E9F7 /* DSDatastore.m in Sources */,
+				D9EAF0C713C62B7D0089E9F7 /* DSDrone.m in Sources */,
+				D9EAF0CB13C62BA70089E9F7 /* test_datastore.m in Sources */,
+				D9EAF0CD13C62BA70089E9F7 /* test_drone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +732,8 @@
 				D9EAF04113C365C90089E9F7 /* DSVersion.m in Sources */,
 				D9EAF09F13C374850089E9F7 /* DSMerge.m in Sources */,
 				D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
+				D9EAF0C013C62B7D0089E9F7 /* DSDatastore.m in Sources */,
+				D9EAF0C613C62B7D0089E9F7 /* DSDrone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +761,10 @@
 				D9EAF0AE13C4FED40089E9F7 /* test_merge.m in Sources */,
 				D9EAF0B013C4FED40089E9F7 /* TestPerson.m in Sources */,
 				D9EAF0B813C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
+				D9EAF0C213C62B7D0089E9F7 /* DSDatastore.m in Sources */,
+				D9EAF0C813C62B7D0089E9F7 /* DSDrone.m in Sources */,
+				D9EAF0CC13C62BA70089E9F7 /* test_datastore.m in Sources */,
+				D9EAF0CE13C62BA70089E9F7 /* test_drone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
