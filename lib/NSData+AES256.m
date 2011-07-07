@@ -15,10 +15,10 @@
   [keyStr getCString:key maxLength:sizeof(key) encoding:NSUTF8StringEncoding];
 
   // Perform PKCS7Padding on the key.
-  int bytes_to_pad = sizeof(key) - [keyStr length];
+  unsigned long bytes_to_pad = sizeof(key) - [keyStr length];
   if (bytes_to_pad > 0) {
     char byte = bytes_to_pad;
-    for (int i = sizeof(key) - bytes_to_pad; i < sizeof(key); i++)
+    for (unsigned long i = sizeof(key) - bytes_to_pad; i < sizeof(key); i++)
       key[i] = byte;
   }
 

@@ -54,8 +54,8 @@ struct nanotime nanotime_from_nsec(const uint64_t nsec) {
 // to follow the c++ api.
 struct timeval nanotime_timeval(const struct nanotime *nt) {
   struct timeval tv;
-  tv.tv_sec = nanotime_sec(nt);
-  tv.tv_usec = nanotime_usec(nt) % kT_ns_in_us;
+  tv.tv_sec = (uint32_t)nanotime_sec(nt);
+  tv.tv_usec = (uint32_t)nanotime_usec(nt) % kT_ns_in_us;
   return tv;
 }
 

@@ -96,13 +96,13 @@ static const NSString *DSVersionBlankHash =
 
 
 - (NSDictionary *) dataForAttribute:(NSString *)attrName {
-  return [serialRep valueForKey:attrName];
+  return [[serialRep valueForKey:@"attributes"] valueForKey:attrName];
 }
 
 - (id) metaData:(NSString *)key forAttribute:(NSString *)attrName {
-  NSObject *obj = [serialRep valueForKey:attrName];
+  NSObject *obj = [self dataForAttribute:attrName];
 
-  // object MUST be a dict or nil. otherwise its malformed data...
+  // object MUST be a dict or nil. otherwise it is malformed data...
   if ([obj isKindOfClass:[NSDictionary class]])
     return [(NSDictionary *)obj valueForKey:key];
 

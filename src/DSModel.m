@@ -19,24 +19,23 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   return nil;
 }
 
-- (id) initWithKey:(DSKey *)_key {
-  if ((self = [super init])) {
-    key = [_key retain];
-    version = [[DSVersion blankVersionWithKey:key] retain];
-    created = [[NSDate date] retain]; //TODO(jbenet) make this sysTime
+- (id) initWithKeyName:(NSString *)keyName {
+  DSKey *_key = [[self class] keyWithName:keyName];
+  return [self initWithVersion:[DSVersion blankVersionWithKey:_key]];
+}
 
-    attributeData = [[NSMutableDictionary alloc] init];
-  }
-  return self;
+- (id) initWithKeyName:(NSString *)keyName andParent:(DSKey *)parent {
+  DSKey *_key = [[self class] keyWithName:keyName];
+  return [self initWithVersion:[DSVersion blankVersionWithKey:_key]];
 }
 
 - (id) initWithVersion:(DSVersion *)_version {
   if ((self = [super init])) {
     version = [_version retain];
-    created = [[version createdDate] retain];
     key = [[version key] retain];
 
     attributeData = [[NSMutableDictionary alloc] init];
+    [self setAttributeDefaults];
   }
   return self;
 }
@@ -46,8 +45,8 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 }
 
 - (void) dealloc {
+  [attributeData release];
   [version release];
-  [created release];
   [key release];
   [super dealloc];
 }
@@ -68,50 +67,70 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   return !version.isBlank;
 }
 
+- (NSDate *) created {
+  return version.createdDate;
+}
 
 //------------------------------------------------------------------------------
 
 - (void) commit {
-  NSMutableString *hash = [[NSMutableString alloc] init];
-  [hash appendFormat:@"%@,%@,", self.key, [[self class] dstype]];
+  NSMutableString *hashB = [[NSMutableString alloc] init];
+  [hashB appendFormat:@"%@,%@,", self.key, [[self class] dstype]];
 
   NSMutableDictionary *attrData = [[NSMutableDictionary alloc] init];
-  NSDictionary *attrs = [self attributes];
+  NSDictionary *attrs = [[self class] attributes];
   for (DSAttribute *attr in [attrs allValues]) {
     [attrData setValue:[attr dataForInstance:self] forKey:attr.name];
-    [hash appendFormat:@"%@=%@,", attr.name, [attrData valueForKey:attr.name]];
+    [hashB appendFormat:@"%@=%@,", attr.name, [attrData valueForKey:attr.name]];
   }
 
-  hash = [self sha1HexDigest];
-
+  NSString *hash = [hashB sha1HexDigest];
   if ([hash isEqualToString:version.hashstr]) {
     DSLog(@"[%@] committing unmodified version.", self.key);
     return;
   }
 
-  NSNumber *nt_committed = [NSNumber numberWithLongLong:nanotime_now().ns];
-  NSNumber *nt_created = [NSNumber numberWithLongLong:version.created.ns];
+  nanotime now = nanotime_now();
+  nanotime created_nt = ([version isBlank] ? now : version.created);
+  NSNumber *committed_num = [NSNumber numberWithLongLong:now.ns];
+  NSNumber *created_num = [NSNumber numberWithLongLong:created_nt.ns];
 
   DSMutableSerialRep *serialRep = [[DSMutableSerialRep alloc] init];
   [serialRep setValue:hash forKey:@"hash"];
   [serialRep setValue:[key string] forKey:@"key"];
   [serialRep setValue:[self dstype] forKey:@"type"];
   [serialRep setValue:version.hashstr forKey:@"parent"];
-  [serialRep setValue:nt_committed forKey:@"committed"];
-  [serialRep setValue:nt_created forKey:@"created"];
-  [serialRep setValue:attrs forKey:@"attributes"];
+  [serialRep setValue:committed_num forKey:@"committed"];
+  [serialRep setValue:created_num forKey:@"created"];
+  [serialRep setValue:attrData forKey:@"attributes"];
 
   NSLog(@"%@", serialRep.contents);
-  [version release];
-  version = [[DSVersion alloc] initWithSerialRep:serialRep];
+
+  @synchronized(self) { // just in case.
+    [version release];
+    version = [[DSVersion alloc] initWithSerialRep:serialRep];
+  }
 }
 
-- (void) merge:(DSVersion *)version {
-  [NSException raise:@"DSNotImplemented" format:@"Not Implemented Yet"];
+
+
+- (void) mergeVersion:(DSVersion *)other {
+  [DSMerge mergeInstance:self withVersion:other];
 }
+
+
 
 //------------------------------------------------------------------------------
 
+- (void) setAttributeDefaults {
+  [attributeData removeAllObjects];
+  NSArray *attrs = [[[self class] attributes] allValues];
+  for (DSAttribute *attr in attrs) {
+    [attributeData setValue:[NSMutableDictionary dictionary] forKey:attr.name];
+    [attr setDefaultValue:attr.defaultValue forInstance:self];
+  }
+
+}
 
 - (void) setData:(NSDictionary *)dict forAttribute:(NSString *)attrName {
   NSMutableDictionary *data = [attributeData valueForKey:attrName];
@@ -121,30 +140,57 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 
 - (NSDictionary *) dataForAttribute:(NSString *)attrName {
-  // NSMutableDictionary *data = [NSMutableDictionary dictionary];
-  // if ([attributeData valueForKey:attr.name])
-  //   [data addEntriesFromDictionary:[attributeData valueForKey:attr.name]];
-  // [data setValue:[attr valueForInstance:self] forKey:@"value"];
   return [attributeData valueForKey:attrName];
 }
 
+- (NSMutableDictionary *) mutableDataForAttribute:(NSString *)attrName{
+  return [attributeData valueForKey:attrName];
+}
+
+- (NSDictionary *) attributeData {
+  return attributeData;
+}
 
 + (NSDictionary *) attributes {
   return [dsAttributeRegistry valueForKey:[self dstype]];
+}
+
++ (DSAttribute *) attributeNamed:(NSString *)name {
+  return [[self attributes] valueForKey:name];
 }
 
 //------------------------------------------------------------------------------
 
 
 + (void) registerAttribute:(DSAttribute *)attr {
+
+  if (![attr isKindOfClass:[DSAttribute class]]) {
+    [NSException raise:@"DSInvalidAttribute" format:@"%@ is not"
+      "derived from %@", attr, [DSAttribute class]];
+  }
+
+
+  if (![attr.strategy isKindOfClass:[DSMergeStrategy class]]) {
+    [NSException raise:@"DSInvalidStrategy" format:@"%@ is not"
+      "derived from %@", attr.strategy, [DSMergeStrategy class]];
+  }
+
   NSMutableDictionary *attrs = [dsAttributeRegistry valueForKey:[self dstype]];
-  assert(attrs);
+  if (!attrs) {
+    [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
+      "registry for %@ is missing. (did you call [super registerAttributes] "
+      "first?).", self];
+  }
+
+  DSLog(@"[%@] registered attribute %@", self, attr.name);
+  // ok register it!
   [attrs setValue:attr forKey:attr.name];
-  [attributeData setValue:[NSMutableDictionary dictionary] forKey:attr.name];
 }
 
 + (void) registerAttributes {
-  // default is blank.
+
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  [dsAttributeRegistry setValue:dict forKey:[self dstype]];
 }
 
 
@@ -155,11 +201,17 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   if (dsAttributeRegistry == nil)
     dsAttributeRegistry = [[NSMutableDictionary alloc] init];
 
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  [dsAttributeRegistry setValue:dict forKey:[self dstype]];
-  [dsModelRegistry setValue:[self class] forKey:[self dstype]];
-
   [self registerAttributes];
+
+  NSString *dstype = [self dstype];
+
+  if ([dsAttributeRegistry valueForKey:dstype] == nil) {
+    [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
+    "registry for %@ is missing. (did you override [DSModel "
+    "registerAttributes] without calling [super registerAttributes]?).", self];
+  }
+  [dsModelRegistry setValue:[self class] forKey:dstype];
+
 }
 //------------------------------------------------------------------------------
 
@@ -170,6 +222,11 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 + (NSString *) dstype {
   return NSStringFromClass([self class]);
+}
+
++ (DSKey *) keyWithName:(NSString *)name {
+  NSString *s = [NSString stringWithFormat:@"/%@/%@", [self dstype], name];
+  return [DSKey keyWithString:s];
 }
 
 + (Class) modelWithDSType:(NSString *)type {

@@ -141,6 +141,16 @@
 		D9EAF0A613C376860089E9F7 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
 		D9EAF0A713C376860089E9F7 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
 		D9EAF0A813C376860089E9F7 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
+		D9EAF0AD13C4FED40089E9F7 /* test_merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AA13C4FED30089E9F7 /* test_merge.m */; };
+		D9EAF0AE13C4FED40089E9F7 /* test_merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AA13C4FED30089E9F7 /* test_merge.m */; };
+		D9EAF0AF13C4FED40089E9F7 /* TestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */; };
+		D9EAF0B013C4FED40089E9F7 /* TestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */; };
+		D9EAF0B313C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */; };
+		D9EAF0B413C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */; };
+		D9EAF0B513C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
+		D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
+		D9EAF0B713C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
+		D9EAF0B813C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,6 +242,11 @@
 		D9EAF09A13C374830089E9F7 /* DSMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSMerge.h; sourceTree = "<group>"; };
 		D9EAF09B13C374840089E9F7 /* DSMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMerge.m; sourceTree = "<group>"; };
 		D9EAF0A213C3758B0089E9F7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D9EAF0AA13C4FED30089E9F7 /* test_merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_merge.m; sourceTree = "<group>"; };
+		D9EAF0AB13C4FED40089E9F7 /* TestPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPerson.h; sourceTree = "<group>"; };
+		D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPerson.m; sourceTree = "<group>"; };
+		D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+ObjCTypeSize.h"; sourceTree = "<group>"; };
+		D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+ObjCTypeSize.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +357,9 @@
 		D95103B911747E8400288D3B /* test */ = {
 			isa = PBXGroup;
 			children = (
+				D9EAF0AA13C4FED30089E9F7 /* test_merge.m */,
+				D9EAF0AB13C4FED40089E9F7 /* TestPerson.h */,
+				D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */,
 				D9EAF04513C365F60089E9F7 /* test_attribute.m */,
 				D9EAF04613C365F60089E9F7 /* test_key.m */,
 				D9EAF04713C365F60089E9F7 /* test_model.m */,
@@ -354,6 +372,8 @@
 		D95103BB11747EAD00288D3B /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */,
+				D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */,
 				D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */,
 				D9EAF09813C371F30089E9F7 /* GHUnitIOSTestMain.m */,
 				D953BE3C122194F7005A6BEC /* NSData+Base64.h */,
@@ -438,6 +458,7 @@
 				D9EAF03E13C365C90089E9F7 /* DSVersion.h in Headers */,
 				D9EAF04313C365C90089E9F7 /* iDrone.h in Headers */,
 				D9EAF09C13C374850089E9F7 /* DSMerge.h in Headers */,
+				D9EAF0B313C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +482,7 @@
 				D9EAF03F13C365C90089E9F7 /* DSVersion.h in Headers */,
 				D9EAF04413C365C90089E9F7 /* iDrone.h in Headers */,
 				D9EAF09D13C374850089E9F7 /* DSMerge.h in Headers */,
+				D9EAF0B413C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +641,7 @@
 				D9EAF03B13C365C90089E9F7 /* DSSerialRep.m in Sources */,
 				D9EAF04013C365C90089E9F7 /* DSVersion.m in Sources */,
 				D9EAF09E13C374850089E9F7 /* DSMerge.m in Sources */,
+				D9EAF0B513C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +669,9 @@
 				D9EAF04E13C365F60089E9F7 /* test_version.m in Sources */,
 				D9EAF09913C371F30089E9F7 /* GHUnitIOSTestMain.m in Sources */,
 				D9EAF0A013C374850089E9F7 /* DSMerge.m in Sources */,
+				D9EAF0AD13C4FED40089E9F7 /* test_merge.m in Sources */,
+				D9EAF0AF13C4FED40089E9F7 /* TestPerson.m in Sources */,
+				D9EAF0B713C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +693,7 @@
 				D9EAF03C13C365C90089E9F7 /* DSSerialRep.m in Sources */,
 				D9EAF04113C365C90089E9F7 /* DSVersion.m in Sources */,
 				D9EAF09F13C374850089E9F7 /* DSMerge.m in Sources */,
+				D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +718,9 @@
 				D9EAF0A613C376860089E9F7 /* NSData+AES256.m in Sources */,
 				D9EAF0A713C376860089E9F7 /* NSDate+Nanotime.m in Sources */,
 				D9EAF0A813C376860089E9F7 /* NSString+SHA.m in Sources */,
+				D9EAF0AE13C4FED40089E9F7 /* test_merge.m in Sources */,
+				D9EAF0B013C4FED40089E9F7 /* TestPerson.m in Sources */,
+				D9EAF0B813C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

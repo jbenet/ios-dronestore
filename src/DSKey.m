@@ -51,6 +51,10 @@
   return [DSKey keyWithString:key];
 }
 
+- (DSKey *) childWithKey:(DSKey *)key {
+  return [self childWithString:key.string];
+}
+
 - (BOOL) isAncestorOfKey:(DSKey *)key {
   return [key.string hasPrefix:string];
 }

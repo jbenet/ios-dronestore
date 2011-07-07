@@ -14,7 +14,7 @@
 #import "DSMerge.h"
 
 #ifndef DSLog
-#define DSLog(fmt, ...) NSLog((@"%s [line %d] " fmt), \
+#define DSLog(fmt, ...) NSLog((@"[DSLog] %s [line %d] " fmt), \
           __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #endif
 

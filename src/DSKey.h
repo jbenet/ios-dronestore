@@ -12,6 +12,9 @@
 //   Key('/ComedyGroup/MontyPython')
 //   Key('/ComedyGroup/MontyPython/Comedian/JohnCleese')
 
+#ifndef DSKey
+#define DSKey(string) [DSKey keyWithString:string]
+#endif
 
 @interface DSKey : NSObject {
   NSString *string;
@@ -25,6 +28,7 @@
 - (id) initWithString:(NSString *)string;
 
 - (DSKey *) childWithString:(NSString *)child;
+- (DSKey *) childWithKey:(DSKey *)key;
 
 - (BOOL) isAncestorOfKey:(DSKey *)key;
 - (BOOL) isTopLevelKey;
