@@ -66,6 +66,8 @@
 - (void) setDefaultValue:(id)value forInstance:(DSModel *)instance;
 - (id) valueForInstance:(DSModel *)instance;
 
+- (void) updateValueForInstance:(DSModel *)instance;
+
 - (void) setData:(NSDictionary *)data forInstance:(DSModel *)instance;
 - (void) setDefaultValue:(id)value forInstance:(DSModel *)instance;
 - (NSDictionary *) dataForInstance:(DSModel *)instance;

@@ -102,21 +102,25 @@
 //------------------------------------------------------------------------------
 
 
-- (void) setData:(NSDictionary *)data forInstance:(DSModel *)instance {
-  [instance setData:data forAttribute:name];
-  [self setValue:[data valueForKey:@"value"] forInstance:instance];
-}
-
-- (NSDictionary *) dataForInstance:(DSModel *)instance {
-
+- (void) updateValueForInstance:(DSModel *)instance {
   // make sure we (and merge strategies) have the latest value.
   // grr need decorators...
 
-  NSObject *curr_val = [self valueForInstance:instance];
-  NSObject *prev_val = [instance.version valueForAttribute:name];
-  if (![curr_val isEqual:prev_val])
-    [self setValue:curr_val forInstance:instance];
+  NSDictionary *data = [instance dataForAttribute:name];
+  id<DSComparable> prop_val = [self valueForInstance:instance];
+  id<DSComparable> data_val = [data valueForKey:@"value"];
+  if (!prop_val || !data_val || [prop_val compare:data_val] != NSOrderedSame)
+    [self setValue:prop_val forInstance:instance];
+}
 
+//------------------------------------------------------------------------------
+
+- (void) setData:(NSDictionary *)data forInstance:(DSModel *)instance {
+  [instance setData:data forAttribute:name];
+  [self __invokeSetValue:[data valueForKey:@"value"] forInstance:instance];
+}
+
+- (NSDictionary *) dataForInstance:(DSModel *)instance {
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
   [dict addEntriesFromDictionary:[instance dataForAttribute:name]];
   return [dict autorelease];

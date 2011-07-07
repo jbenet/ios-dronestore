@@ -121,6 +121,11 @@
 - (void) setValue:(id)value forInstance:(DSModel *)instance {
   NSMutableDictionary *data = [instance mutableDataForAttribute:attribute.name];
 
+  id<DSComparable> curr = [data valueForKey:@"value"];
+  id<DSComparable> prev = [instance.version valueForAttribute:attribute.name];
+  if (curr && prev && [curr compare:prev] == NSOrderedSame)
+    return; // value has not changed. no need to update.
+
   // store our extra state.
   NSNumber *now = [NSNumber numberWithLongLong:nanotime_now().ns];
   [data setValue:now forKey:@"updated"];

@@ -80,6 +80,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   NSMutableDictionary *attrData = [[NSMutableDictionary alloc] init];
   NSDictionary *attrs = [[self class] attributes];
   for (DSAttribute *attr in [attrs allValues]) {
+    [attr updateValueForInstance:self];
     [attrData setValue:[attr dataForInstance:self] forKey:attr.name];
     [hashB appendFormat:@"%@=%@,", attr.name, [attrData valueForKey:attr.name]];
   }
