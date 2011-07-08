@@ -61,6 +61,10 @@
 		D953BE40122194F7005A6BEC /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
 		D953BE41122194F7005A6BEC /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BE3C122194F7005A6BEC /* NSData+Base64.h */; };
 		D953BE42122194F7005A6BEC /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
+		D97AB75813C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
+		D97AB75913C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
+		D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
+		D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D9BB61EB12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
 		D9BB61ED12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
 		D9EAF00B13C365980089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
@@ -110,9 +114,6 @@
 		D9EAF04C13C365F60089E9F7 /* test_model.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04713C365F60089E9F7 /* test_model.m */; };
 		D9EAF04D13C365F60089E9F7 /* test_serialrep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04813C365F60089E9F7 /* test_serialrep.m */; };
 		D9EAF04E13C365F60089E9F7 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
-		D9EAF05813C36DC90089E9F7 /* BsonNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05713C36DC90089E9F7 /* BsonNetwork.framework */; };
-		D9EAF05A13C36DD00089E9F7 /* BsonNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05713C36DC90089E9F7 /* BsonNetwork.framework */; };
-		D9EAF05B13C36DD10089E9F7 /* BsonNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05713C36DC90089E9F7 /* BsonNetwork.framework */; };
 		D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05C13C36E930089E9F7 /* GHUnit.framework */; };
 		D9EAF08013C36F170089E9F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF07F13C36F170089E9F7 /* Cocoa.framework */; };
 		D9EAF08213C36F550089E9F7 /* GHUnit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9EAF05C13C36E930089E9F7 /* GHUnit.framework */; };
@@ -126,7 +127,6 @@
 		D9EAF09213C3705F0089E9F7 /* test_model.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04713C365F60089E9F7 /* test_model.m */; };
 		D9EAF09313C3705F0089E9F7 /* test_serialrep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04813C365F60089E9F7 /* test_serialrep.m */; };
 		D9EAF09413C3705F0089E9F7 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
-		D9EAF09513C3707A0089E9F7 /* BsonNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05713C36DC90089E9F7 /* BsonNetwork.framework */; };
 		D9EAF09713C371D30089E9F7 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */; };
 		D9EAF09913C371F30089E9F7 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09813C371F30089E9F7 /* GHUnitIOSTestMain.m */; };
 		D9EAF09C13C374850089E9F7 /* DSMerge.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF09A13C374830089E9F7 /* DSMerge.h */; };
@@ -224,6 +224,7 @@
 		D953BDD71221884A005A6BEC /* NSData+AES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES256.m"; sourceTree = "<group>"; };
 		D953BE3C122194F7005A6BEC /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		D953BE3D122194F7005A6BEC /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		D97AB75713C75B1C006A65D3 /* bson-objc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "bson-objc.framework"; sourceTree = "<group>"; };
 		D9BB61E712108403006F32AA /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = lib/YAJL.framework; sourceTree = "<group>"; };
 		D9EAF00913C365980089E9F7 /* nanotime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanotime.c; sourceTree = "<group>"; };
 		D9EAF00A13C365980089E9F7 /* nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanotime.h; sourceTree = "<group>"; };
@@ -247,7 +248,6 @@
 		D9EAF04713C365F60089E9F7 /* test_model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_model.m; sourceTree = "<group>"; };
 		D9EAF04813C365F60089E9F7 /* test_serialrep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_serialrep.m; sourceTree = "<group>"; };
 		D9EAF04913C365F60089E9F7 /* test_version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_version.m; sourceTree = "<group>"; };
-		D9EAF05713C36DC90089E9F7 /* BsonNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BsonNetwork.framework; path = lib/BsonNetwork.framework; sourceTree = "<group>"; };
 		D9EAF05C13C36E930089E9F7 /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnit.framework; path = lib/GHUnit.framework; sourceTree = "<group>"; };
 		D9EAF06113C36EC80089E9F7 /* MacTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EAF07F13C36F170089E9F7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -279,7 +279,7 @@
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 				D9BB61ED12108403006F32AA /* YAJL.framework in Frameworks */,
 				D933724D1347283500C7FF19 /* GHUnitIOS.framework in Frameworks */,
-				D9EAF05813C36DC90089E9F7 /* BsonNetwork.framework in Frameworks */,
+				D97AB75813C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +294,7 @@
 				D933733E1347411800C7FF19 /* GHUnitIOS.framework in Frameworks */,
 				D93373521347419E00C7FF19 /* libsqlite3.0.dylib in Frameworks */,
 				D93373531347421700C7FF19 /* YAJL.framework in Frameworks */,
-				D9EAF05B13C36DD10089E9F7 /* BsonNetwork.framework in Frameworks */,
+				D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +305,7 @@
 				D9510B6B117C3B4B00288D3B /* Foundation.framework in Frameworks */,
 				D9BB61EB12108403006F32AA /* YAJL.framework in Frameworks */,
 				D933724E1347283500C7FF19 /* GHUnitIOS.framework in Frameworks */,
-				D9EAF05A13C36DD00089E9F7 /* BsonNetwork.framework in Frameworks */,
+				D97AB75913C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +315,7 @@
 			files = (
 				D9EAF08013C36F170089E9F7 /* Cocoa.framework in Frameworks */,
 				D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */,
-				D9EAF09513C3707A0089E9F7 /* BsonNetwork.framework in Frameworks */,
+				D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +352,6 @@
 			children = (
 				D9EAF0A213C3758B0089E9F7 /* CFNetwork.framework */,
 				D9EAF05C13C36E930089E9F7 /* GHUnit.framework */,
-				D9EAF05713C36DC90089E9F7 /* BsonNetwork.framework */,
 				D933724C1347283500C7FF19 /* GHUnitIOS.framework */,
 				D9BB61E712108403006F32AA /* YAJL.framework */,
 				D9EAF07F13C36F170089E9F7 /* Cocoa.framework */,
@@ -396,6 +395,7 @@
 		D95103BB11747EAD00288D3B /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D97AB75713C75B1C006A65D3 /* bson-objc.framework */,
 				D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */,
 				D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */,
 				D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */,
@@ -831,6 +831,7 @@
 					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
 					"\"$(SRCROOT)/build/Release-iphoneos\"",
 					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = iDrone;
 				SDKROOT = iphoneos;
@@ -870,6 +871,7 @@
 					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
 					"\"$(SRCROOT)/build/Release-iphoneos\"",
 					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = iDrone;
 				SDKROOT = iphoneos;
@@ -941,6 +943,10 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "GHTests/GHTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/lib\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
@@ -963,6 +969,10 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "GHTests/GHTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/lib\"",
+				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
@@ -1006,6 +1016,7 @@
 					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
 					"\"$(SRCROOT)/build/Release-iphoneos\"",
 					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = iDrone;
 				SDKROOT = iphoneos;
@@ -1045,6 +1056,7 @@
 					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
 					"\"$(SRCROOT)/build/Release-iphoneos\"",
 					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = iDrone;
 				SDKROOT = iphoneos;
@@ -1095,6 +1107,10 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "GHTests/MacTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1122,6 +1138,10 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "GHTests/MacTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/lib\"",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1184,6 +1204,7 @@
 				D9EAF07D13C36EC80089E9F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
