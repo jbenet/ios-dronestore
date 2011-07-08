@@ -11,12 +11,14 @@
 @property (nonatomic, readonly, copy) NSDictionary *contents;
 
 - (id) init;
+- (id) initWithData:(NSData *)data;
 - (id) initWithDictionary:(NSDictionary *)dict;
 - (id) initWithSerialRep:(DSSerialRep *)serialRep;
 
 - (id) valueForKey:(NSString *)key;
 
 - (NSData *) data;
++ (DSSerialRep *) serialRepWithData:(NSData *)data;
 
 @end
 

@@ -96,6 +96,7 @@
 @end
 
 @interface NSNumber (DSAttribute)
+- (NSNumber *) convertedNumberForObjCType:(const char *)objCType;
 + (id) value:(const void *)buf withObjCType:(const char *)type;
 @end
 

@@ -171,9 +171,16 @@
 - (void) __invokeSetValue:(NSValue *)value forInstance:(DSModel *)instance {
 
   if (strcmp([value objCType], objCType) != 0) {
-    [NSException raise:@"DSInvalidType" format:@"%@ is of objCType %s not %s "
-      "and cannot be set on %@.%@", value, [value objCType], objCType,
-      [instance class], name];
+
+    // attempt to convert.
+    if ([value isKindOfClass:[NSNumber class]])
+      value = [(NSNumber *)value convertedNumberForObjCType:objCType];
+
+    if (value == nil) {
+      [NSException raise:@"DSInvalidType" format:@"%@ is of objCType %s not %s "
+        "and cannot be set on %@.%@", value, [value objCType], objCType,
+        [instance class], name];
+    }
   }
 
   char argumentBuffer[objc_primitive_size(objCType)];
@@ -224,8 +231,8 @@
     case __primitive_c_ushort    :
     case __primitive_c_ulong     :
     case __primitive_c_ulonglong :
-    case __primitive_c_ufloat    :
-    case __primitive_c_udouble   :
+    case __primitive_c_float     :
+    case __primitive_c_double    :
     case __primitive_c_bool      : return [NSNumber class];
     default: return [NSValue class];
   }
@@ -259,9 +266,9 @@
       return [NSNumber numberWithUnsignedLong:*(unsigned long*)buf];
     case __primitive_c_ulonglong:
       return [NSNumber numberWithUnsignedLongLong:*(unsigned long long*)buf];
-    case __primitive_c_ufloat:
+    case __primitive_c_float:
       return [NSNumber numberWithFloat:*(float *)buf];
-    case __primitive_c_udouble:
+    case __primitive_c_double:
       return [NSNumber numberWithDouble:*(double *)buf];
     case __primitive_c_bool:
       return [NSNumber numberWithBool:*(bool *)buf];
@@ -269,6 +276,116 @@
       return [NSValue value:buf withObjCType:type];
   }
 }
+
+
+#define NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, ret) {                  \
+  switch (*objCType) {                                                        \
+    case __primitive_c_char:                                                  \
+      ret = [NSNumber numberWithChar:(char)var]; break;                       \
+    case __primitive_c_int:                                                   \
+      ret = [NSNumber numberWithInt:(int)var]; break;                         \
+    case __primitive_c_short:                                                 \
+      ret = [NSNumber numberWithShort:(short)var]; break;                     \
+    case __primitive_c_long:                                                  \
+      ret = [NSNumber numberWithLong:(long)var]; break;                       \
+    case __primitive_c_longlong:                                              \
+      ret = [NSNumber numberWithLongLong:(long long)var]; break;              \
+    case __primitive_c_uchar:                                                 \
+      ret = [NSNumber numberWithUnsignedChar:(unsigned char)var]; break;      \
+    case __primitive_c_uint:                                                  \
+      ret = [NSNumber numberWithUnsignedInt:(unsigned int)var]; break;        \
+    case __primitive_c_ushort:                                                \
+      ret = [NSNumber numberWithUnsignedShort:(unsigned short)var]; break;    \
+    case __primitive_c_ulong:                                                 \
+      ret = [NSNumber numberWithUnsignedLong:(unsigned long)var]; break;      \
+    case __primitive_c_ulonglong:                                             \
+      ret = [NSNumber numberWithUnsignedLongLong:(unsigned long long)var];    \
+      break;                                                                  \
+    case __primitive_c_float:                                                 \
+      ret = [NSNumber numberWithFloat:(float)var]; break;                     \
+    case __primitive_c_double:                                                \
+      ret = [NSNumber numberWithDouble:(double)var]; break;                   \
+    case __primitive_c_bool:                                                  \
+      ret = [NSNumber numberWithBool:(bool)var]; break;                       \
+    default:                                                                  \
+      ret = nil; break;                                                       \
+  }                                                                           \
+}
+
+- (NSNumber *) convertedNumberForObjCType:(const char *)objCType {
+  NSNumber *altValue = nil;
+  switch (*[self objCType])
+  {
+    case __primitive_c_char: {
+      char var = [self charValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_int: {
+      int var = [self intValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_short: {
+      short var = [self shortValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_long: {
+      long var = [self longValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_longlong: {
+      long long var = [self longLongValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_uchar: {
+      unsigned char var = [self unsignedCharValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_uint: {
+      unsigned int var = [self unsignedIntValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_ushort: {
+      unsigned short var = [self shortValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_ulong: {
+      unsigned long var = [self unsignedLongValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_ulonglong: {
+      unsigned long long var = [self unsignedLongLongValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_float: {
+      float var = [self floatValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_double: {
+      double var = [self doubleValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+    case __primitive_c_bool: {
+      bool var = [self boolValue];
+      NSNUMBER_WITH_VAR_AND_OBJCTYPE(var, objCType, altValue);
+      break;
+    }
+  }
+  return altValue;
+}
+#undef NSNUMBER_WITH_VAR_AND_OBJCTYPE
+
 @end
 
 

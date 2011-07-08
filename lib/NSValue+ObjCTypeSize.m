@@ -28,8 +28,8 @@ inline int objc_primitive_size(const char * type)
     case __primitive_c_ushort    : return sizeof(unsigned short);
     case __primitive_c_ulong     : return sizeof(unsigned long);
     case __primitive_c_ulonglong : return sizeof(unsigned long long);
-    case __primitive_c_ufloat    : return sizeof(float);
-    case __primitive_c_udouble   : return sizeof(double);
+    case __primitive_c_float    : return sizeof(float);
+    case __primitive_c_double   : return sizeof(double);
     case __primitive_c_bool      : return sizeof(bool);
     case __primitive_c_void      : return 0;
     case __primitive_c_charptr   : return sizeof(char*);

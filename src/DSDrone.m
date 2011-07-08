@@ -19,7 +19,7 @@
 - (id) initWithId:(DSKey *)key andDatastore:(DSDatastore *)store {
   if ((self = [super init])) {
     droneid = [key retain];
-    datastore = [datastore retain];
+    datastore = [store retain];
   }
   return self;
 }
@@ -38,11 +38,14 @@
 
 // Dronestore drone interface. sorry its not more obj-c-like!
 - (DSModel *) get:(DSKey *)key {
-  NSDictionary *data = [datastore get:key];
+  if (key == nil)
+    return nil;
+
+  NSData *data = [datastore get:key];
   if (data == nil)
     return nil;
 
-  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:data];
+  DSSerialRep *rep = [[DSSerialRep alloc] initWithData:data];
   DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
   DSModel *instance = [DSModel modelWithVersion:version];
   [version release];
@@ -59,19 +62,28 @@
 }
 
 - (void) delete:(DSKey *)key {
-  [datastore delete:key];
+  if (key != nil)
+    [datastore delete:key];
 }
 
 - (BOOL) contains:(DSKey *)key {
+  if (key == nil)
+    return NO;
+
   return [datastore contains:key];
 }
 
 - (DSVersion *) putVersion:(DSVersion *)version {
+  if (version == nil)
+    return nil;
+
   [datastore put:[version.serialRep data] forKey:version.key];
   return version;
 }
 
 - (DSModel *) mergeVersion:(DSVersion *)new_version {
+  if (new_version == nil)
+    return nil;
 
   DSModel *curr_instance = [self get:new_version.key];
   if (curr_instance == nil) {

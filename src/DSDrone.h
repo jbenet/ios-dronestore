@@ -10,6 +10,7 @@
 @class DSVersion;
 @class DSSerialRep;
 @class DSDatastore;
+@protocol DSModel;
 
 @interface DSDrone : NSObject {
   DSKey *droneid;
@@ -23,9 +24,9 @@
 - (id) initWithId:(DSKey *)key andDatastore:(DSDatastore *)store;
 
 // Dronestore drone interface. sorry its not more obj-c-like!
-- (DSModel *) get:(DSKey *)key;
-- (DSModel *) put:(DSModel *)instance;
-- (DSModel *) merge:(DSModel *)instance;
+- (id<DSModel>) get:(DSKey *)key;
+- (id<DSModel>) put:(DSModel *)instance;
+- (id<DSModel>) merge:(DSModel *)instance;
 - (void) delete:(DSKey *)key;
 - (BOOL) contains:(DSKey *)key;
 

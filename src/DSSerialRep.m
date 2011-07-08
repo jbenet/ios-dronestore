@@ -1,5 +1,5 @@
 
-#import <BsonNetwork/BSONCodec.h>
+#import <bson-objc/BSONCodec.h>
 #import "DSSerialRep.h"
 
 @implementation DSSerialRep
@@ -13,6 +13,9 @@
   return self;
 }
 
+- (id) initWithData:(NSData *)data {
+  return [self initWithDictionary:[data BSONValue]];
+}
 
 - (id) initWithDictionary:(NSDictionary *)dict {
   if ((self = [self init])) {
@@ -28,6 +31,10 @@
 - (void) dealloc {
   [contents release];
   [super dealloc];
+}
+
++ (DSSerialRep *) serialRepWithData:(NSData *)data {
+  return [self representationWithBSON:data];
 }
 
 //------------------------------------------------------------------------------

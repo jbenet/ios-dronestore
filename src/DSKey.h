@@ -13,7 +13,7 @@
 //   Key('/ComedyGroup/MontyPython/Comedian/JohnCleese')
 
 #ifndef DSKey
-#define DSKey(string) [DSKey keyWithString:string]
+#define DSKey(...) ([DSKey keyWithString:__VA_ARGS__])
 #endif
 
 @interface DSKey : NSObject {

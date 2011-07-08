@@ -35,7 +35,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
     key = [[version key] retain];
 
     attributeData = [[NSMutableDictionary alloc] init];
-    [self setAttributeDefaults];
+    [self initializeAttributes];
   }
   return self;
 }
@@ -74,9 +74,22 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 //------------------------------------------------------------------------------
 
+- (BOOL) isEqualToModel:(DSModel *)model {
+  if (![key isEqualToKey:model.key])
+    return NO;
+
+  if (![version isEqualToVersion:model.version])
+    return NO;
+
+  return [attributeData isEqual:[model attributeData]];
+}
+
+
+//------------------------------------------------------------------------------
+
 - (void) commit {
   NSMutableString *hashB = [[NSMutableString alloc] init];
-  [hashB appendFormat:@"%@,%@,", self.key, [[self class] dstype]];
+  [hashB appendFormat:@"%@,%@,", key, [self dstype]];
 
   NSMutableDictionary *attrData = [[NSMutableDictionary alloc] init];
   NSDictionary *attrs = [[self class] attributes];
@@ -124,12 +137,17 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 //------------------------------------------------------------------------------
 
-- (void) setAttributeDefaults {
+- (void) initializeAttributes {
   [attributeData removeAllObjects];
   NSArray *attrs = [[[self class] attributes] allValues];
   for (DSAttribute *attr in attrs) {
     [attributeData setValue:[NSMutableDictionary dictionary] forKey:attr.name];
-    [attr setDefaultValue:attr.defaultValue forInstance:self];
+
+    NSDictionary *data = [version dataForAttribute:attr.name];
+    if (data)
+      [attr setData:data forInstance:self];
+    else
+      [attr setDefaultValue:attr.defaultValue forInstance:self];
   }
 
 }

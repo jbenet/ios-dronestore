@@ -18,8 +18,8 @@ typedef enum  {
   __primitive_c_ushort    = 'S',  // @encode(unsigned short);
   __primitive_c_ulong     = 'L',  // @encode(unsigned long);
   __primitive_c_ulonglong = 'Q',  // @encode(unsigned long long);
-  __primitive_c_ufloat    = 'f',  // @encode(float);
-  __primitive_c_udouble   = 'd',  // @encode(double);
+  __primitive_c_float     = 'f',  // @encode(float);
+  __primitive_c_double    = 'd',  // @encode(double);
   __primitive_c_bool      = 'B',  // @encode(bool);
   __primitive_c_void      = 'v',  // @encode(void);
   __primitive_c_charptr   = '*',  // @encode(char*);

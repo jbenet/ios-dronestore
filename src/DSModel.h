@@ -10,8 +10,21 @@
 @class DSKey;
 @class DSVersion;
 @class DSAttribute;
+@class DSModel;
 
-@interface DSModel : NSObject {
+@protocol DSModel<NSObject>
+- (DSKey *) key;
+- (DSVersion *) version;
+- (NSDate *) created;
+- (BOOL) isCommitted;
+
+- (void) commit;
+- (void) mergeVersion:(DSVersion *)other;
+
+- (BOOL) isEqualToModel:(DSModel *)model;
+@end
+
+@interface DSModel : NSObject <DSModel> {
   DSKey *key;
   DSVersion *version;
 
@@ -36,13 +49,15 @@
 - (void) commit;
 - (void) mergeVersion:(DSVersion *)other;
 
+// equality
+- (BOOL) isEqualToModel:(DSModel *)model;
 
 // Attributes
 + (DSAttribute *) attributeNamed:(NSString *)name;
 + (NSDictionary *) attributes;
 - (NSDictionary *) attributeData;
 
-- (void) setAttributeDefaults;
+- (void) initializeAttributes;
 - (NSDictionary *) dataForAttribute:(NSString *)attributeName;
 - (NSMutableDictionary *) mutableDataForAttribute:(NSString *)attrName;
 - (void) setData:(NSDictionary *)dict forAttribute:(NSString *)attrName;
