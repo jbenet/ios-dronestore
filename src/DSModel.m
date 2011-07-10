@@ -181,6 +181,24 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 //------------------------------------------------------------------------------
 
+- (NSDictionary *) attributeValues {
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  for (DSAttribute *attr in [[[self class] attributes] allValues]) {
+    [dict setValue:[attr valueForInstance:self] forKey:attr.name];
+  }
+  return dict;
+}
+
+- (void) setAttributeValues:(NSDictionary *)dict {
+  for (DSAttribute *attr in [[self class] attributes]) {
+    NSObject *value = [dict valueForKey:attr.name];
+    if (value)
+      [attr setValue:value forInstance:self];
+  }
+}
+
+//------------------------------------------------------------------------------
+
 
 + (void) registerAttribute:(DSAttribute *)attr {
 
@@ -253,6 +271,8 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   //TODO(jbenet): synch here? shouldnt need to... its basically immutable now.
   return [dsModelRegistry valueForKey:type];
 }
+
+//------------------------------------------------------------------------------
 
 @end
 

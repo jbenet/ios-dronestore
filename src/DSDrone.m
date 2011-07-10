@@ -41,11 +41,11 @@
   if (key == nil)
     return nil;
 
-  NSData *data = [datastore get:key];
+  NSDictionary *data = [datastore get:key];
   if (data == nil)
     return nil;
 
-  DSSerialRep *rep = [[DSSerialRep alloc] initWithData:data];
+  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:data];
   DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
   DSModel *instance = [DSModel modelWithVersion:version];
   [version release];
@@ -77,7 +77,7 @@
   if (version == nil)
     return nil;
 
-  [datastore put:[version.serialRep data] forKey:version.key];
+  [datastore put:version.serialRep.contents forKey:version.key];
   return version;
 }
 

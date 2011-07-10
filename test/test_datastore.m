@@ -1,6 +1,8 @@
 
 #import "DSKey.h"
 #import "DSDatastore.h"
+#import "DSFMDBDatastore.h"
+
 
 #import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
@@ -366,6 +368,24 @@
   [self testAddedUpCounts:ss.stores equals:0];
 
   [self subtestStores:ss.stores withNumElems:1000];
+}
+
+- (void) test_fmdbdatastore {
+
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_1"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_2"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_3"];
+
+  DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithName:@"test_db_1"];
+  DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithName:@"test_db_2"];
+  DSFMDBDatastore *f3 = [[DSFMDBDatastore alloc] initWithName:@"test_db_3"];
+
+  NSArray *stores = [NSArray arrayWithObjects: f1, f2, f3, nil];
+  [self subtestStores:stores withNumElems:100];
+
+  [f1 release];
+  [f2 release];
+  [f3 release];
 }
 
 @end

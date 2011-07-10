@@ -65,6 +65,28 @@
 		D97AB75913C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
+		D97AB75E13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */; };
+		D97AB75F13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */; };
+		D97AB76013C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
+		D97AB76113C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
+		D97AB76213C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
+		D97AB76313C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
+		D97AB76413C791C9006A65D3 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A11179098200288D3B /* FMDatabase.m */; };
+		D97AB76513C791C9006A65D3 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A31179098200288D3B /* FMDatabaseAdditions.m */; };
+		D97AB76613C791C9006A65D3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A61179098200288D3B /* FMResultSet.m */; };
+		D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
+		D97AB76D13CA2AD3006A65D3 /* DSCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76913CA2AC7006A65D3 /* DSCollection.h */; };
+		D97AB76E13CA2AD3006A65D3 /* DSCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76913CA2AC7006A65D3 /* DSCollection.h */; };
+		D97AB76F13CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
+		D97AB77013CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
+		D97AB77113CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
+		D97AB77213CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
+		D97AB77313CA2AD3006A65D3 /* DSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76B13CA2ACA006A65D3 /* DSQuery.h */; };
+		D97AB77413CA2AD3006A65D3 /* DSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76B13CA2ACA006A65D3 /* DSQuery.h */; };
+		D97AB77513CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
+		D97AB77613CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
+		D97AB77713CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
+		D97AB77813CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
 		D9BB61EB12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
 		D9BB61ED12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
 		D9EAF00B13C365980089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
@@ -225,6 +247,12 @@
 		D953BE3C122194F7005A6BEC /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		D953BE3D122194F7005A6BEC /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		D97AB75713C75B1C006A65D3 /* bson-objc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "bson-objc.framework"; sourceTree = "<group>"; };
+		D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFMDBDatastore.h; sourceTree = "<group>"; };
+		D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFMDBDatastore.m; sourceTree = "<group>"; };
+		D97AB76913CA2AC7006A65D3 /* DSCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCollection.h; sourceTree = "<group>"; };
+		D97AB76A13CA2AC8006A65D3 /* DSCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCollection.m; sourceTree = "<group>"; };
+		D97AB76B13CA2ACA006A65D3 /* DSQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSQuery.h; sourceTree = "<group>"; };
+		D97AB76C13CA2ACF006A65D3 /* DSQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSQuery.m; sourceTree = "<group>"; };
 		D9BB61E712108403006F32AA /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = lib/YAJL.framework; sourceTree = "<group>"; };
 		D9EAF00913C365980089E9F7 /* nanotime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanotime.c; sourceTree = "<group>"; };
 		D9EAF00A13C365980089E9F7 /* nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanotime.h; sourceTree = "<group>"; };
@@ -316,6 +344,7 @@
 				D9EAF08013C36F170089E9F7 /* Cocoa.framework in Frameworks */,
 				D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */,
 				D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
+				D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +477,8 @@
 				D9EAF02213C365C90089E9F7 /* DSKey.m */,
 				D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */,
 				D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */,
+				D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */,
+				D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */,
 				D9EAF0BB13C62B730089E9F7 /* DSDrone.h */,
 				D9EAF0BC13C62B780089E9F7 /* DSDrone.m */,
 				D9EAF02313C365C90089E9F7 /* DSModel.h */,
@@ -458,6 +489,10 @@
 				D9EAF02613C365C90089E9F7 /* DSSerialRep.m */,
 				D9EAF02713C365C90089E9F7 /* DSVersion.h */,
 				D9EAF02813C365C90089E9F7 /* DSVersion.m */,
+				D97AB76913CA2AC7006A65D3 /* DSCollection.h */,
+				D97AB76A13CA2AC8006A65D3 /* DSCollection.m */,
+				D97AB76B13CA2ACA006A65D3 /* DSQuery.h */,
+				D97AB76C13CA2ACF006A65D3 /* DSQuery.m */,
 				D9EAF02913C365C90089E9F7 /* iDrone.h */,
 			);
 			path = src;
@@ -489,6 +524,9 @@
 				D9EAF0B313C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
 				D9EAF0BD13C62B7D0089E9F7 /* DSDatastore.h in Headers */,
 				D9EAF0C313C62B7D0089E9F7 /* DSDrone.h in Headers */,
+				D97AB75E13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */,
+				D97AB76D13CA2AD3006A65D3 /* DSCollection.h in Headers */,
+				D97AB77313CA2AD3006A65D3 /* DSQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +553,9 @@
 				D9EAF0B413C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
 				D9EAF0BE13C62B7D0089E9F7 /* DSDatastore.h in Headers */,
 				D9EAF0C413C62B7D0089E9F7 /* DSDrone.h in Headers */,
+				D97AB75F13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */,
+				D97AB76E13CA2AD3006A65D3 /* DSCollection.h in Headers */,
+				D97AB77413CA2AD3006A65D3 /* DSQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +717,9 @@
 				D9EAF0B513C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
 				D9EAF0BF13C62B7D0089E9F7 /* DSDatastore.m in Sources */,
 				D9EAF0C513C62B7D0089E9F7 /* DSDrone.m in Sources */,
+				D97AB76013C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
+				D97AB76F13CA2AD3006A65D3 /* DSCollection.m in Sources */,
+				D97AB77513CA2AD3006A65D3 /* DSQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +754,9 @@
 				D9EAF0C713C62B7D0089E9F7 /* DSDrone.m in Sources */,
 				D9EAF0CB13C62BA70089E9F7 /* test_datastore.m in Sources */,
 				D9EAF0CD13C62BA70089E9F7 /* test_drone.m in Sources */,
+				D97AB76213C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
+				D97AB77113CA2AD3006A65D3 /* DSCollection.m in Sources */,
+				D97AB77713CA2AD3006A65D3 /* DSQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +781,9 @@
 				D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
 				D9EAF0C013C62B7D0089E9F7 /* DSDatastore.m in Sources */,
 				D9EAF0C613C62B7D0089E9F7 /* DSDrone.m in Sources */,
+				D97AB76113C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
+				D97AB77013CA2AD3006A65D3 /* DSCollection.m in Sources */,
+				D97AB77613CA2AD3006A65D3 /* DSQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +815,12 @@
 				D9EAF0C813C62B7D0089E9F7 /* DSDrone.m in Sources */,
 				D9EAF0CC13C62BA70089E9F7 /* test_datastore.m in Sources */,
 				D9EAF0CE13C62BA70089E9F7 /* test_drone.m in Sources */,
+				D97AB76313C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
+				D97AB76413C791C9006A65D3 /* FMDatabase.m in Sources */,
+				D97AB76513C791C9006A65D3 /* FMDatabaseAdditions.m in Sources */,
+				D97AB76613C791C9006A65D3 /* FMResultSet.m in Sources */,
+				D97AB77213CA2AD3006A65D3 /* DSCollection.m in Sources */,
+				D97AB77813CA2AD3006A65D3 /* DSQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
