@@ -3,6 +3,7 @@
 #import "DSModel.h"
 #import "DSVersion.h"
 #import "DSAttribute.h"
+#import "DSComparable.h"
 
 
 @implementation DSMerge

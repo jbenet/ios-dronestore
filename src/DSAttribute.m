@@ -3,6 +3,7 @@
 #import "DSAttribute.h"
 #import "DSMerge.h"
 #import "DSModel.h"
+#import "DSComparable.h"
 #import "NSValue+ObjCTypeSize.h"
 
 @implementation DSAttribute

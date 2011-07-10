@@ -16,6 +16,8 @@
 
 @class DSKey;
 
+extern const NSString *DSVersionBlankHash;
+
 @interface DSVersion : NSObject {
   DSMutableSerialRep *serialRep;
 }
@@ -40,6 +42,8 @@
 - (id) valueForAttribute:(NSString *)attrName;
 - (NSDictionary *) dataForAttribute:(NSString *)attrName;
 - (id) metaData:(NSString *)key forAttribute:(NSString *)attrName;
+
+- (NSObject *) valueForKey:(NSString *)key;
 
 + (DSVersion *) versionWithSerialRep:(DSSerialRep *)serialRep;
 + (DSVersion *) blankVersionWithKey:(DSKey *)key;

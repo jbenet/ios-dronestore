@@ -8,6 +8,7 @@
 #import <pthread.h>
 #import "DSCollection.h"
 #import "DSModel.h"
+#import "DSKey.h"
 
 @implementation DSCollection
 
@@ -44,7 +45,7 @@
 
 - (BOOL) containsModel:(DSModel *)model
 {
-  return [models objectForKey:model.key] != nil;
+  return [models objectForKey:model.key.string] != nil;
 }
 
 - (NSArray *) arrayForMutableEnumeration
@@ -60,8 +61,8 @@
 - (NSArray *) models
 {
   NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];
-  for (NSString *key in ordered)
-    [array addObject:[models objectForKey:key]];
+  for (DSKey *key in ordered)
+    [array addObject:[models objectForKey:key.string]];
   return array;
 }
 
@@ -104,25 +105,25 @@
 
 - (void) insertModel:(DSModel *)model
 {
-  if (model.key == nil || [model.key length] < 1) {
-    // NSLog(@"DS_ERROR: Inserted model with bad key into Collection.");
-    return;
+  if (model.key == nil || [model.key.string length] < 1) {
+    [NSException raise:@"DSInvalidKey" format:@"model inserted into collection "
+      "%@ with invalid key.", self];
   }
 
   if ([self containsModel:model])
     return;
 
-  [models setObject:model forKey:model.key];
+  [models setValue:model forKey:model.key.string];
   [ordered addObject:model.key];
 }
 
 - (void) insertModel:(DSModel *)model atIndex:(NSUInteger)index
 {
-  if (model.key == nil || [model.key length] < 1) {
+  if (model.key == nil || [model.key.string length] < 1) {
     return;
   }
 
-  [models setObject:model forKey:model.key];
+  [models setValue:model forKey:model.key.string];
   [ordered removeObject:model.key]; // In case it's already there.
   [ordered insertObject:model.key atIndex:index];
 }
@@ -133,25 +134,25 @@
 {
   if ([self containsModel:model]) {
     [ordered removeObject:model.key];
-    [models removeObjectForKey:model.key];
+    [models removeObjectForKey:model.key.string];
   }
 }
 
 - (void) removeModelAtIndex:(NSUInteger)index
 {
-  NSString *key = [ordered objectAtIndex:index];
-  if (key != nil && [key length] >= 1) {
+  DSKey *key = [ordered objectAtIndex:index];
+  if (key != nil && [key.string length] >= 1) {
     [ordered removeObjectAtIndex:index];
-    [models removeObjectForKey:key];
+    [models removeObjectForKey:key.string];
   }
 }
 
-- (void) removeModelForKey:(NSString *)key
+- (void) removeModelForKey:(DSKey *)key
 {
-  DSModel *model = [models objectForKey:key];
+  DSModel *model = [models objectForKey:key.string];
   if (model != nil) {
     [ordered removeObject:key];
-    [models removeObjectForKey:key];
+    [models removeObjectForKey:key.string];
   }
 }
 
@@ -160,7 +161,7 @@
   for (id object in array) {
     if ([object isKindOfClass:[DSModel class]])
       [self removeModel:object];
-    else if ([object isKindOfClass:[NSString class]])
+    else if ([object isKindOfClass:[DSKey class]])
       [self removeModelForKey:object];
   }
 }
@@ -178,14 +179,14 @@
 
 #pragma mark -- Getting --
 
-- (id) modelForKey:(NSString *)key
+- (id) modelForKey:(DSKey *)key
 {
-  return [models objectForKey:key];
+  return [models valueForKey:key.string];
 }
 
 - (id) modelAtIndex:(NSUInteger)index
 {
-  return [models objectForKey: [ordered objectAtIndex:index]];
+  return [models valueForKey: ((DSKey *)[ordered objectAtIndex:index]).string];
 }
 
 - (id) randomModel
@@ -193,7 +194,7 @@
   return [self modelAtIndex: arc4random() % [ordered count]];
 }
 
-- (NSUInteger) indexOfKey:(NSString *)key
+- (NSUInteger) indexOfKey:(DSKey *)key
 {
   return [ordered indexOfObject:key];
 }

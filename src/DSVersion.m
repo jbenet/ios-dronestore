@@ -3,7 +3,7 @@
 #import "DSVersion.h"
 #import "iDrone.h"
 
-static const NSString *DSVersionBlankHash =
+const const NSString *DSVersionBlankHash =
   @"0000000000000000000000000000000000000000";
 
 //------------------------------------------------------------------------------
@@ -110,6 +110,21 @@ static const NSString *DSVersionBlankHash =
     DSLog(@"[%@] malformed data for attribute %@", self.key, attrName);
 
   return nil;
+}
+
+//------------------------------------------------------------------------------
+
+- (NSObject *) valueForKey:(NSString *)key {
+  if ([key isEqualToString:@"committed"])
+    return [NSNumber numberWithLongLong:self.committed.ns];
+  if ([key isEqualToString:@"created"])
+    return [NSNumber numberWithLongLong:self.created.ns];
+
+  if ([self respondsToSelector:NSSelectorFromString(key)])
+    return [(id)self performSelector:NSSelectorFromString(key)];
+
+  NSObject *obj = [self valueForAttribute:key];
+  return (obj ? obj : [super valueForKey:key]);
 }
 
 //------------------------------------------------------------------------------

@@ -17,4 +17,3 @@
 #define DSLog(fmt, ...) NSLog((@"[DSLog] %s [line %d] " fmt), \
           __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #endif
-

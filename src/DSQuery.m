@@ -6,17 +6,18 @@
 #import "DSVersion.h"
 #import "DSCollection.h"
 #import "DSSerialRep.h"
+#import "DSComparable.h"
 
 //------------------------------------------------------------------------------
 
 NSObject * __extractValueForField(NSObject *object, NSString *field) {
   NSObject *value = nil;
-  if ([object respondsToSelector:NSSelectorFromString(field)]) {
-    value = [object performSelector:NSSelectorFromString(field)];
+  if ([object respondsToSelector:@selector(valueForKey:)]
+      && [object valueForKey:field] != nil) {
+    value = [(id)object valueForKey:field];
   }
-  else if ([object respondsToSelector:@selector(valueForKey:)]
-     && [object valueForKey:field] != nil) {
-     value = [(id)object valueForKey:field];
+  else if ([object respondsToSelector:NSSelectorFromString(field)]) {
+    value = [object performSelector:NSSelectorFromString(field)];
   }
   else if ([object isKindOfClass:[DSSerialRep class]]) {
     // regular attributes should've been caught already. must be attr.
@@ -79,7 +80,7 @@ DSCompOp *DSCompOpNotEqual = @"!=";
 }
 
 
-+ (DSFilter *) filter:(NSString *)field op:(DSCompOp *)op 
++ (DSFilter *) filter:(NSString *)field op:(DSCompOp *)op
   value:(NSObject<DSComparable> *)value
 {
   DSFilter *filter = [[DSFilter alloc] init];

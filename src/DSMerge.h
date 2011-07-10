@@ -15,10 +15,7 @@
 @class DSModel;
 @class DSVersion;
 @class DSAttribute;
-
-@protocol DSComparable<NSObject>
-- (NSComparisonResult) compare:(id<DSComparable>)other;
-@end
+@protocol DSComparable;
 
 @interface DSMerge : NSObject {}
 + (void) mergeInstance:(DSModel *)instance withVersion:(DSVersion *)version;

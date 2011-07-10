@@ -5,9 +5,9 @@
 // @author jbenet@cs.stanford.edu
 //
 
+@class DSKey;
 @class DSModel;
 @class DSCollection;
-@class DSDrone;
 
 struct pthread_rwlock_t;
 
@@ -44,17 +44,17 @@ struct pthread_rwlock_t;
 
 - (void) removeModel:(DSModel *)model;
 - (void) removeModelAtIndex:(NSUInteger)index;
-- (void) removeModelForKey:(NSString *)key;
+- (void) removeModelForKey:(DSKey *)key;
 
 - (void) removeModelsInArray:(NSArray *)array;
 - (void) removeAllModels;
 - (void) clear;
 
-- (id) modelForKey:(NSString *)key;
+- (id) modelForKey:(DSKey *)key;
 - (id) modelAtIndex:(NSUInteger)index;
 - (id) randomModel;
 
-- (NSUInteger) indexOfKey:(NSString *)key;
+- (NSUInteger) indexOfKey:(DSKey *)key;
 - (NSUInteger) indexOfModel:(DSModel *)model;
 - (NSUInteger) randomIndex;
 

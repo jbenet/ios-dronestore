@@ -199,6 +199,23 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 //------------------------------------------------------------------------------
 
+- (NSObject *) valueForKey:(NSString *)_key {
+  DSAttribute *attr = [[[self class] attributes] valueForKey:_key];
+  if (attr)
+    return [attr valueForInstance:self];
+  return [super valueForKey:_key];
+}
+
+- (void) setValue:(NSObject *)object forKey:(NSString *)_key {
+  DSAttribute *attr = [[[self class] attributes] valueForKey:_key];
+  if (attr)
+    return [attr setValue:object forInstance:self];
+  return [super setValue:object forKey:_key];
+
+}
+
+//------------------------------------------------------------------------------
+
 
 + (void) registerAttribute:(DSAttribute *)attr {
 

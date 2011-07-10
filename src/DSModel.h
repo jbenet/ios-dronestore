@@ -62,6 +62,9 @@
 - (NSMutableDictionary *) mutableDataForAttribute:(NSString *)attrName;
 - (void) setData:(NSDictionary *)dict forAttribute:(NSString *)attrName;
 
+- (NSObject *) valueForKey:(NSString *)key;
+- (void) setValue:(NSObject *)object forKey:(NSString *)key;
+
 + (void) registerAttribute:(DSAttribute *)attr;
 + (void) registerAttributes;
 

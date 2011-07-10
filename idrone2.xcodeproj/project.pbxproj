@@ -87,6 +87,12 @@
 		D97AB77613CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
 		D97AB77713CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
 		D97AB77813CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
+		D97AB77A13CA2EB5006A65D3 /* test_collection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77913CA2EB5006A65D3 /* test_collection.m */; };
+		D97AB77B13CA2EB5006A65D3 /* test_collection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77913CA2EB5006A65D3 /* test_collection.m */; };
+		D97AB77D13CA2EC5006A65D3 /* test_query.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77C13CA2EC5006A65D3 /* test_query.m */; };
+		D97AB77E13CA2EC5006A65D3 /* test_query.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77C13CA2EC5006A65D3 /* test_query.m */; };
+		D97AB78A13CA418A006A65D3 /* DSComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB78913CA418A006A65D3 /* DSComparable.h */; };
+		D97AB78B13CA418A006A65D3 /* DSComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB78913CA418A006A65D3 /* DSComparable.h */; };
 		D9BB61EB12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
 		D9BB61ED12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
 		D9EAF00B13C365980089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
@@ -253,6 +259,9 @@
 		D97AB76A13CA2AC8006A65D3 /* DSCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCollection.m; sourceTree = "<group>"; };
 		D97AB76B13CA2ACA006A65D3 /* DSQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSQuery.h; sourceTree = "<group>"; };
 		D97AB76C13CA2ACF006A65D3 /* DSQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSQuery.m; sourceTree = "<group>"; };
+		D97AB77913CA2EB5006A65D3 /* test_collection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_collection.m; sourceTree = "<group>"; };
+		D97AB77C13CA2EC5006A65D3 /* test_query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_query.m; sourceTree = "<group>"; };
+		D97AB78913CA418A006A65D3 /* DSComparable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSComparable.h; sourceTree = "<group>"; };
 		D9BB61E712108403006F32AA /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = lib/YAJL.framework; sourceTree = "<group>"; };
 		D9EAF00913C365980089E9F7 /* nanotime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanotime.c; sourceTree = "<group>"; };
 		D9EAF00A13C365980089E9F7 /* nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanotime.h; sourceTree = "<group>"; };
@@ -407,6 +416,8 @@
 		D95103B911747E8400288D3B /* test */ = {
 			isa = PBXGroup;
 			children = (
+				D97AB77C13CA2EC5006A65D3 /* test_query.m */,
+				D97AB77913CA2EB5006A65D3 /* test_collection.m */,
 				D9EAF0AA13C4FED30089E9F7 /* test_merge.m */,
 				D9EAF0AB13C4FED40089E9F7 /* TestPerson.h */,
 				D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */,
@@ -474,6 +485,7 @@
 				D9EAF01F13C365C90089E9F7 /* DSAttribute.h */,
 				D9EAF02013C365C90089E9F7 /* DSAttribute.m */,
 				D9EAF02113C365C90089E9F7 /* DSKey.h */,
+				D97AB78913CA418A006A65D3 /* DSComparable.h */,
 				D9EAF02213C365C90089E9F7 /* DSKey.m */,
 				D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */,
 				D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */,
@@ -527,6 +539,7 @@
 				D97AB75E13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */,
 				D97AB76D13CA2AD3006A65D3 /* DSCollection.h in Headers */,
 				D97AB77313CA2AD3006A65D3 /* DSQuery.h in Headers */,
+				D97AB78A13CA418A006A65D3 /* DSComparable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +569,7 @@
 				D97AB75F13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */,
 				D97AB76E13CA2AD3006A65D3 /* DSCollection.h in Headers */,
 				D97AB77413CA2AD3006A65D3 /* DSQuery.h in Headers */,
+				D97AB78B13CA418A006A65D3 /* DSComparable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +771,8 @@
 				D97AB76213C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
 				D97AB77113CA2AD3006A65D3 /* DSCollection.m in Sources */,
 				D97AB77713CA2AD3006A65D3 /* DSQuery.m in Sources */,
+				D97AB77A13CA2EB5006A65D3 /* test_collection.m in Sources */,
+				D97AB77D13CA2EC5006A65D3 /* test_query.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,6 +837,8 @@
 				D97AB76613C791C9006A65D3 /* FMResultSet.m in Sources */,
 				D97AB77213CA2AD3006A65D3 /* DSCollection.m in Sources */,
 				D97AB77813CA2AD3006A65D3 /* DSQuery.m in Sources */,
+				D97AB77B13CA2EB5006A65D3 /* test_collection.m in Sources */,
+				D97AB77E13CA2EC5006A65D3 /* test_query.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

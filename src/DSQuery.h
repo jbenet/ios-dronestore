@@ -1,6 +1,5 @@
 
 #import <Foundation/Foundation.h>
-#import "DSMerge.h"
 
 // A Query describes a set versions.
 //
@@ -12,6 +11,7 @@
 @class DSKey;
 @class DSModel;
 @class DSCollection;
+@protocol DSComparable;
 
 typedef NSString DSCompOp;
 
