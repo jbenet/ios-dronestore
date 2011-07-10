@@ -1,3 +1,4 @@
+#import <GHUnit/GHUnit.h>
 
 #import "DSKey.h"
 #import "DSQuery.h"
@@ -5,7 +6,8 @@
 #import "DSModel.h"
 #import "NSString+SHA.h"
 #import "DSComparable.h"
-#import <GHUnit/GHUnit.h>
+
+#import "TestPerson.h"
 
 @interface QueryTest : GHTestCase {
 }
@@ -291,8 +293,138 @@
     [NSArray arrayWithObject:fk_eq_t3]], [NSArray arrayWithObject:v3],
     @"fk_eq_t3 fAwF");
 
+}
+
+
+- (void) test_filter_order {
+  NSNumber *t1 = [NSNumber numberWithLongLong:nanotime_now().ns];
+  NSNumber *t2 = [NSNumber numberWithLongLong:nanotime_now().ns];
+
+  DSFilter *f1 = [DSFilter filter:@"key" op:DSCompOpGreaterThan value:@"/A"];
+  DSFilter *f2 = [DSFilter filter:@"key" op:DSCompOpLessThan value:@"/A"];
+  DSFilter *f3 = [DSFilter filter:@"committed" op:DSCompOpEqual value:t1];
+  DSFilter *f4 = [DSFilter filter:@"committed" op:DSCompOpGreaterThanOrEqual
+    value:t2];
+
+  GHAssertEqualObjects(([f1 array]), ([NSArray arrayWithObjects:@"key",
+    DSCompOpGreaterThan, @"/A", nil]), @"array equals");
+  GHAssertEqualObjects(([f2 array]), ([NSArray arrayWithObjects:@"key",
+    DSCompOpLessThan, @"/A", nil]), @"array equals");
+  GHAssertEqualObjects(([f3 array]), ([NSArray arrayWithObjects:@"committed",
+    DSCompOpEqual, t1, nil]), @"array equals");
+  GHAssertEqualObjects(([f4 array]), ([NSArray arrayWithObjects:@"committed",
+    DSCompOpGreaterThanOrEqual, t2, nil]), @"array equals");
+}
+
+- (void) test_order {
+  DSOrder *o1 = [DSOrder orderWithString:@"key"];
+  DSOrder *o2 = [DSOrder orderWithString:@"+committed"];
+  DSOrder *o3 = [DSOrder orderWithString:@"-created"];
+
+  NSArray *vs = [self versions];
+  DSVersion *v1 = [vs objectAtIndex:0];
+  DSVersion *v2 = [vs objectAtIndex:1];
+  DSVersion *v3 = [vs objectAtIndex:2];
+
+  GHAssertTrue(o1.isAscending, @"ascending");
+  GHAssertTrue(o2.isAscending, @"ascending");
+  GHAssertFalse(o3.isAscending, @"ascending");
+
+  #define assert_sorting(in1, in2, in3, o1, o2, o3, out1, out2, out3)        \
+    GHAssertEqualObjects(([DSOrder                                           \
+      sortedArray:[NSArray arrayWithObjects: in1, in2, in3, nil]             \
+      withOrders:[NSArray arrayWithObjects:o1, o2, o3, nil]]),               \
+    ([NSArray arrayWithObjects:out1, out2, out3, nil]),                      \
+    @"Testing DSOrder([in1, in2, in3], [o1, o2, o3]) = [out1, out2, out3]");
+
+  assert_sorting(v3, v2, v1,  o1, nil, nil,  v3, v2, v1);
+  assert_sorting(v3, v2, v1,  o1, o2,  nil,  v1, v2, v3);
+  assert_sorting(v1, v3, v2,  o1, o3,  nil,  v3, v2, v1);
+  assert_sorting(v3, v2, v1,  o1, o2,  o3,   v1, v2, v3);
+  assert_sorting(v1, v3, v2,  o1, o3,  o2,   v3, v2, v1);
+
+  assert_sorting(v3, v2, v1,  o2, nil, nil,  v1, v2, v3);
+  assert_sorting(v3, v2, v1,  o2, o1,  nil,  v1, v2, v3);
+  assert_sorting(v3, v2, v1,  o2, o3,  nil,  v1, v2, v3);
+  assert_sorting(v3, v2, v1,  o2, o1,  o3,   v1, v2, v3);
+  assert_sorting(v3, v2, v1,  o2, o3,  o1,   v1, v2, v3);
+
+  assert_sorting(v1, v2, v3,  o3, nil, nil,  v3, v2, v1);
+  assert_sorting(v1, v2, v3,  o3, o2,  nil,  v3, v2, v1);
+  assert_sorting(v1, v2, v3,  o3, o3,  nil,  v3, v2, v1);
+  assert_sorting(v1, v2, v3,  o3, o2,  o3,   v3, v2, v1);
+  assert_sorting(v1, v2, v3,  o3, o3,  o2,   v3, v2, v1);
+
+  #undef assert_sorting
+}
+
+
+- (void) test_order_object {
+
+  GHAssertEqualObjects([[DSOrder orderWithString:@"key"] string], @"+key",
+    @"equal order objects");
+  GHAssertEqualObjects([[DSOrder orderWithString:@"+committed"] string],
+    @"+committed", @"equal order objects");
+  GHAssertEqualObjects([[DSOrder orderWithString:@"-created"] string],
+    @"-created", @"equal order objects");
 
 }
 
+- (void) test_query {
+  DSQuery *q1 = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  DSQuery *q2 = [[DSQuery alloc] initWithType:[TestPerson dstype]];
+  DSQuery *q3 = [[DSQuery alloc] initWithType:[TestPerson dstype]];
+
+  NSNumber *now = [NSNumber numberWithLongLong:nanotime_now().ns];
+
+  q1.limit = 100;
+  q2.offset = 200;
+  q3.keysonly = YES;
+
+  q1.offset = 300;
+  q2.keysonly = YES;
+  q3.limit = 1;
+
+  [q1 addFilter:[DSFilter filter:@"key" op:DSCompOpGreaterThan  value:@"/ABC"]];
+  [q1 addFilter:[DSFilter filter:@"created" op:DSCompOpGreaterThan  value:now]];
+
+  [q2 addOrder:[DSOrder orderWithString:@"key"]];
+  [q2 addOrder:[DSOrder orderWithString:@"-created"]];
+
+  NSDictionary *q1d = [NSDictionary dictionaryWithObjectsAndKeys:
+    [TestPerson dstype], @"type",
+    [NSNumber numberWithInt:100], @"limit",
+    [NSNumber numberWithInt:300], @"offset",
+    [NSArray arrayWithObjects:
+      [NSArray arrayWithObjects:@"key", DSCompOpGreaterThan, @"/ABC", nil],
+      [NSArray arrayWithObjects:@"created", DSCompOpGreaterThan, now, nil],
+    nil], @"filter", nil];
+
+  NSDictionary *q2d = [NSDictionary dictionaryWithObjectsAndKeys:
+    [TestPerson dstype], @"type",
+    [NSNumber numberWithInt:200], @"offset",
+    [NSNumber numberWithBool:YES], @"keysonly",
+    [NSArray arrayWithObjects:@"+key", @"-created", nil], @"order", nil];
+
+  NSDictionary *q3d = [NSDictionary dictionaryWithObjectsAndKeys:
+    [TestPerson dstype], @"type",
+    [NSNumber numberWithInt:1], @"limit",
+    [NSNumber numberWithBool:YES], @"keysonly", nil];
+
+  GHAssertEqualObjects((q1d), [q1 dictionary], @"query eq dict");
+  GHAssertEqualObjects((q2d), [q2 dictionary], @"query eq dict");
+  GHAssertEqualObjects((q3d), [q3 dictionary], @"query eq dict");
+
+  GHAssertEqualObjects((q1d), [[DSQuery queryWithDictionary:q1d] dictionary],
+    @"query eq dict after construction");
+  GHAssertEqualObjects((q2d), [[DSQuery queryWithDictionary:q2d] dictionary],
+    @"query eq dict after construction");
+  GHAssertEqualObjects((q3d), [[DSQuery queryWithDictionary:q3d] dictionary],
+    @"query eq dict after construction");
+
+  [q1 release];
+  [q2 release];
+  [q3 release];
+}
 
 @end

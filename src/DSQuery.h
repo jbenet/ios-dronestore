@@ -56,6 +56,7 @@ extern DSOrderOp *DSOrderOpDescending;
 }
 @property (nonatomic, readonly) NSString *field;
 @property (nonatomic, readonly) DSOrderOp *op;
+@property (nonatomic, readonly) BOOL isAscending;
 
 - (id) initWithField:(NSString *)order op:(DSOrderOp *)op;
 
@@ -88,7 +89,7 @@ extern DSOrderOp *DSOrderOpDescending;
 @property (nonatomic, assign) int offset;
 @property (nonatomic, assign) BOOL keysonly;
 
-- (id) initWithModel:(DSModel *)model;
+- (id) initWithModel:(Class)model;
 - (id) initWithType:(NSString *)type;
 
 - (Class) typeClass;

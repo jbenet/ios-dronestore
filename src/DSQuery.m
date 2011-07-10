@@ -79,6 +79,9 @@ DSCompOp *DSCompOpNotEqual = @"!=";
   return NO;
 }
 
+- (NSString *) description {
+  return [NSString stringWithFormat:@"DSFilter%@", [self array]];
+}
 
 + (DSFilter *) filter:(NSString *)field op:(DSCompOp *)op
   value:(NSObject<DSComparable> *)value
@@ -152,6 +155,10 @@ DSOrderOp *DSOrderOpDescending = @"-";
   [super dealloc];
 }
 
+- (BOOL) isAscending {
+  return [op isEqualToString:DSOrderOpAscending];
+}
+
 - (NSArray *) sortedArray:(NSArray *)array {
   return [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:self]];
 }
@@ -164,6 +171,10 @@ DSOrderOp *DSOrderOpDescending = @"-";
   if (!orders || [orders count] == 0)
     return array;
   return [array sortedArrayUsingDescriptors:orders];
+}
+
+- (NSString *) description {
+  return [self string];
 }
 
 - (NSString *) string {
@@ -193,7 +204,7 @@ DSOrderOp *DSOrderOpDescending = @"-";
 
 @synthesize type, filters, orders, limit, offset, keysonly;
 
-- (id) initWithModel:(DSModel *)model {
+- (id) initWithModel:(Class)model {
   return [self initWithType:[model dstype]];
 }
 
@@ -240,19 +251,27 @@ DSOrderOp *DSOrderOpDescending = @"-";
 
   [dict setValue:type forKey:@"type"];
 
-  [dict setValue:[NSNumber numberWithInt:limit] forKey:@"limit"];
-  [dict setValue:[NSNumber numberWithInt:offset] forKey:@"offset"];
-  [dict setValue:[NSNumber numberWithBool:keysonly] forKey:@"keysonly"];
+  if (limit > 0 && limit != 2000)
+    [dict setValue:[NSNumber numberWithInt:limit] forKey:@"limit"];
+  if (offset > 0)
+    [dict setValue:[NSNumber numberWithInt:offset] forKey:@"offset"];
+  if (keysonly)
+    [dict setValue:[NSNumber numberWithBool:keysonly] forKey:@"keysonly"];
 
-  NSMutableArray *arr = [NSMutableArray array];
-  for (DSFilter *filter in filters)
-    [arr addObject:[filter array]];
-  [dict setValue:arr forKey:@"filter"];
+  if ([filters count] > 0) {
+    NSMutableArray *arr = [NSMutableArray array];
+    for (DSFilter *filter in filters)
+      [arr addObject:[filter array]];
+    [dict setValue:arr forKey:@"filter"];
+  }
 
-  arr = [NSMutableArray array];
-  for (DSOrder *order in orders)
-    [arr addObject:[order string]];
-  [dict setValue:arr forKey:@"order"];
+  if ([orders count] > 0) {
+    NSMutableArray *arr = [NSMutableArray array];
+    for (DSOrder *order in orders)
+      [arr addObject:[order string]];
+    [dict setValue:arr forKey:@"order"];
+  }
+
   return dict;
 }
 
@@ -273,7 +292,7 @@ DSOrderOp *DSOrderOpDescending = @"-";
   }
 
   if ([dict valueForKey:@"order"]) {
-    for (NSString *str in [dict valueForKey:@"filter"])
+    for (NSString *str in [dict valueForKey:@"order"])
       [query addOrder:[DSOrder orderWithString:str]];
   }
 
