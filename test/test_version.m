@@ -19,7 +19,6 @@
 
   DSVersion *blank = [DSVersion blankVersionWithKey:[DSKey keyWithString:@"A"]];
   GHAssertEqualStrings([blank.key string], @"/A", @"cmp");
-  NSLog(@"%@", blank.serialRep.contents);
   GHAssertEqualStrings(blank.hashstr,
     @"0000000000000000000000000000000000000000", @"cmp");
   GHAssertEqualStrings(blank.parent,

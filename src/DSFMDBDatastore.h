@@ -10,11 +10,13 @@ struct pthread_mutex_t;
   NSMutableDictionary *fields;
   NSString *key;
   NSString *table;
+  NSString *wrappedValue;
 }
 
 @property (nonatomic, readonly) NSMutableDictionary *fields;
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *table;
+@property (nonatomic, copy) NSString *wrappedValue;
 
 - (id) initWithTableName:(NSString *)name;
 

@@ -119,8 +119,6 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   [serialRep setValue:created_num forKey:@"created"];
   [serialRep setValue:attrData forKey:@"attributes"];
 
-  NSLog(@"%@", serialRep.contents);
-
   @synchronized(self) { // just in case.
     [version release];
     version = [[DSVersion alloc] initWithSerialRep:serialRep];

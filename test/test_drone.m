@@ -5,6 +5,7 @@
 #import "DSAttribute.h"
 #import "DSDatastore.h"
 #import "TestPerson.h"
+#import "DSFMDBDatastore.h"
 
 #import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
@@ -128,16 +129,41 @@
 
   int numPeople = 10;
 
-  DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/")
-    andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/")
-    andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/")
-    andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/")
-    andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/")
-    andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_1"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_2"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_3"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_4"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_5"];
+
+  SQLSchema *s1 = [SQLSchema versionTableNamed:@"test_db_1"];
+  SQLSchema *s2 = [SQLSchema versionTableNamed:@"test_db_2"];
+  SQLSchema *s3 = [SQLSchema versionTableNamed:@"test_db_3"];
+  SQLSchema *s4 = [SQLSchema versionTableNamed:@"test_db_4"];
+  SQLSchema *s5 = [SQLSchema versionTableNamed:@"test_db_5"];
+
+  DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithSchema:s1];
+  DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithSchema:s2];
+  DSFMDBDatastore *f3 = [[DSFMDBDatastore alloc] initWithSchema:s3];
+  DSFMDBDatastore *f4 = [[DSFMDBDatastore alloc] initWithSchema:s4];
+  DSFMDBDatastore *f5 = [[DSFMDBDatastore alloc] initWithSchema:s5];
+
+
+  DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/") andDatastore:f1];
+  DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/") andDatastore:f2];
+  DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/") andDatastore:f3];
+  DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/") andDatastore:f4];
+  DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/") andDatastore:f5];
 
   NSArray *drones = [NSArray arrayWithObjects:d1, d2, d3, d4, d5, nil];
 

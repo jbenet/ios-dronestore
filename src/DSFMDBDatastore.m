@@ -12,6 +12,178 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 
 //------------------------------------------------------------------------------
 
+@implementation SQLSchema
+
+@synthesize fields, key, table, wrappedValue;
+
+- (id) init {
+  if ((self = [super init])) {
+    fields = [[NSMutableDictionary alloc] init];
+    wrappedValue = nil;
+  }
+  return self;
+}
+
+- (id) initWithTableName:(NSString *)name {
+  if ((self = [self init])) {
+    self.table = name;
+  }
+  return self;
+}
+
+- (void) dealloc {
+  [fields release];
+  [table release];
+  [key release];
+  [super dealloc];
+}
+
+- (void) check {
+  if (table == nil || key == nil || [fields count] == 0) {
+    [NSException raise:@"DSInvalidTableSchema" format:@"Table Schema requires "
+      "at least a table name, key field name, and one other field."];
+  }
+}
+
+- (NSString *) create {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"CREATE TABLE IF NOT EXISTS %@ (", table];
+  [string appendFormat:@"  %@ TEXT PRIMARY KEY", key];
+  for (NSString *field in fields)
+    [string appendFormat:@", %@ %@", field, [fields valueForKey:field]];
+  [string appendString:@");"];
+  return string;
+}
+
+- (NSString *) select {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"SELECT * FROM %@ WHERE %@ = ?;", table, key];
+  return string;
+}
+
+- (NSString *) update {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"UPDATE %@ SET ", table];
+  BOOL first = YES;
+  for (NSString *field in fields) {
+    if (!first)
+      [string appendString:@","];
+    [string appendFormat:@" %@ = ? ", field];
+    first = NO;
+  }
+  [string appendFormat:@" WHERE %@ = ?;", key];
+  return string;
+}
+
+
+- (NSString *) insert {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"INSERT INTO %@ ", table];
+  [string appendFormat:@"(%@) VALUES (?);", key];
+  return string;
+}
+
+- (NSString *) delete {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"DELETE FROM %@ ", table];
+  [string appendFormat:@"WHERE %@ = ?;", key];
+  return string;
+}
+
+- (NSString *) count {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"SELECT count(*) as cnt FROM %@ ", table];
+  [string appendFormat:@"WHERE %@ = ?;", key];
+  return string;
+}
+
+- (NSString *) query:(DSQuery *)query {
+  [self check];
+
+  return [query SQLQueryWithTable:table];
+}
+
+- (NSObject *) objectForField:(NSString *)fld fromResultSet:(FMResultSet *)rs {
+  NSString *type = [fields valueForKey:fld];
+
+  if ([type isEqualToString:@"TEXT"])
+    return [rs stringForColumn:fld];
+
+  if ([type isEqualToString:@"INTEGER"])
+    return [NSNumber numberWithLongLong:[rs longLongIntForColumn:fld]];
+
+  if ([type isEqualToString:@"REAL"])
+    return [NSNumber numberWithDouble:[rs doubleForColumn:fld]];
+
+  if ([type isEqualToString:@"NUMERIC"])
+    return [NSNumber numberWithDouble:[rs doubleForColumn:fld]];
+
+  if ([type isEqualToString:@"BLOB"])
+    return [rs dataForColumn:fld];
+
+  return nil;
+}
+
+- (NSDictionary *) dictionaryFromResultSet:(FMResultSet *)rs {
+  NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+  for (NSString *field in fields) {
+    NSObject *object = [self objectForField:field fromResultSet:rs];
+    [dict setValue:object forKey:field];
+  }
+  [dict setValue:[rs stringForColumn:key] forKey:key];
+  return [dict autorelease];
+}
+
+- (NSArray *) updateValuesFromObject:(NSObject *)object andKey:(NSString *)_k {
+  if (wrappedValue)
+    return [NSArray arrayWithObjects:object, _k, nil];
+
+  NSMutableArray *array = [[NSMutableArray alloc] init];
+  for (NSString *field in fields)
+    [array addObject:[object valueForKey:field]];
+  [array addObject:_k];
+  return [array autorelease];
+}
+
++ (SQLSchema *) simpleTableNamed:(NSString *)table {
+  SQLSchema *schema = [[SQLSchema alloc] init];
+  schema.table = table;
+  schema.key = @"k";
+  schema.wrappedValue = @"v";
+  [schema.fields setValue:@"TEXT" forKey:@"v"];
+  return [schema autorelease];
+}
+
++ (SQLSchema *) versionTableNamed:(NSString *)table {
+  SQLSchema *schema = [[SQLSchema alloc] init];
+  schema.table = table;
+  schema.key = @"key";
+  [schema.fields setValue:@"TEXT" forKey:@"type"];
+  [schema.fields setValue:@"TEXT" forKey:@"hash"];
+  [schema.fields setValue:@"TEXT" forKey:@"parent"];
+  [schema.fields setValue:@"INTEGER" forKey:@"created"];
+  [schema.fields setValue:@"INTEGER" forKey:@"committed"];
+  [schema.fields setValue:@"BLOB" forKey:@"attributes"];
+  return [schema autorelease];
+}
+
+@end
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
 
 @interface DSFMDBDatastore (Private)
 - (BOOL) tableExists:(NSString *)table;
@@ -226,8 +398,8 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   NSDictionary *result = [self selectDataForKey:key.string];
 
   // unwrap those that need unwrapping.
-  if ([result count] == 1)
-    return [[result allValues] objectAtIndex:0];
+  if (schema.wrappedValue) // value and key.
+    return [result objectForKey:schema.wrappedValue];
 
   return result;
 }
@@ -279,181 +451,6 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 //------------------------------------------------------------------------------
 
 
-@implementation SQLSchema
-
-@synthesize fields, key, table;
-
-- (id) init {
-  if ((self = [super init])) {
-    fields = [[NSMutableDictionary alloc] init];
-  }
-  return self;
-}
-
-- (id) initWithTableName:(NSString *)name {
-  if ((self = [self init])) {
-    self.table = name;
-  }
-  return self;
-}
-
-- (void) dealloc {
-  [fields release];
-  [table release];
-  [key release];
-  [super dealloc];
-}
-
-- (void) check {
-  if (table == nil || key == nil || [fields count] == 0) {
-    [NSException raise:@"DSInvalidTableSchema" format:@"Table Schema requires "
-      "at least a table name, key field name, and one other field."];
-  }
-}
-
-- (NSString *) create {
-  [self check];
-
-  NSMutableString *string = [NSMutableString string];
-  [string appendFormat:@"CREATE TABLE IF NOT EXISTS %@ (", table];
-  [string appendFormat:@"  %@ TEXT PRIMARY KEY", key];
-  for (NSString *field in fields)
-    [string appendFormat:@", %@ %@", field, [fields valueForKey:field]];
-  [string appendString:@");"];
-  NSLog(@"%@", string);
-  return string;
-}
-
-- (NSString *) select {
-  [self check];
-
-  NSMutableString *string = [NSMutableString string];
-  [string appendFormat:@"SELECT * FROM %@ WHERE %@ = ?;", table, key];
-  NSLog(@"%@", string);
-  return string;
-}
-
-- (NSString *) update {
-  [self check];
-
-  NSMutableString *string = [NSMutableString string];
-  [string appendFormat:@"UPDATE %@ SET ", table];
-  BOOL first = YES;
-  for (NSString *field in fields) {
-    if (!first)
-      [string appendString:@","];
-    [string appendFormat:@" %@ = ? ", field];
-    first = NO;
-  }
-  [string appendFormat:@" WHERE %@ = ?;", key];
-  NSLog(@"%@", string);
-  return string;
-}
-
-
-- (NSString *) insert {
-  [self check];
-
-  NSMutableString *string = [NSMutableString string];
-  [string appendFormat:@"INSERT INTO %@ ", table];
-  [string appendFormat:@"(%@) VALUES (?);", key];
-  NSLog(@"%@", string);
-  return string;
-}
-
-- (NSString *) delete {
-  [self check];
-
-  NSMutableString *string = [NSMutableString string];
-  [string appendFormat:@"DELETE FROM %@ ", table];
-  [string appendFormat:@"WHERE %@ = ?;", key];
-  NSLog(@"%@", string);
-  return string;
-}
-
-- (NSString *) count {
-  [self check];
-
-  NSMutableString *string = [NSMutableString string];
-  [string appendFormat:@"SELECT count(*) as cnt FROM %@ ", table];
-  [string appendFormat:@"WHERE %@ = ?;", key];
-  NSLog(@"%@", string);
-  return string;
-}
-
-- (NSString *) query:(DSQuery *)query {
-  [self check];
-
-  return [query SQLQueryWithTable:table];
-}
-
-- (NSObject *) objectForField:(NSString *)fld fromResultSet:(FMResultSet *)rs {
-  NSString *type = [fields valueForKey:fld];
-
-  if ([type isEqualToString:@"TEXT"])
-    return [rs stringForColumn:fld];
-
-  if ([type isEqualToString:@"INTEGER"])
-    return [NSNumber numberWithLongLong:[rs longLongIntForColumn:fld]];
-
-  if ([type isEqualToString:@"REAL"])
-    return [NSNumber numberWithDouble:[rs doubleForColumn:fld]];
-
-  if ([type isEqualToString:@"NUMERIC"])
-    return [NSNumber numberWithDouble:[rs doubleForColumn:fld]];
-
-  if ([type isEqualToString:@"BLOB"])
-    return [rs dataForColumn:fld];
-
-  return nil;
-}
-
-- (NSDictionary *) dictionaryFromResultSet:(FMResultSet *)rs {
-  NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-  for (NSString *field in fields) {
-    NSObject *object = [self objectForField:field fromResultSet:rs];
-    [dict setValue:object forKey:field];
-  }
-  return [dict autorelease];
-}
-
-- (NSArray *) updateValuesFromObject:(NSObject *)object andKey:(NSString *)_k {
-  if ([fields count] == 1)
-    return [NSArray arrayWithObjects:object, _k, nil];
-
-  NSMutableArray *array = [[NSMutableArray alloc] init];
-  for (NSString *field in fields)
-    [array addObject:[object valueForKey:field]];
-  [array addObject:_k];
-  return [array autorelease];
-}
-
-+ (SQLSchema *) simpleTableNamed:(NSString *)table {
-  SQLSchema *schema = [[SQLSchema alloc] init];
-  schema.table = table;
-  schema.key = @"k";
-  [schema.fields setValue:@"TEXT" forKey:@"v"];
-  return [schema autorelease];
-}
-
-+ (SQLSchema *) versionTableNamed:(NSString *)table {
-  SQLSchema *schema = [[SQLSchema alloc] init];
-  schema.table = table;
-  schema.key = @"key";
-  [schema.fields setValue:@"TEXT" forKey:@"type"];
-  [schema.fields setValue:@"TEXT" forKey:@"hash"];
-  [schema.fields setValue:@"TEXT" forKey:@"parent"];
-  [schema.fields setValue:@"INTEGER" forKey:@"created"];
-  [schema.fields setValue:@"INTEGER" forKey:@"committed"];
-  [schema.fields setValue:@"TEXT" forKey:@"attributes"];
-  return [schema autorelease];
-}
-
-@end
-
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-
 @implementation DSQuery (SQL)
 
 - (NSString *) SQLQueryWithTable:(NSString *)table {
@@ -494,7 +491,6 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   // Close the query
   [string appendString:@";"];
 
-  NSLog(@"%@", string);
   return [string autorelease];
 }
 

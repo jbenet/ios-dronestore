@@ -6,6 +6,8 @@
 #import "DSSerialRep.h"
 #import "DSDatastore.h"
 
+#import <bson-objc/BSONCodec.h>
+
 @implementation DSDrone
 
 @synthesize datastore, droneid;
@@ -45,7 +47,13 @@
   if (data == nil)
     return nil;
 
-  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:data];
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  [dict addEntriesFromDictionary:data];
+
+  NSData *attrs = [dict valueForKey:@"attributes"];
+  [dict setValue:[attrs BSONValue] forKey:@"attributes"];
+
+  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:dict];
   DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
   DSModel *instance = [DSModel modelWithVersion:version];
   [version release];
@@ -77,7 +85,13 @@
   if (version == nil)
     return nil;
 
-  [datastore put:version.serialRep.contents forKey:version.key];
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  [dict addEntriesFromDictionary:version.serialRep.contents];
+
+  NSDictionary *attrs = [version.serialRep.contents valueForKey:@"attributes"];
+  [dict setValue:[attrs BSONRepresentation] forKey:@"attributes"];
+
+  [datastore put:dict forKey:version.key];
   return version;
 }
 
