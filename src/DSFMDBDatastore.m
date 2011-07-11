@@ -10,48 +10,6 @@
 static NSString *kDSSQLITE_FILE = @"ds.%@.sqlite";
 static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 
-static NSString *kCREATE_VERSIONS = @"CREATE TABLE IF NOT EXISTS ds_versions ("
-"  key TEXT PRIMARY KEY,"
-"  hash TEXT,"
-"  parent TEXT,"
-"  type NUMERIC,"
-"  committed NUMERIC,"
-"  created NUMERIC,"
-"  attributes TEXT"
-");";
-
-
-static NSString *kSELECT_VERSION = @"SELECT * FROM ds_versions WHERE key = ?;";
-
-static NSString *kQUERY_VERSION = @"SELECT * FROM ds_versions WHERE %@;";
-
-static NSString *kINSERT_VERSION = @"INSERT INTO ds_versions (key) VALUES (?);";
-
-static NSString *kCOUNT_VERSION = @"SELECT COUNT(*) as cnt FROM ds_versions \
- WHERE key = ?;";
-
-static NSString *kDELETE_VERSION = @"DELETE FROM ds_versions WHERE key = ?;";
-
-static NSString *kUPDATE_VERSION = @"UPDATE ds_versions SET \
- hash = ?, parent = ?, type = ?, committed = ?, created = ?, attributes = ? \
- WHERE key = ?;";
-
-
-static NSString *kCREATE_KV = @"CREATE TABLE IF NOT EXISTS ds_kv ("
-"  k TEXT PRIMARY KEY,"
-"  v BLOB"
-");";
-
-
-static NSString *kSELECT_KV = @"SELECT * FROM ds_kv WHERE k = ?;";
-static NSString *kQUERY_KV = @"SELECT * FROM ds_kv WHERE %@;";
-static NSString *kINSERT_KV = @"INSERT INTO ds_kv (k) VALUES (?);";
-static NSString *kCOUNT_KV = @"SELECT COUNT(*) as cnt FROM ds_kv WHERE k = ?;";
-static NSString *kDELETE_KV = @"DELETE FROM ds_kv WHERE k = ?;";
-static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
-
-
-
 //------------------------------------------------------------------------------
 
 
@@ -66,11 +24,17 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 
 @implementation DSFMDBDatastore
 
-@synthesize name;
+@synthesize schema;
 
-- (id) initWithName:(NSString *)_name {
+- (id) init {
+  [NSException raise:@"DSDatastoreInvalidCreation" format:@"%@ requires a "
+    "%@ to be specified.", [self class], [SQLSchema class]];
+  return nil;
+}
+
+- (id) initWithSchema:(SQLSchema *)_schema {
   if ((self = [super init])) {
-    name = [_name copy];
+    schema = [_schema retain];
     pthread_mutex_init(&lock_, NULL);
     [self initializeDatabase];
   }
@@ -80,7 +44,7 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 
 - (void) dealloc {
   [fmdb_ release];
-  [name release];
+  [schema release];
   pthread_mutex_destroy(&lock_);
   [super dealloc];
 }
@@ -91,7 +55,8 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 {
   pthread_mutex_lock(&lock_);
 
-  fmdb_ = [[FMDatabase alloc] initWithPath:[[self class] pathForName:name]];
+  NSString *path = [[self class] pathForName:schema.table];
+  fmdb_ = [[FMDatabase alloc] initWithPath:path];
   fmdb_.logsErrors = YES;
   [fmdb_ setBusyRetryTimeout:10];
 //  fmdb.traceExecution = YES;
@@ -101,13 +66,13 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 
   pthread_mutex_unlock(&lock_);
 
-  [self ensureTableExists:@"ds_kv" create:kCREATE_KV];
+  [self ensureTableExists:schema.table create:[schema create]];
 }
 
 - (BOOL) tableExists:(NSString *)table {
   pthread_mutex_lock(&lock_);
 
-  FMResultSet *rs = [fmdb_ executeQuery:kQ_TABLE, table];
+  FMResultSet *rs = [fmdb_ executeQuery:kQ_TABLE, schema.table];
   bool exists = [rs next];
   [rs close];
 
@@ -118,7 +83,7 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 - (void) ensureTableExists:(NSString *)table create:(NSString *)create {
   pthread_mutex_lock(&lock_);
 
-  FMResultSet *rs = [fmdb_ executeQuery:kQ_TABLE, table];
+  FMResultSet *rs = [fmdb_ executeQuery:kQ_TABLE, schema.table];
   bool exists = [rs next];
   [rs close];
 
@@ -131,17 +96,12 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 //------------------------------------------------------------------------------
 #pragma mark dbcalls
 
-- (BOOL) __updateData:(NSData *)data forKey:(NSString *)key {
-  [data retain];
+- (BOOL) __updateValues:(NSArray *)values forKey:(NSString *)key {
+  [values retain];
   [key retain];
   pthread_mutex_lock(&lock_);
 
-  [fmdb_ executeUpdate:kUPDATE_KV, data, key];
-
-  // [fmdb_ executeUpdate:kUPDATE_VERSION, [data valueForKey:@"hash"],
-  //   [data valueForKey:@"parent"], [data valueForKey:@"type"],
-  //   [data valueForKey:@"committed"], [data valueForKey:@"created"],
-  //   [[data valueForKey:@"attributes"] BSONRepresentation], key];
+  [fmdb_ executeUpdate:[schema update] withArgumentsInArray:values];
 
   if ([fmdb_ changes] > 1)
     DSLog(@"fmdb error: update modified more than one row.");
@@ -150,45 +110,45 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 
   pthread_mutex_unlock(&lock_);
   [key release];
-  [data release];
+  [values release];
   return success;
 }
 
-- (BOOL) insertData:(NSData *)data forKey:(NSString *)key {
-  [data retain];
+- (BOOL) insertValues:(NSArray *)values forKey:(NSString *)key {
+  [values retain];
   [key retain];
   pthread_mutex_lock(&lock_);
 
-  [fmdb_ executeUpdate:kINSERT_KV, key];
+  [fmdb_ executeUpdate:[schema insert], key];
 
   pthread_mutex_unlock(&lock_);
 
   //FIXME otherQueryProperties
-  BOOL success = [self __updateData:data forKey:key];
+  BOOL success = [self __updateValues:values forKey:key];
 
   [key release];
-  [data release];
+  [values release];
   return success;
 }
 
-- (BOOL) updateData:(NSData *)data forKey:(NSString *)key {
-  [data retain];
+- (BOOL) updateValues:(NSArray *)values forKey:(NSString *)key {
+  [values retain];
   [key retain];
 
-  BOOL success = [self __updateData:data forKey:key];
+  BOOL success = [self __updateValues:values forKey:key];
   if (!success)
-    success = [self insertData:data forKey:key];
+    success = [self insertValues:values forKey:key];
 
   [key release];
-  [data release];
+  [values release];
   return success;
 }
 
 
-- (NSData *) selectDataForKey:(NSString *)key {
+- (NSDictionary *) selectDataForKey:(NSString *)key {
   [key retain];
   pthread_mutex_lock(&lock_);
-  FMResultSet *rs = [fmdb_ executeQuery:kSELECT_KV, key];
+  FMResultSet *rs = [fmdb_ executeQuery:[schema select], key];
   [key release];
 
   if (![rs next]) {
@@ -197,20 +157,18 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
     return nil;
   }
 
-  // NSDictionary *dict = [self dictFromResult:rs];
-  NSData *data = [rs dataForColumn:@"v"];
-  [rs close];
+  NSDictionary *data = [[schema dictionaryFromResultSet:rs] retain];
 
+  [rs close];
   pthread_mutex_unlock(&lock_);
 
-  // return dict;
-  return data;
+  return [data autorelease];
 }
 
 - (int) countDataForKey:(NSString *)key {
   [key retain];
   pthread_mutex_lock(&lock_);
-  FMResultSet *rs = [fmdb_ executeQuery:kCOUNT_KV, key];
+  FMResultSet *rs = [fmdb_ executeQuery:[schema count], key];
   [key release];
 
   if (![rs next]) {
@@ -230,42 +188,56 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 - (void) deleteDataForKey:(NSString *)key {
   [key retain];
   pthread_mutex_lock(&lock_);
-  [fmdb_ executeUpdate:kDELETE_KV, key];
+
+  [fmdb_ executeUpdate:[schema delete], key];
 
   [key release];
   pthread_mutex_unlock(&lock_);
 }
 
+- (NSArray *) runQuery:(NSString *)query {
+  [query retain];
+
+  pthread_mutex_lock(&lock_);
+  NSMutableArray *result = [[NSMutableArray alloc] init];
+  FMResultSet *rs;
+
+  rs = [fmdb_ executeQuery:query];
+
+  while ([rs next]) {
+    [result addObject:[schema dictionaryFromResultSet:rs]];
+  }
+
+  [rs close];
+  pthread_mutex_unlock(&lock_);
+
+  [query release];
+  return [result autorelease];
+}
+
 //------------------------------------------------------------------------------
-#pragma mark datasource
+#pragma mark datasource interface
 
 
 - (id) get:(DSKey *)key {
   if (key == nil)
     return nil;
 
-  NSData *data = [self selectDataForKey:key.string];
-  // NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary *dict = [data BSONValue];
-  return [dict valueForKey:@"v"];
+  NSDictionary *result = [self selectDataForKey:key.string];
+
+  // unwrap those that need unwrapping.
+  if ([result count] == 1)
+    return [[result allValues] objectAtIndex:0];
+
+  return result;
 }
 
 - (void) put:(NSObject *)object forKey:(DSKey *)key {
   if (object == nil || key == nil)
     return;
 
-
-  NSDictionary *dict;
-  dict = [NSDictionary dictionaryWithObjectsAndKeys:object, @"v", nil];
-
-  NSData *data = [dict BSONRepresentation];
-
-  // NSString *str;
-  // str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-
-  [self updateData:data forKey:key.string];
-
-//  [str release];
+  NSArray *values = [schema updateValuesFromObject:object andKey:key.string];
+  [self updateValues:values forKey:key.string];
 }
 
 - (void) delete:(DSKey *)key {
@@ -279,28 +251,12 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
   return [self countDataForKey:key.string] > 0;
 }
 
-
-//------------------------------------------------------------------------------
-#pragma mark util
-
-- (NSDictionary *) dictFromResult:(FMResultSet *)rs
-{
-  NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:7];
-  [dict setObject:[rs stringForColumn:@"key"] forKey:@"key"];
-  [dict setObject:[rs stringForColumn:@"hash"] forKey:@"hash"];
-  [dict setObject:[rs stringForColumn:@"parent"] forKey:@"parent"];
-  [dict setObject:[rs stringForColumn:@"type"] forKey:@"type"];
-
-  [dict setObject:[NSNumber numberWithInt:[rs intForColumn:@"committed"]]
-    forKey:@"committed"];
-  [dict setObject:[NSNumber numberWithInt:[rs intForColumn:@"created"]]
-    forKey:@"created"];
-
-  [dict setObject:[rs stringForColumn:@"attributes"] forKey:@"attributes"];
-  return dict;
+- (NSArray *) query:(DSQuery *)query {
+  return [self runQuery:[schema query:query]];
 }
 
 //------------------------------------------------------------------------------
+#pragma mark util
 
 + (NSString *) pathForName:(NSString *)name
 {
@@ -315,6 +271,231 @@ static NSString *kUPDATE_KV = @"UPDATE ds_kv SET v = ? WHERE k = ?;";
 {
   NSFileManager *fileManager = [NSFileManager defaultManager];
   [fileManager removeItemAtPath:[self pathForName:name] error:NULL];
+}
+
+@end
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+
+@implementation SQLSchema
+
+@synthesize fields, key, table;
+
+- (id) init {
+  if ((self = [super init])) {
+    fields = [[NSMutableDictionary alloc] init];
+  }
+  return self;
+}
+
+- (id) initWithTableName:(NSString *)name {
+  if ((self = [self init])) {
+    self.table = name;
+  }
+  return self;
+}
+
+- (void) dealloc {
+  [fields release];
+  [table release];
+  [key release];
+  [super dealloc];
+}
+
+- (void) check {
+  if (table == nil || key == nil || [fields count] == 0) {
+    [NSException raise:@"DSInvalidTableSchema" format:@"Table Schema requires "
+      "at least a table name, key field name, and one other field."];
+  }
+}
+
+- (NSString *) create {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"CREATE TABLE IF NOT EXISTS %@ (", table];
+  [string appendFormat:@"  %@ TEXT PRIMARY KEY", key];
+  for (NSString *field in fields)
+    [string appendFormat:@", %@ %@", field, [fields valueForKey:field]];
+  [string appendString:@");"];
+  NSLog(@"%@", string);
+  return string;
+}
+
+- (NSString *) select {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"SELECT * FROM %@ WHERE %@ = ?;", table, key];
+  NSLog(@"%@", string);
+  return string;
+}
+
+- (NSString *) update {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"UPDATE %@ SET ", table];
+  BOOL first = YES;
+  for (NSString *field in fields) {
+    if (!first)
+      [string appendString:@","];
+    [string appendFormat:@" %@ = ? ", field];
+    first = NO;
+  }
+  [string appendFormat:@" WHERE %@ = ?;", key];
+  NSLog(@"%@", string);
+  return string;
+}
+
+
+- (NSString *) insert {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"INSERT INTO %@ ", table];
+  [string appendFormat:@"(%@) VALUES (?);", key];
+  NSLog(@"%@", string);
+  return string;
+}
+
+- (NSString *) delete {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"DELETE FROM %@ ", table];
+  [string appendFormat:@"WHERE %@ = ?;", key];
+  NSLog(@"%@", string);
+  return string;
+}
+
+- (NSString *) count {
+  [self check];
+
+  NSMutableString *string = [NSMutableString string];
+  [string appendFormat:@"SELECT count(*) as cnt FROM %@ ", table];
+  [string appendFormat:@"WHERE %@ = ?;", key];
+  NSLog(@"%@", string);
+  return string;
+}
+
+- (NSString *) query:(DSQuery *)query {
+  [self check];
+
+  return [query SQLQueryWithTable:table];
+}
+
+- (NSObject *) objectForField:(NSString *)fld fromResultSet:(FMResultSet *)rs {
+  NSString *type = [fields valueForKey:fld];
+
+  if ([type isEqualToString:@"TEXT"])
+    return [rs stringForColumn:fld];
+
+  if ([type isEqualToString:@"INTEGER"])
+    return [NSNumber numberWithLongLong:[rs longLongIntForColumn:fld]];
+
+  if ([type isEqualToString:@"REAL"])
+    return [NSNumber numberWithDouble:[rs doubleForColumn:fld]];
+
+  if ([type isEqualToString:@"NUMERIC"])
+    return [NSNumber numberWithDouble:[rs doubleForColumn:fld]];
+
+  if ([type isEqualToString:@"BLOB"])
+    return [rs dataForColumn:fld];
+
+  return nil;
+}
+
+- (NSDictionary *) dictionaryFromResultSet:(FMResultSet *)rs {
+  NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+  for (NSString *field in fields) {
+    NSObject *object = [self objectForField:field fromResultSet:rs];
+    [dict setValue:object forKey:field];
+  }
+  return [dict autorelease];
+}
+
+- (NSArray *) updateValuesFromObject:(NSObject *)object andKey:(NSString *)_k {
+  if ([fields count] == 1)
+    return [NSArray arrayWithObjects:object, _k, nil];
+
+  NSMutableArray *array = [[NSMutableArray alloc] init];
+  for (NSString *field in fields)
+    [array addObject:[object valueForKey:field]];
+  [array addObject:_k];
+  return [array autorelease];
+}
+
++ (SQLSchema *) simpleTableNamed:(NSString *)table {
+  SQLSchema *schema = [[SQLSchema alloc] init];
+  schema.table = table;
+  schema.key = @"k";
+  [schema.fields setValue:@"TEXT" forKey:@"v"];
+  return [schema autorelease];
+}
+
++ (SQLSchema *) versionTableNamed:(NSString *)table {
+  SQLSchema *schema = [[SQLSchema alloc] init];
+  schema.table = table;
+  schema.key = @"key";
+  [schema.fields setValue:@"TEXT" forKey:@"type"];
+  [schema.fields setValue:@"TEXT" forKey:@"hash"];
+  [schema.fields setValue:@"TEXT" forKey:@"parent"];
+  [schema.fields setValue:@"INTEGER" forKey:@"created"];
+  [schema.fields setValue:@"INTEGER" forKey:@"committed"];
+  [schema.fields setValue:@"TEXT" forKey:@"attributes"];
+  return [schema autorelease];
+}
+
+@end
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+@implementation DSQuery (SQL)
+
+- (NSString *) SQLQueryWithTable:(NSString *)table {
+  NSMutableString *string = [[NSMutableString alloc] init];
+
+  // Add the select clause
+  [string appendFormat:@"SELECT * FROM %@ ", table];
+
+  // Add the WHERE clause
+  if ([filters count] > 0) {
+    BOOL first = YES;
+    for (DSFilter *filter in filters) {
+      [string appendString:(first ? @"WHERE " : @",")];
+      [string appendFormat:@" %@ %@ %@ ", filter.field, filter.op, filter.value];
+      first = NO;
+    }
+  }
+
+  // Add the ORDER BY clause
+  if ([orders count] > 0) {
+    BOOL first = YES;
+    for (DSOrder *order in orders) {
+      [string appendString:(first ? @" ORDER BY " : @",")];
+      [string appendFormat:@" %@ ", order.field];
+      [string appendString:(order.isAscending ? @"ASC " : @"DESC ")];
+      first = NO;
+    }
+  }
+
+  // Add the limit clause
+  if (limit > 0)
+    [string appendFormat:@" LIMIT %d ", limit];
+
+  // Add the offset clause
+  if (offset > 0)
+    [string appendFormat:@" OFFSET %d ", offset];
+
+  // Close the query
+  [string appendString:@";"];
+
+  NSLog(@"%@", string);
+  return [string autorelease];
 }
 
 @end

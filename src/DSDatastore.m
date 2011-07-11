@@ -1,6 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DSDatastore.h"
+#import "DSQuery.h"
 #import "DSKey.h"
 
 @implementation DSDatastore
@@ -23,7 +24,11 @@
     [self class]];
   return NO;
 }
-
+- (NSArray *) query:(DSQuery *)query {
+  [NSException raise:@"DSNotImplemented" format:@"%@ query: not implemented",
+    [self class]];
+  return nil;
+}
 
 
 - (NSObject *) valueForKey:(DSKey *)key {
@@ -87,7 +92,9 @@
 - (BOOL) contains:(DSKey *)key {
   return [dict valueForKey:key.string] != nil;
 }
-
+- (NSArray *) query:(DSQuery *)query {
+  return [query operateOnArray:[dict allValues]];
+}
 @end
 
 // Abstract interface for collections of datastores
@@ -154,7 +161,10 @@
   }
   return NO;
 }
-
+- (NSArray *) query:(DSQuery *)query {
+  DSDatastore *store = [stores objectAtIndex:[stores count] - 1];
+  return [store query:query];
+}
 @end
 
 
@@ -192,6 +202,12 @@
 }
 - (BOOL) contains:(DSKey *)key {
   return [[self shardDatasourceForKey:key] contains:key];
+}
+- (NSArray *) query:(DSQuery *)query {
+  NSMutableArray *array = [[NSMutableArray alloc] init];
+  for (DSDatastore *store in stores)
+    [array addObjectsFromArray:[store query:query]];
+  return [query operateOnArray:[array autorelease]];
 }
 @end
 

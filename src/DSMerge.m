@@ -33,6 +33,7 @@
     [attr setData:data forInstance:instance];
   }
 
+  [mergeData release];
   [instance commit];
 }
 

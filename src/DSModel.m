@@ -88,10 +88,10 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 //------------------------------------------------------------------------------
 
 - (void) commit {
-  NSMutableString *hashB = [[NSMutableString alloc] init];
+  NSMutableString *hashB = [NSMutableString string];
   [hashB appendFormat:@"%@,%@,", key, [self dstype]];
 
-  NSMutableDictionary *attrData = [[NSMutableDictionary alloc] init];
+  NSMutableDictionary *attrData = [NSMutableDictionary dictionary];
   NSDictionary *attrs = [[self class] attributes];
   for (DSAttribute *attr in [attrs allValues]) {
     [attr updateValueForInstance:self];
@@ -125,6 +125,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
     [version release];
     version = [[DSVersion alloc] initWithSerialRep:serialRep];
   }
+  [serialRep release];
 }
 
 

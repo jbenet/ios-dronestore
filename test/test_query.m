@@ -25,7 +25,7 @@
   NSString *h3 = [[NSString stringWithFormat:@"lerp"] sha1HexDigest];
   DSMutableSerialRep *sr = nil;
 
-  sr = [[DSMutableSerialRep alloc] init];
+  sr = [[[DSMutableSerialRep alloc] init] autorelease];
   [sr setValue:@"/ABCD" forKey:@"key"];
   [sr setValue:h1 forKey:@"hash"];
   [sr setValue:DSVersionBlankHash forKey:@"parent"];
@@ -40,7 +40,7 @@
 
   DSVersion *v1 = [[[DSVersion alloc] initWithSerialRep:sr] autorelease];
 
-  sr = [[DSMutableSerialRep alloc] init];
+  sr = [[[DSMutableSerialRep alloc] init] autorelease];
   [sr setValue:@"/ABCD" forKey:@"key"];
   [sr setValue:h2 forKey:@"hash"];
   [sr setValue:h1 forKey:@"parent"];
@@ -55,7 +55,7 @@
 
   DSVersion *v2 = [[[DSVersion alloc] initWithSerialRep:sr] autorelease];
 
-  sr = [[DSMutableSerialRep alloc] init];
+  sr = [[[DSMutableSerialRep alloc] init] autorelease];
   [sr setValue:@"/ABCD" forKey:@"key"];
   [sr setValue:h3 forKey:@"hash"];
   [sr setValue:h2 forKey:@"parent"];

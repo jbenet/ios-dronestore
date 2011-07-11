@@ -51,7 +51,7 @@
       GHAssertFalse([sn contains:key], @"insert");
       [sn put:[NSNumber numberWithInt:i] forKey:key];
       GHAssertTrue([sn contains:key], @"insert");
-      GHAssertEqualObjects([sn get:key], [NSNumber numberWithInt:i], @"insert");
+      GHAssertTrue([[sn get:key] intValue] == i, @"insert");
     }
   }
 
@@ -62,7 +62,7 @@
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
     for (DSDatastore *sn in stores) {
       GHAssertTrue([sn contains:key], @"reassure");
-      GHAssertEqualObjects([sn get:key], [NSNumber numberWithInt:i], @"reass");
+      GHAssertTrue([[sn get:key] intValue] == i, @"reass");
     }
   }
 
@@ -73,11 +73,11 @@
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
     for (DSDatastore *sn in stores) {
       GHAssertTrue([sn contains:key], @"change");
-      GHAssertEqualObjects([sn get:key], [NSNumber numberWithInt:i], @"change");
+      GHAssertTrue([[sn get:key] intValue] == i, @"change");
       [sn put:[NSNumber numberWithInt:i + 1] forKey:key];
       GHAssertTrue([sn contains:key], @"change");
-      GHAssertNotEqualObjects([sn get:key], [NSNumber numberWithInt:i], @"chg");
-      GHAssertEqualObjects([sn get:key], [NSNumber numberWithInt:i + 1], @"c");
+      GHAssertTrue([[sn get:key] intValue] != i, @"chg");
+      GHAssertTrue([[sn get:key] intValue] == i + 1, @"c");
     }
   }
 
@@ -88,7 +88,7 @@
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
     for (DSDatastore *sn in stores) {
       GHAssertTrue([sn contains:key], @"remove");
-      GHAssertEqualObjects([sn get:key], [NSNumber numberWithInt:i + 1], @"rm");
+      GHAssertTrue([[sn get:key] intValue] == i + 1, @"rm");
       [sn delete:key];
       GHAssertFalse([sn contains:key], @"remove");
       GHAssertNil([sn get:key], @"remove");
@@ -376,9 +376,13 @@
   [DSFMDBDatastore deleteDatabaseNamed:@"test_db_2"];
   [DSFMDBDatastore deleteDatabaseNamed:@"test_db_3"];
 
-  DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithName:@"test_db_1"];
-  DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithName:@"test_db_2"];
-  DSFMDBDatastore *f3 = [[DSFMDBDatastore alloc] initWithName:@"test_db_3"];
+  SQLSchema *s1 = [SQLSchema simpleTableNamed:@"test_db_1"];
+  SQLSchema *s2 = [SQLSchema simpleTableNamed:@"test_db_2"];
+  SQLSchema *s3 = [SQLSchema simpleTableNamed:@"test_db_3"];
+
+  DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithSchema:s1];
+  DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithSchema:s2];
+  DSFMDBDatastore *f3 = [[DSFMDBDatastore alloc] initWithSchema:s3];
 
   NSArray *stores = [NSArray arrayWithObjects: f1, f2, f3, nil];
   [self subtestStores:stores withNumElems:100];

@@ -23,6 +23,7 @@
 
 
 @class DSKey;
+@class DSQuery;
 
 // Abstract interface. subclass it.
 @interface DSDatastore : NSObject {}
@@ -32,7 +33,7 @@
 - (void) put:(NSObject *)object forKey:(DSKey *)key;
 - (void) delete:(DSKey *)key;
 - (BOOL) contains:(DSKey *)key;
-
+- (NSArray *) query:(DSQuery *)query;
 
 // obj-c interface
 - (NSObject *) valueForKey:(DSKey *)key;
