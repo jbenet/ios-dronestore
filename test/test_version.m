@@ -2,7 +2,6 @@
 #import "DSKey.h"
 #import "DSVersion.h"
 #import "DSSerialRep.h"
-#import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
 
 @interface VersionTest : GHTestCase {

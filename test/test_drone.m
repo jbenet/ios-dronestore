@@ -6,8 +6,9 @@
 #import "DSDatastore.h"
 #import "TestPerson.h"
 #import "DSFMDBDatastore.h"
+#import "DSQuery.h"
+#import "DSCollection.h"
 
-#import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
 
 @interface DroneTest : GHTestCase {
@@ -74,6 +75,16 @@
   GHAssertFalse([person isEqualToModel:person2], @"!eq.");
   GHAssertTrue([[drone get:person2.key] isEqualToModel:person2], @"should eq.");
 
+
+  DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  DSCollection *result = [drone query:query];
+  GHAssertTrue([result count] == 1, @"query count");
+  GHAssertTrue([person2 isEqualToModel:[result modelAtIndex:0]],
+    @"should eq.");
+  GHAssertTrue([person2 isEqualToModel:[result modelForKey:person2.key]],
+    @"should eq.");
+
+  [query release];
 
   [drone release];
 }
@@ -203,7 +214,7 @@
     for (int i = 0; i < numPeople; i++) {
       DSKey *k = [TestPerson keyWithName:[NSString stringWithFormat:@"%d", i]];
       TestPerson *p = [drone get:k];
-      NSLog(@"person %d: %@", i, (p == nil ? @"not found" : p));
+      NSLog(@"person %d: %@", i, (p == nil ? @"not found" : [p description]));
     }
   }
 
@@ -225,8 +236,34 @@
       GHAssertTrue(fabs(p.awesome - o.awesome) < 0.00001, @"awesome");
 
       GHAssertTrue([p.version isEqualToVersion:o.version], @"version");
+
     }
   }
+
+  DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  for (DSDrone *drone in drones) {
+    DSCollection *result = [drone query:query];
+    GHAssertTrue([result count] == numPeople, @"query count");
+
+    for (int i = 0; i < numPeople; i++) {
+      DSKey *k = [TestPerson keyWithName:[NSString stringWithFormat:@"%d", i]];
+      TestPerson *p = [[drones objectAtIndex:0] get:k];
+
+      TestPerson *o = [result modelForKey:p.key];
+
+      GHAssertTrue([p isEqualToModel:o], @"equal");
+      GHAssertEqualStrings(p.first, o.first, @"first");
+      GHAssertEqualStrings(p.last, o.last, @"last");
+      GHAssertEqualStrings(p.phone, o.phone, @"phone");
+      GHAssertTrue(p.age == o.age, @"age");
+      GHAssertTrue(fabs(p.awesome - o.awesome) < 0.00001, @"awesome");
+
+      GHAssertTrue([p.version isEqualToVersion:o.version], @"version");
+
+    }
+  }
+  [query release];
+
 
   [d1 release];
   [d2 release];

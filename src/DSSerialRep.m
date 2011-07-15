@@ -1,5 +1,6 @@
 
-#import <bson-objc/BSONCodec.h>
+#import <bson-objc/bson-objc.h>
+
 #import "DSSerialRep.h"
 
 @implementation DSSerialRep

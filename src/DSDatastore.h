@@ -58,6 +58,16 @@
 @end
 
 
+// Slightly better DSDictionaryDatastore
+//
+// WARNING: unless explicitly called, it only evicts entries on memory warnings.
+// and even then, only removes entries whose retainCounts are one.
+@interface DSCacheDatastore : DSDictionaryDatastore {
+}
+- (void) removeUnusedObjects;
+@end
+
+
 
 // Abstract interface for collections of datastores
 @interface DSDatastoreCollection : DSDatastore {

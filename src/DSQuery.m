@@ -236,7 +236,9 @@ DSOrderOp *DSOrderOpDescending = @"-";
 - (NSArray *) operateOnArray:(NSArray *)array {
   array = [DSFilter filteredArray:array withFilters:self.filters];
   array = [DSOrder sortedArray:array withOrders:self.orders];
-  return [array subarrayWithRange:NSMakeRange(self.offset, self.limit)];
+  int off = MIN(self.offset, [array count]);
+  int lim = MIN(self.limit, [array count] - offset);
+  return [array subarrayWithRange:NSMakeRange(off, lim)];
 }
 
 - (void) addOrder:(DSOrder *)order {

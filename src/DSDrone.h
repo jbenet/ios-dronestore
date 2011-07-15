@@ -10,6 +10,8 @@
 @class DSVersion;
 @class DSSerialRep;
 @class DSDatastore;
+@class DSQuery;
+@class DSCollection;
 @protocol DSModel;
 
 @interface DSDrone : NSObject {
@@ -29,6 +31,7 @@
 - (id<DSModel>) merge:(DSModel *)instance;
 - (void) delete:(DSKey *)key;
 - (BOOL) contains:(DSKey *)key;
+- (DSCollection *) query:(DSQuery *)query;
 
 - (DSVersion *) putVersion:(DSVersion *)version;
 - (DSModel *) mergeVersion:(DSVersion *)version;

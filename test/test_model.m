@@ -4,7 +4,6 @@
 #import "DSModel.h"
 #import "DSAttribute.h"
 
-#import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
 
 #import "TestPerson.h"

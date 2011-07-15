@@ -6,211 +6,106 @@
 	objectVersion = 45;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		D9510B73117C3BB700288D3B /* Build & Merge Libraries */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = D9510B77117C3BBB00288D3B /* Build configuration list for PBXAggregateTarget "Build & Merge Libraries" */;
-			buildPhases = (
-				D9510C12117C4BC500288D3B /* ShellScript */,
-			);
-			dependencies = (
-				D9510B79117C3BD900288D3B /* PBXTargetDependency */,
-				D9510B7B117C3BD900288D3B /* PBXTargetDependency */,
-			);
-			name = "Build & Merge Libraries";
-			productName = "Build & Merge Libraries";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		AA747D9F0F9514B9006C5449 /* idrone_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* idrone_Prefix.pch */; };
-		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
-		D933724D1347283500C7FF19 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D933724C1347283500C7FF19 /* GHUnitIOS.framework */; };
-		D933724E1347283500C7FF19 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D933724C1347283500C7FF19 /* GHUnitIOS.framework */; };
 		D9337322134740DF00C7FF19 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D951042E1174822000288D3B /* UIKit.framework */; };
 		D9337323134740DF00C7FF19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		D9337324134740DF00C7FF19 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D951042D1174822000288D3B /* CoreGraphics.framework */; };
 		D933732A134740DF00C7FF19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9337328134740DF00C7FF19 /* InfoPlist.strings */; };
 		D933733E1347411800C7FF19 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D933724C1347283500C7FF19 /* GHUnitIOS.framework */; };
-		D933733F1347411C00C7FF19 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
-		D93373401347411C00C7FF19 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
-		D933734F1347413500C7FF19 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A11179098200288D3B /* FMDatabase.m */; };
-		D93373501347413500C7FF19 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A31179098200288D3B /* FMDatabaseAdditions.m */; };
-		D93373511347413500C7FF19 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A61179098200288D3B /* FMResultSet.m */; };
 		D93373521347419E00C7FF19 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
 		D93373531347421700C7FF19 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
-		D95106C71179098200288D3B /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A01179098200288D3B /* FMDatabase.h */; };
-		D95106C81179098200288D3B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A11179098200288D3B /* FMDatabase.m */; };
-		D95106C91179098200288D3B /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A21179098200288D3B /* FMDatabaseAdditions.h */; };
-		D95106CA1179098200288D3B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A31179098200288D3B /* FMDatabaseAdditions.m */; };
-		D95106CC1179098200288D3B /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A51179098200288D3B /* FMResultSet.h */; };
-		D95106CD1179098200288D3B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A61179098200288D3B /* FMResultSet.m */; };
-		D9510B4B117C3B4B00288D3B /* idrone_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* idrone_Prefix.pch */; };
-		D9510B4F117C3B4B00288D3B /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A01179098200288D3B /* FMDatabase.h */; };
-		D9510B50117C3B4B00288D3B /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A21179098200288D3B /* FMDatabaseAdditions.h */; };
-		D9510B51117C3B4B00288D3B /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A51179098200288D3B /* FMResultSet.h */; };
-		D9510B5F117C3B4B00288D3B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A11179098200288D3B /* FMDatabase.m */; };
-		D9510B60117C3B4B00288D3B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A31179098200288D3B /* FMDatabaseAdditions.m */; };
-		D9510B61117C3B4B00288D3B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A61179098200288D3B /* FMResultSet.m */; };
-		D9510B6B117C3B4B00288D3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
-		D953BDD91221884A005A6BEC /* NSData+AES256.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BDD61221884A005A6BEC /* NSData+AES256.h */; };
-		D953BDDA1221884A005A6BEC /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
-		D953BDDB1221884A005A6BEC /* NSData+AES256.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BDD61221884A005A6BEC /* NSData+AES256.h */; };
-		D953BDDC1221884A005A6BEC /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
-		D953BE3F122194F7005A6BEC /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BE3C122194F7005A6BEC /* NSData+Base64.h */; };
-		D953BE40122194F7005A6BEC /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
-		D953BE41122194F7005A6BEC /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BE3C122194F7005A6BEC /* NSData+Base64.h */; };
-		D953BE42122194F7005A6BEC /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
-		D97AB75813C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
-		D97AB75913C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
+		D95C239413CBC329004BCE48 /* DSAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01F13C365C90089E9F7 /* DSAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C239513CBC329004BCE48 /* DSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02013C365C90089E9F7 /* DSAttribute.m */; };
+		D95C239613CBC329004BCE48 /* DSKey.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02113C365C90089E9F7 /* DSKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C239713CBC329004BCE48 /* DSComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB78913CA418A006A65D3 /* DSComparable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C239813CBC329004BCE48 /* DSKey.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02213C365C90089E9F7 /* DSKey.m */; };
+		D95C239913CBC329004BCE48 /* DSDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C239A13CBC329004BCE48 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
+		D95C239B13CBC329004BCE48 /* DSFMDBDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C239C13CBC329004BCE48 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
+		D95C239D13CBC329004BCE48 /* DSDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0BB13C62B730089E9F7 /* DSDrone.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C239E13CBC329004BCE48 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
+		D95C239F13CBC329004BCE48 /* DSModel.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02313C365C90089E9F7 /* DSModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23A013CBC329004BCE48 /* DSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02413C365C90089E9F7 /* DSModel.m */; };
+		D95C23A113CBC329004BCE48 /* DSMerge.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF09A13C374830089E9F7 /* DSMerge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23A213CBC329004BCE48 /* DSMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09B13C374840089E9F7 /* DSMerge.m */; };
+		D95C23A313CBC329004BCE48 /* DSSerialRep.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02513C365C90089E9F7 /* DSSerialRep.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23A413CBC329004BCE48 /* DSSerialRep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02613C365C90089E9F7 /* DSSerialRep.m */; };
+		D95C23A513CBC329004BCE48 /* DSVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02713C365C90089E9F7 /* DSVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23A613CBC329004BCE48 /* DSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02813C365C90089E9F7 /* DSVersion.m */; };
+		D95C23A713CBC329004BCE48 /* DSCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76913CA2AC7006A65D3 /* DSCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23A813CBC329004BCE48 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
+		D95C23A913CBC329004BCE48 /* DSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76B13CA2ACA006A65D3 /* DSQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23AA13CBC329004BCE48 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
+		D95C23AB13CBC329004BCE48 /* iDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02913C365C90089E9F7 /* iDrone.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23AC13CBC34C004BCE48 /* NSValue+ObjCTypeSize.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23AD13CBC34C004BCE48 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
+		D95C23B013CBC34C004BCE48 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BE3C122194F7005A6BEC /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23B113CBC34C004BCE48 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
+		D95C23B213CBC34C004BCE48 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF00A13C365980089E9F7 /* nanotime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23B313CBC34C004BCE48 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
+		D95C23B413CBC34C004BCE48 /* NSData+AES256.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BDD61221884A005A6BEC /* NSData+AES256.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23B513CBC34C004BCE48 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
+		D95C23B613CBC34C004BCE48 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23B713CBC34C004BCE48 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
+		D95C23B813CBC34C004BCE48 /* NSString+SHA.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01213C365A10089E9F7 /* NSString+SHA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23B913CBC34C004BCE48 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
+		D95C23BA13CBC34C004BCE48 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A01179098200288D3B /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23BB13CBC34C004BCE48 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A11179098200288D3B /* FMDatabase.m */; };
+		D95C23BC13CBC34C004BCE48 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A21179098200288D3B /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23BD13CBC34C004BCE48 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A31179098200288D3B /* FMDatabaseAdditions.m */; };
+		D95C23BE13CBC34C004BCE48 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A51179098200288D3B /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D95C23BF13CBC34C004BCE48 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A61179098200288D3B /* FMResultSet.m */; };
+		D95C23C113CBC364004BCE48 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
+		D95C23C813CBC864004BCE48 /* test_query.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77C13CA2EC5006A65D3 /* test_query.m */; };
+		D95C23C913CBC864004BCE48 /* test_collection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77913CA2EB5006A65D3 /* test_collection.m */; };
+		D95C23CA13CBC864004BCE48 /* test_merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AA13C4FED30089E9F7 /* test_merge.m */; };
+		D95C23CB13CBC864004BCE48 /* TestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */; };
+		D95C23CC13CBC864004BCE48 /* test_datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0C913C62BA60089E9F7 /* test_datastore.m */; };
+		D95C23CD13CBC864004BCE48 /* test_drone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0CA13C62BA70089E9F7 /* test_drone.m */; };
+		D95C23CE13CBC864004BCE48 /* test_attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04513C365F60089E9F7 /* test_attribute.m */; };
+		D95C23CF13CBC864004BCE48 /* test_key.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04613C365F60089E9F7 /* test_key.m */; };
+		D95C23D013CBC864004BCE48 /* test_model.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04713C365F60089E9F7 /* test_model.m */; };
+		D95C23D113CBC864004BCE48 /* test_serialrep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04813C365F60089E9F7 /* test_serialrep.m */; };
+		D95C23D213CBC864004BCE48 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
+		D95C23D313CBC864004BCE48 /* test_query.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77C13CA2EC5006A65D3 /* test_query.m */; };
+		D95C23D413CBC864004BCE48 /* test_collection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77913CA2EB5006A65D3 /* test_collection.m */; };
+		D95C23D513CBC864004BCE48 /* test_merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AA13C4FED30089E9F7 /* test_merge.m */; };
+		D95C23D613CBC864004BCE48 /* TestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */; };
+		D95C23D713CBC864004BCE48 /* test_datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0C913C62BA60089E9F7 /* test_datastore.m */; };
+		D95C23D813CBC864004BCE48 /* test_drone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0CA13C62BA70089E9F7 /* test_drone.m */; };
+		D95C23D913CBC864004BCE48 /* test_attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04513C365F60089E9F7 /* test_attribute.m */; };
+		D95C23DA13CBC864004BCE48 /* test_key.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04613C365F60089E9F7 /* test_key.m */; };
+		D95C23DB13CBC864004BCE48 /* test_model.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04713C365F60089E9F7 /* test_model.m */; };
+		D95C23DC13CBC864004BCE48 /* test_serialrep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04813C365F60089E9F7 /* test_serialrep.m */; };
+		D95C23DD13CBC864004BCE48 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
+		D95C23E913CBCB91004BCE48 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */; };
+		D95C23EA13CBCB94004BCE48 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09813C371F30089E9F7 /* GHUnitIOSTestMain.m */; };
+		D95C23EC13CBCE1E004BCE48 /* iDrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95C23EB13CBCE1E004BCE48 /* iDrone.framework */; };
+		D95C23ED13CBCE1E004BCE48 /* iDrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95C23EB13CBCE1E004BCE48 /* iDrone.framework */; };
 		D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
-		D97AB75E13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */; };
-		D97AB75F13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */; };
-		D97AB76013C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
-		D97AB76113C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
-		D97AB76213C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
-		D97AB76313C790E5006A65D3 /* DSFMDBDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */; };
-		D97AB76413C791C9006A65D3 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A11179098200288D3B /* FMDatabase.m */; };
-		D97AB76513C791C9006A65D3 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A31179098200288D3B /* FMDatabaseAdditions.m */; };
-		D97AB76613C791C9006A65D3 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D95106A61179098200288D3B /* FMResultSet.m */; };
 		D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
-		D97AB76D13CA2AD3006A65D3 /* DSCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76913CA2AC7006A65D3 /* DSCollection.h */; };
-		D97AB76E13CA2AD3006A65D3 /* DSCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76913CA2AC7006A65D3 /* DSCollection.h */; };
-		D97AB76F13CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
-		D97AB77013CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
-		D97AB77113CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
-		D97AB77213CA2AD3006A65D3 /* DSCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76A13CA2AC8006A65D3 /* DSCollection.m */; };
-		D97AB77313CA2AD3006A65D3 /* DSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76B13CA2ACA006A65D3 /* DSQuery.h */; };
-		D97AB77413CA2AD3006A65D3 /* DSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB76B13CA2ACA006A65D3 /* DSQuery.h */; };
-		D97AB77513CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
-		D97AB77613CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
-		D97AB77713CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
-		D97AB77813CA2AD3006A65D3 /* DSQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB76C13CA2ACF006A65D3 /* DSQuery.m */; };
-		D97AB77A13CA2EB5006A65D3 /* test_collection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77913CA2EB5006A65D3 /* test_collection.m */; };
-		D97AB77B13CA2EB5006A65D3 /* test_collection.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77913CA2EB5006A65D3 /* test_collection.m */; };
-		D97AB77D13CA2EC5006A65D3 /* test_query.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77C13CA2EC5006A65D3 /* test_query.m */; };
-		D97AB77E13CA2EC5006A65D3 /* test_query.m in Sources */ = {isa = PBXBuildFile; fileRef = D97AB77C13CA2EC5006A65D3 /* test_query.m */; };
-		D97AB78A13CA418A006A65D3 /* DSComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB78913CA418A006A65D3 /* DSComparable.h */; };
-		D97AB78B13CA418A006A65D3 /* DSComparable.h in Headers */ = {isa = PBXBuildFile; fileRef = D97AB78913CA418A006A65D3 /* DSComparable.h */; };
-		D9BB61EB12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
-		D9BB61ED12108403006F32AA /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
-		D9EAF00B13C365980089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
-		D9EAF00C13C365980089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
-		D9EAF00D13C365980089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
-		D9EAF00E13C365980089E9F7 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF00A13C365980089E9F7 /* nanotime.h */; };
-		D9EAF00F13C365980089E9F7 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF00A13C365980089E9F7 /* nanotime.h */; };
-		D9EAF01413C365A10089E9F7 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */; };
-		D9EAF01513C365A10089E9F7 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */; };
-		D9EAF01613C365A10089E9F7 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
-		D9EAF01713C365A10089E9F7 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
-		D9EAF01813C365A10089E9F7 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
-		D9EAF01913C365A10089E9F7 /* NSString+SHA.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01213C365A10089E9F7 /* NSString+SHA.h */; };
-		D9EAF01A13C365A10089E9F7 /* NSString+SHA.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01213C365A10089E9F7 /* NSString+SHA.h */; };
-		D9EAF01B13C365A10089E9F7 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
-		D9EAF01C13C365A10089E9F7 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
-		D9EAF01D13C365A10089E9F7 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
-		D9EAF02A13C365C90089E9F7 /* DSAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01F13C365C90089E9F7 /* DSAttribute.h */; };
-		D9EAF02B13C365C90089E9F7 /* DSAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01F13C365C90089E9F7 /* DSAttribute.h */; };
-		D9EAF02C13C365C90089E9F7 /* DSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02013C365C90089E9F7 /* DSAttribute.m */; };
-		D9EAF02D13C365C90089E9F7 /* DSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02013C365C90089E9F7 /* DSAttribute.m */; };
-		D9EAF02E13C365C90089E9F7 /* DSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02013C365C90089E9F7 /* DSAttribute.m */; };
-		D9EAF02F13C365C90089E9F7 /* DSKey.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02113C365C90089E9F7 /* DSKey.h */; };
-		D9EAF03013C365C90089E9F7 /* DSKey.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02113C365C90089E9F7 /* DSKey.h */; };
-		D9EAF03113C365C90089E9F7 /* DSKey.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02213C365C90089E9F7 /* DSKey.m */; };
-		D9EAF03213C365C90089E9F7 /* DSKey.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02213C365C90089E9F7 /* DSKey.m */; };
-		D9EAF03313C365C90089E9F7 /* DSKey.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02213C365C90089E9F7 /* DSKey.m */; };
-		D9EAF03413C365C90089E9F7 /* DSModel.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02313C365C90089E9F7 /* DSModel.h */; };
-		D9EAF03513C365C90089E9F7 /* DSModel.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02313C365C90089E9F7 /* DSModel.h */; };
-		D9EAF03613C365C90089E9F7 /* DSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02413C365C90089E9F7 /* DSModel.m */; };
-		D9EAF03713C365C90089E9F7 /* DSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02413C365C90089E9F7 /* DSModel.m */; };
-		D9EAF03813C365C90089E9F7 /* DSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02413C365C90089E9F7 /* DSModel.m */; };
-		D9EAF03913C365C90089E9F7 /* DSSerialRep.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02513C365C90089E9F7 /* DSSerialRep.h */; };
-		D9EAF03A13C365C90089E9F7 /* DSSerialRep.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02513C365C90089E9F7 /* DSSerialRep.h */; };
-		D9EAF03B13C365C90089E9F7 /* DSSerialRep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02613C365C90089E9F7 /* DSSerialRep.m */; };
-		D9EAF03C13C365C90089E9F7 /* DSSerialRep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02613C365C90089E9F7 /* DSSerialRep.m */; };
-		D9EAF03D13C365C90089E9F7 /* DSSerialRep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02613C365C90089E9F7 /* DSSerialRep.m */; };
-		D9EAF03E13C365C90089E9F7 /* DSVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02713C365C90089E9F7 /* DSVersion.h */; };
-		D9EAF03F13C365C90089E9F7 /* DSVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02713C365C90089E9F7 /* DSVersion.h */; };
-		D9EAF04013C365C90089E9F7 /* DSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02813C365C90089E9F7 /* DSVersion.m */; };
-		D9EAF04113C365C90089E9F7 /* DSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02813C365C90089E9F7 /* DSVersion.m */; };
-		D9EAF04213C365C90089E9F7 /* DSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02813C365C90089E9F7 /* DSVersion.m */; };
-		D9EAF04313C365C90089E9F7 /* iDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02913C365C90089E9F7 /* iDrone.h */; };
-		D9EAF04413C365C90089E9F7 /* iDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02913C365C90089E9F7 /* iDrone.h */; };
-		D9EAF04A13C365F60089E9F7 /* test_attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04513C365F60089E9F7 /* test_attribute.m */; };
-		D9EAF04B13C365F60089E9F7 /* test_key.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04613C365F60089E9F7 /* test_key.m */; };
-		D9EAF04C13C365F60089E9F7 /* test_model.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04713C365F60089E9F7 /* test_model.m */; };
-		D9EAF04D13C365F60089E9F7 /* test_serialrep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04813C365F60089E9F7 /* test_serialrep.m */; };
-		D9EAF04E13C365F60089E9F7 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
 		D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05C13C36E930089E9F7 /* GHUnit.framework */; };
 		D9EAF08013C36F170089E9F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF07F13C36F170089E9F7 /* Cocoa.framework */; };
 		D9EAF08213C36F550089E9F7 /* GHUnit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9EAF05C13C36E930089E9F7 /* GHUnit.framework */; };
-		D9EAF08B13C3705F0089E9F7 /* DSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02013C365C90089E9F7 /* DSAttribute.m */; };
-		D9EAF08C13C3705F0089E9F7 /* DSKey.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02213C365C90089E9F7 /* DSKey.m */; };
-		D9EAF08D13C3705F0089E9F7 /* DSModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02413C365C90089E9F7 /* DSModel.m */; };
-		D9EAF08E13C3705F0089E9F7 /* DSSerialRep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02613C365C90089E9F7 /* DSSerialRep.m */; };
-		D9EAF08F13C3705F0089E9F7 /* DSVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02813C365C90089E9F7 /* DSVersion.m */; };
-		D9EAF09013C3705F0089E9F7 /* test_attribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04513C365F60089E9F7 /* test_attribute.m */; };
-		D9EAF09113C3705F0089E9F7 /* test_key.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04613C365F60089E9F7 /* test_key.m */; };
-		D9EAF09213C3705F0089E9F7 /* test_model.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04713C365F60089E9F7 /* test_model.m */; };
-		D9EAF09313C3705F0089E9F7 /* test_serialrep.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04813C365F60089E9F7 /* test_serialrep.m */; };
-		D9EAF09413C3705F0089E9F7 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
-		D9EAF09713C371D30089E9F7 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */; };
-		D9EAF09913C371F30089E9F7 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09813C371F30089E9F7 /* GHUnitIOSTestMain.m */; };
-		D9EAF09C13C374850089E9F7 /* DSMerge.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF09A13C374830089E9F7 /* DSMerge.h */; };
-		D9EAF09D13C374850089E9F7 /* DSMerge.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF09A13C374830089E9F7 /* DSMerge.h */; };
-		D9EAF09E13C374850089E9F7 /* DSMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09B13C374840089E9F7 /* DSMerge.m */; };
-		D9EAF09F13C374850089E9F7 /* DSMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09B13C374840089E9F7 /* DSMerge.m */; };
-		D9EAF0A013C374850089E9F7 /* DSMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09B13C374840089E9F7 /* DSMerge.m */; };
-		D9EAF0A113C374850089E9F7 /* DSMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09B13C374840089E9F7 /* DSMerge.m */; };
 		D9EAF0A313C3758B0089E9F7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF0A213C3758B0089E9F7 /* CFNetwork.framework */; };
-		D9EAF0A413C3767E0089E9F7 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
-		D9EAF0A513C376860089E9F7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
-		D9EAF0A613C376860089E9F7 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
-		D9EAF0A713C376860089E9F7 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
-		D9EAF0A813C376860089E9F7 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
-		D9EAF0AD13C4FED40089E9F7 /* test_merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AA13C4FED30089E9F7 /* test_merge.m */; };
-		D9EAF0AE13C4FED40089E9F7 /* test_merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AA13C4FED30089E9F7 /* test_merge.m */; };
-		D9EAF0AF13C4FED40089E9F7 /* TestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */; };
-		D9EAF0B013C4FED40089E9F7 /* TestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0AC13C4FED40089E9F7 /* TestPerson.m */; };
-		D9EAF0B313C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */; };
-		D9EAF0B413C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */; };
-		D9EAF0B513C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
-		D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
-		D9EAF0B713C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
-		D9EAF0B813C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
-		D9EAF0BD13C62B7D0089E9F7 /* DSDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */; };
-		D9EAF0BE13C62B7D0089E9F7 /* DSDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B913C62B6E0089E9F7 /* DSDatastore.h */; };
-		D9EAF0BF13C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
-		D9EAF0C013C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
-		D9EAF0C113C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
-		D9EAF0C213C62B7D0089E9F7 /* DSDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BA13C62B700089E9F7 /* DSDatastore.m */; };
-		D9EAF0C313C62B7D0089E9F7 /* DSDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0BB13C62B730089E9F7 /* DSDrone.h */; };
-		D9EAF0C413C62B7D0089E9F7 /* DSDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0BB13C62B730089E9F7 /* DSDrone.h */; };
-		D9EAF0C513C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
-		D9EAF0C613C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
-		D9EAF0C713C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
-		D9EAF0C813C62B7D0089E9F7 /* DSDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0BC13C62B780089E9F7 /* DSDrone.m */; };
-		D9EAF0CB13C62BA70089E9F7 /* test_datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0C913C62BA60089E9F7 /* test_datastore.m */; };
-		D9EAF0CC13C62BA70089E9F7 /* test_datastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0C913C62BA60089E9F7 /* test_datastore.m */; };
-		D9EAF0CD13C62BA70089E9F7 /* test_drone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0CA13C62BA70089E9F7 /* test_drone.m */; };
-		D9EAF0CE13C62BA70089E9F7 /* test_drone.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0CA13C62BA70089E9F7 /* test_drone.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D9510B78117C3BD900288D3B /* PBXContainerItemProxy */ = {
+		D95C239013CBC272004BCE48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = "idrone device";
+			remoteGlobalIDString = D95C238413CBC241004BCE48;
+			remoteInfo = iDrone;
 		};
-		D9510B7A117C3BD900288D3B /* PBXContainerItemProxy */ = {
+		D95C239213CBC274004BCE48 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D9510B49117C3B4B00288D3B;
-			remoteInfo = "idrone sim";
+			remoteGlobalIDString = D95C238413CBC241004BCE48;
+			remoteInfo = iDrone;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -230,9 +125,8 @@
 /* Begin PBXFileReference section */
 		AA747D9E0F9514B9006C5449 /* idrone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idrone_Prefix.pch; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D2AAC07E0554694100DB518D /* libiDrone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiDrone.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D933724C1347283500C7FF19 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = lib/GHUnitIOS.framework; sourceTree = "<group>"; };
-		D9337320134740DF00C7FF19 /* GHTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9337320134740DF00C7FF19 /* iDroneiOSTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDroneiOSTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9337327134740DF00C7FF19 /* GHTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GHTests-Info.plist"; sourceTree = "<group>"; };
 		D9337329134740DF00C7FF19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D933732B134740DF00C7FF19 /* GHTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GHTests-Prefix.pch"; sourceTree = "<group>"; };
@@ -245,13 +139,17 @@
 		D95106A51179098200288D3B /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		D95106A61179098200288D3B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		D951076411797CD300288D3B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = /usr/lib/libsqlite3.0.dylib; sourceTree = "<absolute>"; };
-		D9510B6F117C3B4B00288D3B /* libiDrone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiDrone.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9510BE0117C472E00288D3B /* Framework.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Framework.plist; sourceTree = "<group>"; };
 		D9510BE9117C480C00288D3B /* framework.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = framework.sh; sourceTree = "<group>"; };
 		D953BDD61221884A005A6BEC /* NSData+AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES256.h"; sourceTree = "<group>"; };
 		D953BDD71221884A005A6BEC /* NSData+AES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES256.m"; sourceTree = "<group>"; };
 		D953BE3C122194F7005A6BEC /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		D953BE3D122194F7005A6BEC /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		D95C238513CBC241004BCE48 /* iDrone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDrone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D95C23C213CBC456004BCE48 /* iDrone-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iDrone-Info.plist"; sourceTree = "<group>"; };
+		D95C23C313CBC456004BCE48 /* iDrone-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iDrone-Prefix.pch"; sourceTree = "<group>"; };
+		D95C23EB13CBCE1E004BCE48 /* iDrone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iDrone.framework; path = "../Release-framework/iDrone.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D95C23F113CBEF37004BCE48 /* iDrone.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = iDrone.tar.gz; path = release/iDrone.tar.gz; sourceTree = "<group>"; };
 		D97AB75713C75B1C006A65D3 /* bson-objc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "bson-objc.framework"; sourceTree = "<group>"; };
 		D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFMDBDatastore.h; sourceTree = "<group>"; };
 		D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFMDBDatastore.m; sourceTree = "<group>"; };
@@ -286,7 +184,7 @@
 		D9EAF04813C365F60089E9F7 /* test_serialrep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_serialrep.m; sourceTree = "<group>"; };
 		D9EAF04913C365F60089E9F7 /* test_version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_version.m; sourceTree = "<group>"; };
 		D9EAF05C13C36E930089E9F7 /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnit.framework; path = lib/GHUnit.framework; sourceTree = "<group>"; };
-		D9EAF06113C36EC80089E9F7 /* MacTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9EAF06113C36EC80089E9F7 /* iDroneMacTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDroneMacTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EAF07F13C36F170089E9F7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		D9EAF08813C370170089E9F7 /* MacTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MacTests-Info.plist"; sourceTree = "<group>"; };
 		D9EAF08913C370170089E9F7 /* MacTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MacTests-Prefix.pch"; sourceTree = "<group>"; };
@@ -309,17 +207,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2AAC07C0554694100DB518D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				D9BB61ED12108403006F32AA /* YAJL.framework in Frameworks */,
-				D933724D1347283500C7FF19 /* GHUnitIOS.framework in Frameworks */,
-				D97AB75813C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D933731D134740DF00C7FF19 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,17 +219,15 @@
 				D93373521347419E00C7FF19 /* libsqlite3.0.dylib in Frameworks */,
 				D93373531347421700C7FF19 /* YAJL.framework in Frameworks */,
 				D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
+				D95C23EC13CBCE1E004BCE48 /* iDrone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9510B6A117C3B4B00288D3B /* Frameworks */ = {
+		D95C23C013CBC35C004BCE48 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9510B6B117C3B4B00288D3B /* Foundation.framework in Frameworks */,
-				D9BB61EB12108403006F32AA /* YAJL.framework in Frameworks */,
-				D933724E1347283500C7FF19 /* GHUnitIOS.framework in Frameworks */,
-				D97AB75913C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
+				D95C23C113CBC364004BCE48 /* bson-objc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,21 +239,23 @@
 				D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */,
 				D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 				D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */,
+				D95C23ED13CBCE1E004BCE48 /* iDrone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		034768DFFF38A50411DB9C8B /* Products */ = {
+		034768DFFF38A50411DB9C8B /* products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libiDrone.a */,
-				D9510B6F117C3B4B00288D3B /* libiDrone.a */,
-				D9337320134740DF00C7FF19 /* GHTests.app */,
-				D9EAF06113C36EC80089E9F7 /* MacTests.app */,
+				D9337320134740DF00C7FF19 /* iDroneiOSTests.app */,
+				D9EAF06113C36EC80089E9F7 /* iDroneMacTests.app */,
+				D95C238513CBC241004BCE48 /* iDrone.framework */,
+				D95C23EB13CBCE1E004BCE48 /* iDrone.framework */,
+				D95C23F113CBEF37004BCE48 /* iDrone.tar.gz */,
 			);
-			name = Products;
+			name = products;
 			sourceTree = "<group>";
 		};
 		0867D691FE84028FC02AAC07 /* idrone */ = {
@@ -379,7 +266,7 @@
 				D95103B911747E8400288D3B /* test */,
 				D9337325134740DF00C7FF19 /* GHTests */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
-				034768DFFF38A50411DB9C8B /* Products */,
+				034768DFFF38A50411DB9C8B /* products */,
 				D9510BDF117C470D00288D3B /* resources */,
 			);
 			name = idrone;
@@ -472,9 +359,11 @@
 		D9510BDF117C470D00288D3B /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				D95C23C313CBC456004BCE48 /* iDrone-Prefix.pch */,
 				AA747D9E0F9514B9006C5449 /* idrone_Prefix.pch */,
 				D9510BE0117C472E00288D3B /* Framework.plist */,
 				D9510BE9117C480C00288D3B /* framework.sh */,
+				D95C23C213CBC456004BCE48 /* iDrone-Info.plist */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -513,89 +402,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D2AAC07A0554694100DB518D /* Headers */ = {
+		D95C238013CBC241004BCE48 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA747D9F0F9514B9006C5449 /* idrone_Prefix.pch in Headers */,
-				D95106C71179098200288D3B /* FMDatabase.h in Headers */,
-				D95106C91179098200288D3B /* FMDatabaseAdditions.h in Headers */,
-				D95106CC1179098200288D3B /* FMResultSet.h in Headers */,
-				D953BDDB1221884A005A6BEC /* NSData+AES256.h in Headers */,
-				D953BE41122194F7005A6BEC /* NSData+Base64.h in Headers */,
-				D9EAF00E13C365980089E9F7 /* nanotime.h in Headers */,
-				D9EAF01413C365A10089E9F7 /* NSDate+Nanotime.h in Headers */,
-				D9EAF01913C365A10089E9F7 /* NSString+SHA.h in Headers */,
-				D9EAF02A13C365C90089E9F7 /* DSAttribute.h in Headers */,
-				D9EAF02F13C365C90089E9F7 /* DSKey.h in Headers */,
-				D9EAF03413C365C90089E9F7 /* DSModel.h in Headers */,
-				D9EAF03913C365C90089E9F7 /* DSSerialRep.h in Headers */,
-				D9EAF03E13C365C90089E9F7 /* DSVersion.h in Headers */,
-				D9EAF04313C365C90089E9F7 /* iDrone.h in Headers */,
-				D9EAF09C13C374850089E9F7 /* DSMerge.h in Headers */,
-				D9EAF0B313C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
-				D9EAF0BD13C62B7D0089E9F7 /* DSDatastore.h in Headers */,
-				D9EAF0C313C62B7D0089E9F7 /* DSDrone.h in Headers */,
-				D97AB75E13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */,
-				D97AB76D13CA2AD3006A65D3 /* DSCollection.h in Headers */,
-				D97AB77313CA2AD3006A65D3 /* DSQuery.h in Headers */,
-				D97AB78A13CA418A006A65D3 /* DSComparable.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D9510B4A117C3B4B00288D3B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D9510B4B117C3B4B00288D3B /* idrone_Prefix.pch in Headers */,
-				D9510B4F117C3B4B00288D3B /* FMDatabase.h in Headers */,
-				D9510B50117C3B4B00288D3B /* FMDatabaseAdditions.h in Headers */,
-				D9510B51117C3B4B00288D3B /* FMResultSet.h in Headers */,
-				D953BDD91221884A005A6BEC /* NSData+AES256.h in Headers */,
-				D953BE3F122194F7005A6BEC /* NSData+Base64.h in Headers */,
-				D9EAF00F13C365980089E9F7 /* nanotime.h in Headers */,
-				D9EAF01513C365A10089E9F7 /* NSDate+Nanotime.h in Headers */,
-				D9EAF01A13C365A10089E9F7 /* NSString+SHA.h in Headers */,
-				D9EAF02B13C365C90089E9F7 /* DSAttribute.h in Headers */,
-				D9EAF03013C365C90089E9F7 /* DSKey.h in Headers */,
-				D9EAF03513C365C90089E9F7 /* DSModel.h in Headers */,
-				D9EAF03A13C365C90089E9F7 /* DSSerialRep.h in Headers */,
-				D9EAF03F13C365C90089E9F7 /* DSVersion.h in Headers */,
-				D9EAF04413C365C90089E9F7 /* iDrone.h in Headers */,
-				D9EAF09D13C374850089E9F7 /* DSMerge.h in Headers */,
-				D9EAF0B413C526BE0089E9F7 /* NSValue+ObjCTypeSize.h in Headers */,
-				D9EAF0BE13C62B7D0089E9F7 /* DSDatastore.h in Headers */,
-				D9EAF0C413C62B7D0089E9F7 /* DSDrone.h in Headers */,
-				D97AB75F13C790E5006A65D3 /* DSFMDBDatastore.h in Headers */,
-				D97AB76E13CA2AD3006A65D3 /* DSCollection.h in Headers */,
-				D97AB77413CA2AD3006A65D3 /* DSQuery.h in Headers */,
-				D97AB78B13CA418A006A65D3 /* DSComparable.h in Headers */,
+				D95C239413CBC329004BCE48 /* DSAttribute.h in Headers */,
+				D95C239613CBC329004BCE48 /* DSKey.h in Headers */,
+				D95C239713CBC329004BCE48 /* DSComparable.h in Headers */,
+				D95C239913CBC329004BCE48 /* DSDatastore.h in Headers */,
+				D95C239B13CBC329004BCE48 /* DSFMDBDatastore.h in Headers */,
+				D95C239D13CBC329004BCE48 /* DSDrone.h in Headers */,
+				D95C239F13CBC329004BCE48 /* DSModel.h in Headers */,
+				D95C23A113CBC329004BCE48 /* DSMerge.h in Headers */,
+				D95C23A313CBC329004BCE48 /* DSSerialRep.h in Headers */,
+				D95C23A513CBC329004BCE48 /* DSVersion.h in Headers */,
+				D95C23A713CBC329004BCE48 /* DSCollection.h in Headers */,
+				D95C23A913CBC329004BCE48 /* DSQuery.h in Headers */,
+				D95C23AB13CBC329004BCE48 /* iDrone.h in Headers */,
+				D95C23AC13CBC34C004BCE48 /* NSValue+ObjCTypeSize.h in Headers */,
+				D95C23B013CBC34C004BCE48 /* NSData+Base64.h in Headers */,
+				D95C23B213CBC34C004BCE48 /* nanotime.h in Headers */,
+				D95C23B413CBC34C004BCE48 /* NSData+AES256.h in Headers */,
+				D95C23B613CBC34C004BCE48 /* NSDate+Nanotime.h in Headers */,
+				D95C23B813CBC34C004BCE48 /* NSString+SHA.h in Headers */,
+				D95C23BA13CBC34C004BCE48 /* FMDatabase.h in Headers */,
+				D95C23BC13CBC34C004BCE48 /* FMDatabaseAdditions.h in Headers */,
+				D95C23BE13CBC34C004BCE48 /* FMResultSet.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC07D0554694100DB518D /* idrone device */ = {
+		D933731F134740DF00C7FF19 /* iDroneiOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "idrone device" */;
-			buildPhases = (
-				D2AAC07A0554694100DB518D /* Headers */,
-				D2AAC07B0554694100DB518D /* Sources */,
-				D2AAC07C0554694100DB518D /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "idrone device";
-			productName = idrone;
-			productReference = D2AAC07E0554694100DB518D /* libiDrone.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		D933731F134740DF00C7FF19 /* GHTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D9337334134740DF00C7FF19 /* Build configuration list for PBXNativeTarget "GHTests" */;
+			buildConfigurationList = D9337334134740DF00C7FF19 /* Build configuration list for PBXNativeTarget "iDroneiOSTests" */;
 			buildPhases = (
 				D933731C134740DF00C7FF19 /* Sources */,
 				D933731D134740DF00C7FF19 /* Frameworks */,
@@ -604,32 +445,36 @@
 			buildRules = (
 			);
 			dependencies = (
+				D95C239313CBC274004BCE48 /* PBXTargetDependency */,
 			);
-			name = GHTests;
+			name = iDroneiOSTests;
 			productName = GHTests;
-			productReference = D9337320134740DF00C7FF19 /* GHTests.app */;
+			productReference = D9337320134740DF00C7FF19 /* iDroneiOSTests.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D9510B49117C3B4B00288D3B /* idrone sim */ = {
+		D95C238413CBC241004BCE48 /* iDrone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D9510B6C117C3B4B00288D3B /* Build configuration list for PBXNativeTarget "idrone sim" */;
+			buildConfigurationList = D95C238D13CBC241004BCE48 /* Build configuration list for PBXNativeTarget "iDrone" */;
 			buildPhases = (
-				D9510B4A117C3B4B00288D3B /* Headers */,
-				D9510B5B117C3B4B00288D3B /* Sources */,
-				D9510B6A117C3B4B00288D3B /* Frameworks */,
+				D95C237F13CBC241004BCE48 /* Sources */,
+				D95C23C013CBC35C004BCE48 /* Frameworks */,
+				D95C238013CBC241004BCE48 /* Headers */,
+				D95C238113CBC241004BCE48 /* ShellScript */,
+				D95C238213CBC241004BCE48 /* ShellScript */,
+				D95C238313CBC241004BCE48 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "idrone sim";
-			productName = idrone;
-			productReference = D9510B6F117C3B4B00288D3B /* libiDrone.a */;
-			productType = "com.apple.product-type.library.static";
+			name = iDrone;
+			productName = iDrone;
+			productReference = D95C238513CBC241004BCE48 /* iDrone.framework */;
+			productType = "com.apple.product-type.bundle";
 		};
-		D9EAF06013C36EC80089E9F7 /* MacTests */ = {
+		D9EAF06013C36EC80089E9F7 /* iDroneMacTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D9EAF07B13C36EC80089E9F7 /* Build configuration list for PBXNativeTarget "MacTests" */;
+			buildConfigurationList = D9EAF07B13C36EC80089E9F7 /* Build configuration list for PBXNativeTarget "iDroneMacTests" */;
 			buildPhases = (
 				D9EAF05D13C36EC80089E9F7 /* Sources */,
 				D9EAF05E13C36EC80089E9F7 /* Frameworks */,
@@ -639,10 +484,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				D95C239113CBC272004BCE48 /* PBXTargetDependency */,
 			);
-			name = MacTests;
+			name = iDroneMacTests;
 			productName = MacTests;
-			productReference = D9EAF06113C36EC80089E9F7 /* MacTests.app */;
+			productReference = D9EAF06113C36EC80089E9F7 /* iDroneMacTests.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -662,15 +508,13 @@
 				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* idrone */;
-			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC07D0554694100DB518D /* idrone device */,
-				D9510B49117C3B4B00288D3B /* idrone sim */,
-				D9510B73117C3BB700288D3B /* Build & Merge Libraries */,
-				D933731F134740DF00C7FF19 /* GHTests */,
-				D9EAF06013C36EC80089E9F7 /* MacTests */,
+				D933731F134740DF00C7FF19 /* iDroneiOSTests */,
+				D9EAF06013C36EC80089E9F7 /* iDroneMacTests */,
+				D95C238413CBC241004BCE48 /* iDrone */,
 			);
 		};
 /* End PBXProject section */
@@ -684,6 +528,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D95C238313CBC241004BCE48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9EAF05F13C36EC80089E9F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,7 +545,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D9510C12117C4BC500288D3B /* ShellScript */ = {
+		D95C238113CBC241004BCE48 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -705,101 +556,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "resources/framework.sh\n";
+			shellScript = "if [ \"${ACTION}\" = \"build\" ]\nthen\n\n# Product name should be ${TARGET_NAME}.framework anyway...\nFWK_NAME=\"${WRAPPER_NAME}\"\nFWK_LIB=\"${FWK_NAME}/${TARGET_NAME}\"\n\n# Set the target folders and the final framework product.\nFWK_PATH=\"${SYMROOT}/${CONFIGURATION}-framework\"\nDEV_PATH=\"${SYMROOT}/${CONFIGURATION}-iphoneos\"\nSIM_PATH=\"${SYMROOT}/${CONFIGURATION}-iphonesimulator\"\nFWK_ROOT=\"${FWK_PATH}/${FWK_NAME}\"\n\necho \"framework: building ${FWK_NAME}\"\n\necho \"framework: setting up framework directory structure\"\n\nmkdir -p \"${FWK_ROOT}\"\nrm -rf \"${FWK_ROOT}/\"*\n\nif [ $? -ne 0 ];then\n  echo \"error: failed to delete existing framework. check permissions?\"\n  exit\nfi\n\n# Build the canonical Framework bundle directory structure\nmkdir -p \"${FWK_ROOT}/Versions\"\nmkdir -p \"${FWK_ROOT}/Versions/${FRAMEWORK_VERSION}\"\nmkdir -p \"${FWK_ROOT}/Versions/${FRAMEWORK_VERSION}/Resources\"\nmkdir -p \"${FWK_ROOT}/Versions/${FRAMEWORK_VERSION}/Headers\"\n\nln -s \"${FRAMEWORK_VERSION}\" \"${FWK_ROOT}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${FWK_ROOT}/Headers\"\nln -s \"Versions/Current/Resources\" \"${FWK_ROOT}/Resources\"\nln -s \"Versions/Current/${TARGET_NAME}\" \"${FWK_ROOT}/${TARGET_NAME}\"\n\n\nif [ ! -d \"${DEV_PATH}/${FWK_NAME}/Headers\" ]\nthen\n  echo \"error: Framework target \\\"${TARGET_NAME}\\\" did not copy any headers.\" \\\n   \"Make sure the desired headers are on the 'Copy Headers' Build Phase.\" \\\n   \"Make sure you built the Device target (from which headers are copied).\"\n  exit 1\nfi\n\n# Copy the header files to the final product folder.\necho \"framework: copying headers from ${DEV_PATH}/${FWK_NAME}/Headers\"\nditto \"${DEV_PATH}/${FWK_NAME}/Headers\" \"${FWK_ROOT}/Headers\"\n\n# Copy the header files to the final product folder.\necho \"framework: copying Info.plist file\"\ncp \"${DEV_PATH}/${FWK_NAME}/Info.plist\" \"${FWK_ROOT}/Resources/Info.plist\"\n\n# Use the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\necho \"framework: creating universal lib ${FWK_PATH}/${FWK_LIB}\"\nlipo -create \"${DEV_PATH}/${FWK_LIB}\" \"${SIM_PATH}/${FWK_LIB}\" \\\n     -output \"${FWK_ROOT}/Versions/Current/${TARGET_NAME}\"\n\nfi";
+		};
+		D95C238213CBC241004BCE48 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]\nthen\n\n# Product name should be ${TARGET_NAME}.framework anyway...\nFWK_NAME=\"${WRAPPER_NAME}\"\nFWK_PATH=\"${SYMROOT}/${CONFIGURATION}-framework\"\nFWK_TARBALL=\"${RELEASE_TARBALL_FILE}\"\n\n\n# Package up\necho \"framework: packaging release tarball\"\ncd \"${FWK_PATH}\"\ntar -czf \"${TARGET_NAME}.tar.gz\" \"${FWK_NAME}\"\ncd \"${PROJECT_DIR}\"\nmkdir -p `dirname \"${RELEASE_TARBALL_FILE}\"`\ncp \"${FWK_PATH}/${TARGET_NAME}.tar.gz\" \"${RELEASE_TARBALL_FILE}\"\n\n\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2AAC07B0554694100DB518D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D95106C81179098200288D3B /* FMDatabase.m in Sources */,
-				D95106CA1179098200288D3B /* FMDatabaseAdditions.m in Sources */,
-				D95106CD1179098200288D3B /* FMResultSet.m in Sources */,
-				D953BDDC1221884A005A6BEC /* NSData+AES256.m in Sources */,
-				D953BE42122194F7005A6BEC /* NSData+Base64.m in Sources */,
-				D9EAF00B13C365980089E9F7 /* nanotime.c in Sources */,
-				D9EAF01613C365A10089E9F7 /* NSDate+Nanotime.m in Sources */,
-				D9EAF01B13C365A10089E9F7 /* NSString+SHA.m in Sources */,
-				D9EAF02C13C365C90089E9F7 /* DSAttribute.m in Sources */,
-				D9EAF03113C365C90089E9F7 /* DSKey.m in Sources */,
-				D9EAF03613C365C90089E9F7 /* DSModel.m in Sources */,
-				D9EAF03B13C365C90089E9F7 /* DSSerialRep.m in Sources */,
-				D9EAF04013C365C90089E9F7 /* DSVersion.m in Sources */,
-				D9EAF09E13C374850089E9F7 /* DSMerge.m in Sources */,
-				D9EAF0B513C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
-				D9EAF0BF13C62B7D0089E9F7 /* DSDatastore.m in Sources */,
-				D9EAF0C513C62B7D0089E9F7 /* DSDrone.m in Sources */,
-				D97AB76013C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
-				D97AB76F13CA2AD3006A65D3 /* DSCollection.m in Sources */,
-				D97AB77513CA2AD3006A65D3 /* DSQuery.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D933731C134740DF00C7FF19 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D933733F1347411C00C7FF19 /* NSData+Base64.m in Sources */,
-				D93373401347411C00C7FF19 /* NSData+AES256.m in Sources */,
-				D933734F1347413500C7FF19 /* FMDatabase.m in Sources */,
-				D93373501347413500C7FF19 /* FMDatabaseAdditions.m in Sources */,
-				D93373511347413500C7FF19 /* FMResultSet.m in Sources */,
-				D9EAF00D13C365980089E9F7 /* nanotime.c in Sources */,
-				D9EAF01813C365A10089E9F7 /* NSDate+Nanotime.m in Sources */,
-				D9EAF01D13C365A10089E9F7 /* NSString+SHA.m in Sources */,
-				D9EAF02E13C365C90089E9F7 /* DSAttribute.m in Sources */,
-				D9EAF03313C365C90089E9F7 /* DSKey.m in Sources */,
-				D9EAF03813C365C90089E9F7 /* DSModel.m in Sources */,
-				D9EAF03D13C365C90089E9F7 /* DSSerialRep.m in Sources */,
-				D9EAF04213C365C90089E9F7 /* DSVersion.m in Sources */,
-				D9EAF04A13C365F60089E9F7 /* test_attribute.m in Sources */,
-				D9EAF04B13C365F60089E9F7 /* test_key.m in Sources */,
-				D9EAF04C13C365F60089E9F7 /* test_model.m in Sources */,
-				D9EAF04D13C365F60089E9F7 /* test_serialrep.m in Sources */,
-				D9EAF04E13C365F60089E9F7 /* test_version.m in Sources */,
-				D9EAF09913C371F30089E9F7 /* GHUnitIOSTestMain.m in Sources */,
-				D9EAF0A013C374850089E9F7 /* DSMerge.m in Sources */,
-				D9EAF0AD13C4FED40089E9F7 /* test_merge.m in Sources */,
-				D9EAF0AF13C4FED40089E9F7 /* TestPerson.m in Sources */,
-				D9EAF0B713C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
-				D9EAF0C113C62B7D0089E9F7 /* DSDatastore.m in Sources */,
-				D9EAF0C713C62B7D0089E9F7 /* DSDrone.m in Sources */,
-				D9EAF0CB13C62BA70089E9F7 /* test_datastore.m in Sources */,
-				D9EAF0CD13C62BA70089E9F7 /* test_drone.m in Sources */,
-				D97AB76213C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
-				D97AB77113CA2AD3006A65D3 /* DSCollection.m in Sources */,
-				D97AB77713CA2AD3006A65D3 /* DSQuery.m in Sources */,
-				D97AB77A13CA2EB5006A65D3 /* test_collection.m in Sources */,
-				D97AB77D13CA2EC5006A65D3 /* test_query.m in Sources */,
+				D95C23D313CBC864004BCE48 /* test_query.m in Sources */,
+				D95C23D413CBC864004BCE48 /* test_collection.m in Sources */,
+				D95C23D513CBC864004BCE48 /* test_merge.m in Sources */,
+				D95C23D613CBC864004BCE48 /* TestPerson.m in Sources */,
+				D95C23D713CBC864004BCE48 /* test_datastore.m in Sources */,
+				D95C23D813CBC864004BCE48 /* test_drone.m in Sources */,
+				D95C23D913CBC864004BCE48 /* test_attribute.m in Sources */,
+				D95C23DA13CBC864004BCE48 /* test_key.m in Sources */,
+				D95C23DB13CBC864004BCE48 /* test_model.m in Sources */,
+				D95C23DC13CBC864004BCE48 /* test_serialrep.m in Sources */,
+				D95C23DD13CBC864004BCE48 /* test_version.m in Sources */,
+				D95C23EA13CBCB94004BCE48 /* GHUnitIOSTestMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9510B5B117C3B4B00288D3B /* Sources */ = {
+		D95C237F13CBC241004BCE48 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9510B5F117C3B4B00288D3B /* FMDatabase.m in Sources */,
-				D9510B60117C3B4B00288D3B /* FMDatabaseAdditions.m in Sources */,
-				D9510B61117C3B4B00288D3B /* FMResultSet.m in Sources */,
-				D953BDDA1221884A005A6BEC /* NSData+AES256.m in Sources */,
-				D953BE40122194F7005A6BEC /* NSData+Base64.m in Sources */,
-				D9EAF00C13C365980089E9F7 /* nanotime.c in Sources */,
-				D9EAF01713C365A10089E9F7 /* NSDate+Nanotime.m in Sources */,
-				D9EAF01C13C365A10089E9F7 /* NSString+SHA.m in Sources */,
-				D9EAF02D13C365C90089E9F7 /* DSAttribute.m in Sources */,
-				D9EAF03213C365C90089E9F7 /* DSKey.m in Sources */,
-				D9EAF03713C365C90089E9F7 /* DSModel.m in Sources */,
-				D9EAF03C13C365C90089E9F7 /* DSSerialRep.m in Sources */,
-				D9EAF04113C365C90089E9F7 /* DSVersion.m in Sources */,
-				D9EAF09F13C374850089E9F7 /* DSMerge.m in Sources */,
-				D9EAF0B613C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
-				D9EAF0C013C62B7D0089E9F7 /* DSDatastore.m in Sources */,
-				D9EAF0C613C62B7D0089E9F7 /* DSDrone.m in Sources */,
-				D97AB76113C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
-				D97AB77013CA2AD3006A65D3 /* DSCollection.m in Sources */,
-				D97AB77613CA2AD3006A65D3 /* DSQuery.m in Sources */,
+				D95C239513CBC329004BCE48 /* DSAttribute.m in Sources */,
+				D95C239813CBC329004BCE48 /* DSKey.m in Sources */,
+				D95C239A13CBC329004BCE48 /* DSDatastore.m in Sources */,
+				D95C239C13CBC329004BCE48 /* DSFMDBDatastore.m in Sources */,
+				D95C239E13CBC329004BCE48 /* DSDrone.m in Sources */,
+				D95C23A013CBC329004BCE48 /* DSModel.m in Sources */,
+				D95C23A213CBC329004BCE48 /* DSMerge.m in Sources */,
+				D95C23A413CBC329004BCE48 /* DSSerialRep.m in Sources */,
+				D95C23A613CBC329004BCE48 /* DSVersion.m in Sources */,
+				D95C23A813CBC329004BCE48 /* DSCollection.m in Sources */,
+				D95C23AA13CBC329004BCE48 /* DSQuery.m in Sources */,
+				D95C23AD13CBC34C004BCE48 /* NSValue+ObjCTypeSize.m in Sources */,
+				D95C23B113CBC34C004BCE48 /* nanotime.c in Sources */,
+				D95C23B313CBC34C004BCE48 /* NSData+Base64.m in Sources */,
+				D95C23B513CBC34C004BCE48 /* NSData+AES256.m in Sources */,
+				D95C23B713CBC34C004BCE48 /* NSDate+Nanotime.m in Sources */,
+				D95C23B913CBC34C004BCE48 /* NSString+SHA.m in Sources */,
+				D95C23BB13CBC34C004BCE48 /* FMDatabase.m in Sources */,
+				D95C23BD13CBC34C004BCE48 /* FMDatabaseAdditions.m in Sources */,
+				D95C23BF13CBC34C004BCE48 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,53 +624,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9EAF08B13C3705F0089E9F7 /* DSAttribute.m in Sources */,
-				D9EAF08C13C3705F0089E9F7 /* DSKey.m in Sources */,
-				D9EAF08D13C3705F0089E9F7 /* DSModel.m in Sources */,
-				D9EAF08E13C3705F0089E9F7 /* DSSerialRep.m in Sources */,
-				D9EAF08F13C3705F0089E9F7 /* DSVersion.m in Sources */,
-				D9EAF09013C3705F0089E9F7 /* test_attribute.m in Sources */,
-				D9EAF09113C3705F0089E9F7 /* test_key.m in Sources */,
-				D9EAF09213C3705F0089E9F7 /* test_model.m in Sources */,
-				D9EAF09313C3705F0089E9F7 /* test_serialrep.m in Sources */,
-				D9EAF09413C3705F0089E9F7 /* test_version.m in Sources */,
-				D9EAF09713C371D30089E9F7 /* GHUnitTestMain.m in Sources */,
-				D9EAF0A113C374850089E9F7 /* DSMerge.m in Sources */,
-				D9EAF0A413C3767E0089E9F7 /* nanotime.c in Sources */,
-				D9EAF0A513C376860089E9F7 /* NSData+Base64.m in Sources */,
-				D9EAF0A613C376860089E9F7 /* NSData+AES256.m in Sources */,
-				D9EAF0A713C376860089E9F7 /* NSDate+Nanotime.m in Sources */,
-				D9EAF0A813C376860089E9F7 /* NSString+SHA.m in Sources */,
-				D9EAF0AE13C4FED40089E9F7 /* test_merge.m in Sources */,
-				D9EAF0B013C4FED40089E9F7 /* TestPerson.m in Sources */,
-				D9EAF0B813C526BE0089E9F7 /* NSValue+ObjCTypeSize.m in Sources */,
-				D9EAF0C213C62B7D0089E9F7 /* DSDatastore.m in Sources */,
-				D9EAF0C813C62B7D0089E9F7 /* DSDrone.m in Sources */,
-				D9EAF0CC13C62BA70089E9F7 /* test_datastore.m in Sources */,
-				D9EAF0CE13C62BA70089E9F7 /* test_drone.m in Sources */,
-				D97AB76313C790E5006A65D3 /* DSFMDBDatastore.m in Sources */,
-				D97AB76413C791C9006A65D3 /* FMDatabase.m in Sources */,
-				D97AB76513C791C9006A65D3 /* FMDatabaseAdditions.m in Sources */,
-				D97AB76613C791C9006A65D3 /* FMResultSet.m in Sources */,
-				D97AB77213CA2AD3006A65D3 /* DSCollection.m in Sources */,
-				D97AB77813CA2AD3006A65D3 /* DSQuery.m in Sources */,
-				D97AB77B13CA2EB5006A65D3 /* test_collection.m in Sources */,
-				D97AB77E13CA2EC5006A65D3 /* test_query.m in Sources */,
+				D95C23C813CBC864004BCE48 /* test_query.m in Sources */,
+				D95C23C913CBC864004BCE48 /* test_collection.m in Sources */,
+				D95C23CA13CBC864004BCE48 /* test_merge.m in Sources */,
+				D95C23CB13CBC864004BCE48 /* TestPerson.m in Sources */,
+				D95C23CC13CBC864004BCE48 /* test_datastore.m in Sources */,
+				D95C23CD13CBC864004BCE48 /* test_drone.m in Sources */,
+				D95C23CE13CBC864004BCE48 /* test_attribute.m in Sources */,
+				D95C23CF13CBC864004BCE48 /* test_key.m in Sources */,
+				D95C23D013CBC864004BCE48 /* test_model.m in Sources */,
+				D95C23D113CBC864004BCE48 /* test_serialrep.m in Sources */,
+				D95C23D213CBC864004BCE48 /* test_version.m in Sources */,
+				D95C23E913CBCB91004BCE48 /* GHUnitTestMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D9510B79117C3BD900288D3B /* PBXTargetDependency */ = {
+		D95C239113CBC272004BCE48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D2AAC07D0554694100DB518D /* idrone device */;
-			targetProxy = D9510B78117C3BD900288D3B /* PBXContainerItemProxy */;
+			target = D95C238413CBC241004BCE48 /* iDrone */;
+			targetProxy = D95C239013CBC272004BCE48 /* PBXContainerItemProxy */;
 		};
-		D9510B7B117C3BD900288D3B /* PBXTargetDependency */ = {
+		D95C239313CBC274004BCE48 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D9510B49117C3B4B00288D3B /* idrone sim */;
-			targetProxy = D9510B7A117C3BD900288D3B /* PBXContainerItemProxy */;
+			target = D95C238413CBC241004BCE48 /* iDrone */;
+			targetProxy = D95C239213CBC274004BCE48 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -869,90 +666,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1DEB921F08733DC00010E9CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/idrone.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../yajl-objc/Project-IPhone/build/Release-Framework\"",
-					"\"$(SRCROOT)/lib\"",
-					"\"$(SRCROOT)/build/build/Framework\"",
-					"\"$(SRCROOT)/build/Framework\"",
-					"\"$(SRCROOT)/resources/build/Framework\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = resources/idrone_Prefix.pch;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/Release-iphoneos\"",
-					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
-					"\"$(SRCROOT)/lib\"",
-				);
-				PRODUCT_NAME = iDrone;
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = iphoneos;
-			};
-			name = Debug;
-		};
-		1DEB922008733DC00010E9CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/idrone.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../yajl-objc/Project-IPhone/build/Release-Framework\"",
-					"\"$(SRCROOT)/lib\"",
-					"\"$(SRCROOT)/build/build/Framework\"",
-					"\"$(SRCROOT)/build/Framework\"",
-					"\"$(SRCROOT)/resources/build/Framework\"",
-				);
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = resources/idrone_Prefix.pch;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/Release-iphoneos\"",
-					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
-					"\"$(SRCROOT)/lib\"",
-				);
-				PRODUCT_NAME = iDrone;
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = iphoneos;
-			};
-			name = Release;
-		};
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1002,11 +715,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1014,7 +730,7 @@
 				GCC_PREFIX_HEADER = "GHTests/GHTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = "GHTests/GHTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
@@ -1022,6 +738,7 @@
 					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1031,16 +748,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GHTests/GHTests-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = "GHTests/GHTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
@@ -1049,114 +769,91 @@
 				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		D9510B6D117C3B4B00288D3B /* Debug */ = {
+		D95C238E13CBC241004BCE48 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/idrone.dst;
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					"$(ARCHS_STANDARD_64_BIT)",
+					x86_64,
+				);
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../yajl-objc/Project-IPhone/build/Release-Framework\"",
-					"\"$(SRCROOT)/lib\"",
-					"\"$(SRCROOT)/build/build/Framework\"",
-					"\"$(SRCROOT)/build/Framework\"",
-					"\"$(SRCROOT)/resources/build/Framework\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = resources/idrone_Prefix.pch;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/Release-iphoneos\"",
-					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/lib\"",
 				);
-				PRODUCT_NAME = iDrone;
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = iphonesimulator;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "resources/iDrone-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = 4.2;
+				INFOPLIST_EXPAND_BUILD_SETTINGS = NO;
+				INFOPLIST_FILE = "resources/iDrone-Info.plist";
+				INFOPLIST_OUTPUT_FORMAT = xml;
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RELEASE_TARBALL_FILE = "release/$(TARGET_NAME).tar.gz";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv6 armv7 x86_64 i386";
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
 		};
-		D9510B6E117C3B4B00288D3B /* Release */ = {
+		D95C238F13CBC241004BCE48 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/idrone.dst;
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					"$(ARCHS_STANDARD_64_BIT)",
+					x86_64,
+				);
+				DEAD_CODE_STRIPPING = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../yajl-objc/Project-IPhone/build/Release-Framework\"",
-					"\"$(SRCROOT)/lib\"",
-					"\"$(SRCROOT)/build/build/Framework\"",
-					"\"$(SRCROOT)/build/Framework\"",
-					"\"$(SRCROOT)/resources/build/Framework\"",
-				);
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = resources/idrone_Prefix.pch;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug-iphoneos\"",
-					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Debug-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone device.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv6\"",
-					"\"$(SRCROOT)/build/idrone.build/Release-iphoneos/idrone sim.build/Objects-normal/armv7\"",
-					"\"$(SRCROOT)/build/Release-iphoneos\"",
-					"\"$(SRCROOT)/build/Release-iphonesimulator\"",
 					"\"$(SRCROOT)/lib\"",
 				);
-				PRODUCT_NAME = iDrone;
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = iphonesimulator;
-			};
-			name = Release;
-		};
-		D9510B74117C3BB700288D3B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = "Build & Merge Libraries";
-				SDKROOT = iphoneos;
-			};
-			name = Debug;
-		};
-		D9510B75117C3BB700288D3B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = "Build & Merge Libraries";
-				ZERO_LINK = NO;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "resources/iDrone-Prefix.pch";
+				GCC_VERSION = 4.2;
+				INFOPLIST_EXPAND_BUILD_SETTINGS = NO;
+				INFOPLIST_FILE = "resources/iDrone-Info.plist";
+				INFOPLIST_OUTPUT_FORMAT = xml;
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RELEASE_TARBALL_FILE = "release/$(TARGET_NAME).tar.gz";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv6 armv7 x86_64 i386";
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
@@ -1169,6 +866,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1177,7 +876,7 @@
 				GCC_PREFIX_HEADER = "GHTests/MacTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = 4.2;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "GHTests/MacTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -1186,7 +885,7 @@
 					"\"$(SRCROOT)/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -1203,12 +902,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GHTests/MacTests-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = 4.2;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "GHTests/MacTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
@@ -1217,6 +918,7 @@
 					"\"$(SRCROOT)/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -1226,15 +928,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "idrone device" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1DEB921F08733DC00010E9CD /* Debug */,
-				1DEB922008733DC00010E9CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "idrone2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1244,7 +937,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9337334134740DF00C7FF19 /* Build configuration list for PBXNativeTarget "GHTests" */ = {
+		D9337334134740DF00C7FF19 /* Build configuration list for PBXNativeTarget "iDroneiOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9337335134740DF00C7FF19 /* Debug */,
@@ -1253,25 +946,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9510B6C117C3B4B00288D3B /* Build configuration list for PBXNativeTarget "idrone sim" */ = {
+		D95C238D13CBC241004BCE48 /* Build configuration list for PBXNativeTarget "iDrone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D9510B6D117C3B4B00288D3B /* Debug */,
-				D9510B6E117C3B4B00288D3B /* Release */,
+				D95C238E13CBC241004BCE48 /* Debug */,
+				D95C238F13CBC241004BCE48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9510B77117C3BBB00288D3B /* Build configuration list for PBXAggregateTarget "Build & Merge Libraries" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D9510B74117C3BB700288D3B /* Debug */,
-				D9510B75117C3BB700288D3B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D9EAF07B13C36EC80089E9F7 /* Build configuration list for PBXNativeTarget "MacTests" */ = {
+		D9EAF07B13C36EC80089E9F7 /* Build configuration list for PBXNativeTarget "iDroneMacTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9EAF07C13C36EC80089E9F7 /* Debug */,

@@ -31,8 +31,9 @@ struct pthread_mutex_t;
 - (NSDictionary *) dictionaryFromResultSet:(FMResultSet *)rs;
 - (NSArray *) updateValuesFromObject:(NSObject *)object andKey:(NSString *)key;
 
-+ (SQLSchema *) simpleTableNamed:(NSString *)table;
 + (SQLSchema *) versionTableNamed:(NSString *)table;
++ (SQLSchema *) simpleTableNamed:(NSString *)table
+  withValueType:(NSString *)type;
 @end
 
 

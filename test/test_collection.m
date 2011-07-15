@@ -1,7 +1,6 @@
 
 #import "DSCollection.h"
 #import "DSModel.h"
-#import <GHUnit/GHUnit.h>
 
 @interface CollectionTest : GHTestCase {
   DSCollection *collection;

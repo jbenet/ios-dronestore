@@ -1,6 +1,5 @@
 
 #import "DSKey.h"
-#import <GHUnit/GHUnit.h>
 
 @interface KeyTest : GHTestCase {
 }

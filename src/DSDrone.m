@@ -5,8 +5,10 @@
 #import "DSVersion.h"
 #import "DSSerialRep.h"
 #import "DSDatastore.h"
+#import "DSQuery.h"
+#import "DSCollection.h"
 
-#import <bson-objc/BSONCodec.h>
+#import <bson-objc/bson-objc.h>
 
 @implementation DSDrone
 
@@ -38,6 +40,24 @@
   return [NSString stringWithFormat:@"<DSDrone %@>", droneid];
 }
 
+
+- (DSModel *) instanceFromDatastoreData:(NSDictionary *)data {
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  [dict addEntriesFromDictionary:data];
+  
+  NSData *attrs = [dict valueForKey:@"attributes"];
+  [dict setValue:[attrs BSONValue] forKey:@"attributes"];
+  
+  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:dict];
+  DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
+  DSModel *instance = [DSModel modelWithVersion:version];
+  [version release];
+  [rep release];
+  return instance;
+}
+
+//------------------------------------------------------------------------------
+
 // Dronestore drone interface. sorry its not more obj-c-like!
 - (DSModel *) get:(DSKey *)key {
   if (key == nil)
@@ -47,18 +67,7 @@
   if (data == nil)
     return nil;
 
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  [dict addEntriesFromDictionary:data];
-
-  NSData *attrs = [dict valueForKey:@"attributes"];
-  [dict setValue:[attrs BSONValue] forKey:@"attributes"];
-
-  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:dict];
-  DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
-  DSModel *instance = [DSModel modelWithVersion:version];
-  [version release];
-  [rep release];
-  return instance;
+  return [self instanceFromDatastoreData:data];
 }
 
 - (DSModel *) put:(DSModel *)instance {
@@ -80,6 +89,15 @@
 
   return [datastore contains:key];
 }
+
+- (DSCollection *) query:(DSQuery *)query {
+  NSArray *array = [datastore query:query];
+  DSCollection *collection = [[DSCollection alloc] init];
+  for (NSDictionary *data in array)
+    [collection insertModel:[self instanceFromDatastoreData:data]];
+  return [collection autorelease];
+}
+
 
 - (DSVersion *) putVersion:(DSVersion *)version {
   if (version == nil)

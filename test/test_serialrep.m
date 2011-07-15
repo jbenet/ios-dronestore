@@ -1,6 +1,5 @@
 
 #import "DSSerialRep.h"
-#import <GHUnit/GHUnit.h>
 
 @interface SerialRepTest : GHTestCase {
 }

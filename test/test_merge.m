@@ -5,7 +5,6 @@
 #import "DSAttribute.h"
 #import "DSMerge.h"
 
-#import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
 
 #import "TestPerson.h"
@@ -83,12 +82,12 @@
 
     if ([attrs containsObject:attr.name]) {
       NSLog(@"%@ should not be equal", attr.name);
-      GHAssertNotEqualObjects([p1.version valueForAttribute:attr.name],
-        [p2.version valueForAttribute:attr.name], @"val");
-      GHAssertNotEqualObjects([attr valueForInstance:p1],
-        [attr valueForInstance:p2], @"val");
-      GHAssertNotEqualObjects([p1.version valueForAttribute:attr.name],
-        [p2.version valueForAttribute:attr.name], @"val");
+      GHAssertFalse([[p1.version valueForAttribute:attr.name] isEqual:
+        [p2.version valueForAttribute:attr.name]], @"val");
+      GHAssertFalse([[attr valueForInstance:p1] isEqual:
+        [attr valueForInstance:p2]], @"val");
+      GHAssertFalse([[p1.version valueForAttribute:attr.name] isEqual:
+        [p2.version valueForAttribute:attr.name]], @"val");
     } else {
       NSLog(@"%@ should be equal", attr.name);
       GHAssertEqualObjects([p1.version valueForAttribute:attr.name],

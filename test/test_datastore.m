@@ -1,10 +1,9 @@
 
+
 #import "DSKey.h"
 #import "DSDatastore.h"
 #import "DSFMDBDatastore.h"
 
-
-#import <GHUnit/GHUnit.h>
 #import "NSString+SHA.h"
 
 @interface DatastoreTest : GHTestCase {
@@ -44,6 +43,14 @@
 
   [self subtestStores:stores ensureCount:0];
 
+  DSQuery *query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  for (DSDatastore *sn in stores) {
+    NSArray *result = [sn query:query];
+    GHAssertTrue([result count] == 0, @"query count");
+  }
+  [query release];
+
+
   // Insert numElems elements
   for (int i = 0; i < numElems; i++) {
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
@@ -57,6 +64,17 @@
 
   [self subtestStores:stores ensureCount:numElems];
 
+  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  for (DSDatastore *sn in stores) {
+    NSArray *result = [sn query:query];
+    GHAssertTrue([result count] == numElems, @"query count");
+    result = [result sortedArrayUsingSelector:@selector(compare:)];
+    for (int i = 0; i < numElems; i++)
+      GHAssertTrue([[result objectAtIndex:i] intValue] == i, @"objs");
+  }
+  [query release];
+
+
   // Reassure they're all there
   for (int i = 0; i < numElems; i++) {
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
@@ -67,6 +85,16 @@
   }
 
   [self subtestStores:stores ensureCount:numElems];
+
+  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  for (DSDatastore *sn in stores) {
+    NSArray *result = [sn query:query];
+    GHAssertTrue([result count] == numElems, @"query count");
+    result = [result sortedArrayUsingSelector:@selector(compare:)];
+    for (int i = 0; i < numElems; i++)
+      GHAssertTrue([[result objectAtIndex:i] intValue] == i, @"objs");
+  }
+  [query release];
 
   // Change all the elements there
   for (int i = 0; i < numElems; i++) {
@@ -83,6 +111,16 @@
 
   [self subtestStores:stores ensureCount:numElems];
 
+  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  for (DSDatastore *sn in stores) {
+    NSArray *result = [sn query:query];
+    GHAssertTrue([result count] == numElems, @"query count");
+    result = [result sortedArrayUsingSelector:@selector(compare:)];
+    for (int i = 0; i < numElems; i++)
+      GHAssertTrue([[result objectAtIndex:i] intValue] == i+1, @"objs");
+  }
+  [query release];
+
   // remove all elements
   for (int i = 0; i < numElems; i++) {
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
@@ -97,6 +135,13 @@
 
   [self subtestStores:stores ensureCount:0];
 
+  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  for (DSDatastore *sn in stores) {
+    NSArray *result = [sn query:query];
+    GHAssertTrue([result count] == 0, @"query count");
+  }
+  [query release];
+
   // Reassure they're all not there
   for (int i = 0; i < numElems; i++) {
     DSKey *key = [pkey childWithString:[NSString stringWithFormat:@"%d", i]];
@@ -107,6 +152,13 @@
   }
 
   [self subtestStores:stores ensureCount:0];
+
+  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  for (DSDatastore *sn in stores) {
+    NSArray *result = [sn query:query];
+    GHAssertTrue([result count] == 0, @"query count");
+  }
+  [query release];
 
 }
 
@@ -376,9 +428,10 @@
   [DSFMDBDatastore deleteDatabaseNamed:@"test_db_2"];
   [DSFMDBDatastore deleteDatabaseNamed:@"test_db_3"];
 
-  SQLSchema *s1 = [SQLSchema simpleTableNamed:@"test_db_1"];
-  SQLSchema *s2 = [SQLSchema simpleTableNamed:@"test_db_2"];
-  SQLSchema *s3 = [SQLSchema simpleTableNamed:@"test_db_3"];
+  NSString *intgr = @"NUMERIC";
+  SQLSchema *s1 = [SQLSchema simpleTableNamed:@"test_db_1" withValueType:intgr];
+  SQLSchema *s2 = [SQLSchema simpleTableNamed:@"test_db_2" withValueType:intgr];
+  SQLSchema *s3 = [SQLSchema simpleTableNamed:@"test_db_3" withValueType:intgr];
 
   DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithSchema:s1];
   DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithSchema:s2];

@@ -1,11 +1,12 @@
 
+#import <bson-objc/bson-objc.h>
+
 #import "DSFMDBDatastore.h"
 
 #import "iDrone.h"
 #import <pthread.h>
 #import "FMDatabase.h"
 #import "FMResultSet.h"
-#import <bson-objc/BSONCodec.h>
 
 static NSString *kDSSQLITE_FILE = @"ds.%@.sqlite";
 static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
@@ -157,12 +158,16 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   return [array autorelease];
 }
 
-+ (SQLSchema *) simpleTableNamed:(NSString *)table {
++ (SQLSchema *) simpleTableNamed:(NSString *)table
+  withValueType:(NSString *)type {
+  if (type == nil)
+    type = @"TEXT";
+
   SQLSchema *schema = [[SQLSchema alloc] init];
   schema.table = table;
   schema.key = @"k";
   schema.wrappedValue = @"v";
-  [schema.fields setValue:@"TEXT" forKey:@"v"];
+  [schema.fields setValue:type forKey:@"v"];
   return [schema autorelease];
 }
 
@@ -375,9 +380,11 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   FMResultSet *rs;
 
   rs = [fmdb_ executeQuery:query];
-
   while ([rs next]) {
-    [result addObject:[schema dictionaryFromResultSet:rs]];
+    NSObject *obj = [schema dictionaryFromResultSet:rs];
+    if (schema.wrappedValue)
+      obj = [(NSDictionary *)obj valueForKey:schema.wrappedValue];
+    [result addObject:obj];
   }
 
   [rs close];
