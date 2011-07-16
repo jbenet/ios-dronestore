@@ -34,6 +34,7 @@
   }
 
   [mergeData release];
+
   [instance commit];
 }
 

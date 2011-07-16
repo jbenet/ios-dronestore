@@ -62,7 +62,7 @@ const const NSString *DSVersionBlankHash =
 
 - (nanotime) committed {
   nanotime nt;
-  nt.ns = [[serialRep valueForKey:@"committed"] longValue];
+  nt.ns = [[serialRep valueForKey:@"committed"] longLongValue];
   return nt;
 }
 
@@ -72,7 +72,7 @@ const const NSString *DSVersionBlankHash =
 
 - (nanotime) created {
   nanotime nt;
-  nt.ns = [[serialRep valueForKey:@"created"] longValue];
+  nt.ns = [[serialRep valueForKey:@"created"] longLongValue];
   return nt;
 }
 
@@ -146,8 +146,8 @@ const const NSString *DSVersionBlankHash =
   [serialRep setValue:[key string] forKey:@"key"];
   [serialRep setValue:DSVersionBlankHash forKey:@"hash"];
   [serialRep setValue:DSVersionBlankHash forKey:@"parent"];
-  [serialRep setValue:[NSNumber numberWithLong:0] forKey:@"committed"];
-  [serialRep setValue:[NSNumber numberWithLong:0] forKey:@"created"];
+  [serialRep setValue:[NSNumber numberWithLongLong:0] forKey:@"committed"];
+  [serialRep setValue:[NSNumber numberWithLongLong:0] forKey:@"created"];
   [serialRep setValue:[NSMutableDictionary dictionary] forKey:@"attributes"];
   [serialRep setValue:@"" forKey:@"type"];
 
