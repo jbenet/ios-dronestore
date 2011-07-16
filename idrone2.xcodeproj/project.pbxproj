@@ -81,11 +81,15 @@
 		D95C23DD13CBC864004BCE48 /* test_version.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF04913C365F60089E9F7 /* test_version.m */; };
 		D95C23E913CBCB91004BCE48 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */; };
 		D95C23EA13CBCB94004BCE48 /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF09813C371F30089E9F7 /* GHUnitIOSTestMain.m */; };
-		D95C23EC13CBCE1E004BCE48 /* iDrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95C23EB13CBCE1E004BCE48 /* iDrone.framework */; };
-		D95C23ED13CBCE1E004BCE48 /* iDrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95C23EB13CBCE1E004BCE48 /* iDrone.framework */; };
 		D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
+		D9CD42D313D1335300CA3D75 /* DSBNDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9CD42D113D1335200CA3D75 /* DSBNDatastore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9CD42D413D1335300CA3D75 /* DSBNDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CD42D213D1335200CA3D75 /* DSBNDatastore.m */; };
+		D9CD42D613D1339400CA3D75 /* test_bndatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CD42D513D1339400CA3D75 /* test_bndatastore.m */; };
+		D9CD42D713D1339400CA3D75 /* test_bndatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CD42D513D1339400CA3D75 /* test_bndatastore.m */; };
+		D9CD42D913D1341000CA3D75 /* BsonNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CD42D813D1340F00CA3D75 /* BsonNetwork.framework */; };
+		D9CD42DC13D15B4100CA3D75 /* BsonNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CD42D813D1340F00CA3D75 /* BsonNetwork.framework */; };
 		D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF05C13C36E930089E9F7 /* GHUnit.framework */; };
 		D9EAF08013C36F170089E9F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF07F13C36F170089E9F7 /* Cocoa.framework */; };
 		D9EAF08213C36F550089E9F7 /* GHUnit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9EAF05C13C36E930089E9F7 /* GHUnit.framework */; };
@@ -148,8 +152,8 @@
 		D95C238513CBC241004BCE48 /* iDrone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDrone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95C23C213CBC456004BCE48 /* iDrone-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iDrone-Info.plist"; sourceTree = "<group>"; };
 		D95C23C313CBC456004BCE48 /* iDrone-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iDrone-Prefix.pch"; sourceTree = "<group>"; };
-		D95C23EB13CBCE1E004BCE48 /* iDrone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iDrone.framework; path = "../Release-framework/iDrone.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D95C23F113CBEF37004BCE48 /* iDrone.tar.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = iDrone.tar.gz; path = release/iDrone.tar.gz; sourceTree = "<group>"; };
+		D96896F413D1DACE00B7392F /* iDrone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iDrone.framework; path = release/iDrone.framework; sourceTree = "<group>"; };
 		D97AB75713C75B1C006A65D3 /* bson-objc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "bson-objc.framework"; sourceTree = "<group>"; };
 		D97AB75C13C790E5006A65D3 /* DSFMDBDatastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSFMDBDatastore.h; sourceTree = "<group>"; };
 		D97AB75D13C790E5006A65D3 /* DSFMDBDatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSFMDBDatastore.m; sourceTree = "<group>"; };
@@ -161,6 +165,10 @@
 		D97AB77C13CA2EC5006A65D3 /* test_query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_query.m; sourceTree = "<group>"; };
 		D97AB78913CA418A006A65D3 /* DSComparable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSComparable.h; sourceTree = "<group>"; };
 		D9BB61E712108403006F32AA /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = lib/YAJL.framework; sourceTree = "<group>"; };
+		D9CD42D113D1335200CA3D75 /* DSBNDatastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBNDatastore.h; sourceTree = "<group>"; };
+		D9CD42D213D1335200CA3D75 /* DSBNDatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBNDatastore.m; sourceTree = "<group>"; };
+		D9CD42D513D1339400CA3D75 /* test_bndatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_bndatastore.m; sourceTree = "<group>"; };
+		D9CD42D813D1340F00CA3D75 /* BsonNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BsonNetwork.framework; sourceTree = "<group>"; };
 		D9EAF00913C365980089E9F7 /* nanotime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanotime.c; sourceTree = "<group>"; };
 		D9EAF00A13C365980089E9F7 /* nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanotime.h; sourceTree = "<group>"; };
 		D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nanotime.h"; sourceTree = "<group>"; };
@@ -219,7 +227,7 @@
 				D93373521347419E00C7FF19 /* libsqlite3.0.dylib in Frameworks */,
 				D93373531347421700C7FF19 /* YAJL.framework in Frameworks */,
 				D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
-				D95C23EC13CBCE1E004BCE48 /* iDrone.framework in Frameworks */,
+				D9CD42D913D1341000CA3D75 /* BsonNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +247,7 @@
 				D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */,
 				D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 				D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */,
-				D95C23ED13CBCE1E004BCE48 /* iDrone.framework in Frameworks */,
+				D9CD42DC13D15B4100CA3D75 /* BsonNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +260,7 @@
 				D9337320134740DF00C7FF19 /* iDroneiOSTests.app */,
 				D9EAF06113C36EC80089E9F7 /* iDroneMacTests.app */,
 				D95C238513CBC241004BCE48 /* iDrone.framework */,
-				D95C23EB13CBCE1E004BCE48 /* iDrone.framework */,
+				D96896F413D1DACE00B7392F /* iDrone.framework */,
 				D95C23F113CBEF37004BCE48 /* iDrone.tar.gz */,
 			);
 			name = products;
@@ -303,6 +311,7 @@
 		D95103B911747E8400288D3B /* test */ = {
 			isa = PBXGroup;
 			children = (
+				D9CD42D513D1339400CA3D75 /* test_bndatastore.m */,
 				D97AB77C13CA2EC5006A65D3 /* test_query.m */,
 				D97AB77913CA2EB5006A65D3 /* test_collection.m */,
 				D9EAF0AA13C4FED30089E9F7 /* test_merge.m */,
@@ -322,6 +331,7 @@
 		D95103BB11747EAD00288D3B /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D9CD42D813D1340F00CA3D75 /* BsonNetwork.framework */,
 				D97AB75713C75B1C006A65D3 /* bson-objc.framework */,
 				D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */,
 				D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */,
@@ -395,6 +405,8 @@
 				D97AB76B13CA2ACA006A65D3 /* DSQuery.h */,
 				D97AB76C13CA2ACF006A65D3 /* DSQuery.m */,
 				D9EAF02913C365C90089E9F7 /* iDrone.h */,
+				D9CD42D113D1335200CA3D75 /* DSBNDatastore.h */,
+				D9CD42D213D1335200CA3D75 /* DSBNDatastore.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -426,6 +438,7 @@
 				D95C23B613CBC34C004BCE48 /* NSDate+Nanotime.h in Headers */,
 				D95C23B813CBC34C004BCE48 /* NSString+SHA.h in Headers */,
 				D95C23BA13CBC34C004BCE48 /* FMDatabase.h in Headers */,
+				D9CD42D313D1335300CA3D75 /* DSBNDatastore.h in Headers */,
 				D95C23BC13CBC34C004BCE48 /* FMDatabaseAdditions.h in Headers */,
 				D95C23BE13CBC34C004BCE48 /* FMResultSet.h in Headers */,
 			);
@@ -569,7 +582,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]\nthen\n\n# Product name should be ${TARGET_NAME}.framework anyway...\nFWK_NAME=\"${WRAPPER_NAME}\"\nFWK_PATH=\"${SYMROOT}/${CONFIGURATION}-framework\"\nFWK_TARBALL=\"${RELEASE_TARBALL_FILE}\"\n\n\n# Package up\necho \"framework: packaging release tarball\"\ncd \"${FWK_PATH}\"\ntar -czf \"${TARGET_NAME}.tar.gz\" \"${FWK_NAME}\"\ncd \"${PROJECT_DIR}\"\nmkdir -p `dirname \"${RELEASE_TARBALL_FILE}\"`\ncp \"${FWK_PATH}/${TARGET_NAME}.tar.gz\" \"${RELEASE_TARBALL_FILE}\"\n\n\nfi";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]\nthen\n\n# Product name should be ${TARGET_NAME}.framework anyway...\nFWK_NAME=\"${WRAPPER_NAME}\"\nFWK_PATH=\"${SYMROOT}/${CONFIGURATION}-framework\"\nFWK_TARBALL=\"${RELEASE_TARBALL_FILE}\"\n\n\n# Package up\nTARBALL_PATH=`dirname \"${RELEASE_TARBALL_FILE}\"`\nTARBALL_FILENAME=`basename \"${RELEASE_TARBALL_FILE}\"`\necho \"framework: packaging release tarball\"\nmkdir -p \"${TARBALL_PATH}\"\ncp -r \"${FWK_PATH}/${FWK_NAME}\" \"${TARBALL_PATH}/.\"\ncd \"${TARBALL_PATH}\"\ntar -czf \"${TARBALL_FILENAME}\" \"${FWK_NAME}\"\n\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -590,6 +603,7 @@
 				D95C23DC13CBC864004BCE48 /* test_serialrep.m in Sources */,
 				D95C23DD13CBC864004BCE48 /* test_version.m in Sources */,
 				D95C23EA13CBCB94004BCE48 /* GHUnitIOSTestMain.m in Sources */,
+				D9CD42D613D1339400CA3D75 /* test_bndatastore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +631,7 @@
 				D95C23BB13CBC34C004BCE48 /* FMDatabase.m in Sources */,
 				D95C23BD13CBC34C004BCE48 /* FMDatabaseAdditions.m in Sources */,
 				D95C23BF13CBC34C004BCE48 /* FMResultSet.m in Sources */,
+				D9CD42D413D1335300CA3D75 /* DSBNDatastore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +651,7 @@
 				D95C23D113CBC864004BCE48 /* test_serialrep.m in Sources */,
 				D95C23D213CBC864004BCE48 /* test_version.m in Sources */,
 				D95C23E913CBCB91004BCE48 /* GHUnitTestMain.m in Sources */,
+				D9CD42D713D1339400CA3D75 /* test_bndatastore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
