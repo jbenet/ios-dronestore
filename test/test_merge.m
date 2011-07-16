@@ -160,7 +160,7 @@
   [self __subtestPerson:p1 otherPerson:p2 diffAttrs:[NSArray
     arrayWithObjects:@"age", nil]];
 
-  p2.awesome = 60.0;
+  p2.awesome = (float)60.0;
   [p2 commit];
   NSLog(@"committed %@", p1.version.hashstr);
 
@@ -200,10 +200,10 @@
   [self __subtestPerson:p1 otherPerson:p3 diffAttrs:nil];
   [self __subtestPerson:p1 otherPerson:p4 diffAttrs:nil];
 
-  p1.awesome = 0.1;
-  p2.awesome = 0.2;
-  p3.awesome = 0.3;
-  p4.awesome = 0.4;
+  p1.awesome = (float)0.1;
+  p2.awesome = (float)0.2;
+  p3.awesome = (float)0.3;
+  p4.awesome = (float)0.4;
 
   [p1 commit];
   [p2 commit];

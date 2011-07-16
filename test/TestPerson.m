@@ -19,4 +19,8 @@
 
 }
 
++ (NSString *) dstype {
+  return @"Person";
+}
+
 @end
