@@ -28,6 +28,9 @@ struct pthread_mutex_t;
 - (NSString *) count;
 - (NSString *) query:(DSQuery *)query;
 
+- (NSString *) storageForField:(NSString *)fld;
+- (NSObject *) storageValue:(NSObject *)value forField:(NSString *)fld;
+
 - (NSDictionary *) dictionaryFromResultSet:(FMResultSet *)rs;
 - (NSArray *) updateValuesFromObject:(NSObject *)object andKey:(NSString *)key;
 

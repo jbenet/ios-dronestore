@@ -44,10 +44,7 @@
 - (DSModel *) instanceFromDatastoreData:(NSDictionary *)data {
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   [dict addEntriesFromDictionary:data];
-  
-  NSData *attrs = [dict valueForKey:@"attributes"];
-  [dict setValue:[attrs BSONValue] forKey:@"attributes"];
-  
+
   DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:dict];
   DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
   DSModel *instance = [DSModel modelWithVersion:version];
@@ -105,9 +102,6 @@
 
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   [dict addEntriesFromDictionary:version.serialRep.contents];
-
-  NSDictionary *attrs = [version.serialRep.contents valueForKey:@"attributes"];
-  [dict setValue:[attrs BSONRepresentation] forKey:@"attributes"];
 
   [datastore put:dict forKey:version.key];
   return version;

@@ -53,7 +53,7 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   [string appendFormat:@"CREATE TABLE IF NOT EXISTS %@ (", table];
   [string appendFormat:@"  %@ TEXT PRIMARY KEY", key];
   for (NSString *field in fields)
-    [string appendFormat:@", %@ %@", field, [fields valueForKey:field]];
+    [string appendFormat:@", %@ %@", field, [self storageForField:field]];
   [string appendString:@");"];
   return string;
 }
@@ -116,6 +116,28 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   return [query SQLQueryWithTable:table];
 }
 
+- (NSString *) storageForField:(NSString *)fld {
+  NSString *fieldType = [fields valueForKey:fld];
+  if ([fieldType isEqualToString:@"dictionary"])
+    return @"BLOB";
+
+  if ([fieldType isEqualToString:@"array"])
+    return @"BLOB";
+
+  return fieldType;
+}
+
+- (NSObject *) storageValue:(NSObject *)value forField:(NSString *)fld {
+  NSString *fieldType = [fields valueForKey:fld];
+  if ([fieldType isEqualToString:@"dictionary"])
+    return [value BSONRepresentation];
+
+  if ([fieldType isEqualToString:@"array"])
+    return [value BSONRepresentation];
+
+  return value;
+}
+
 - (NSObject *) objectForField:(NSString *)fld fromResultSet:(FMResultSet *)rs {
   NSString *type = [fields valueForKey:fld];
 
@@ -133,6 +155,12 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 
   if ([type isEqualToString:@"BLOB"])
     return [rs dataForColumn:fld];
+
+  if ([type isEqualToString:@"dictionary"])
+    return [[rs dataForColumn:fld] BSONValue];
+
+  if ([type isEqualToString:@"array"])
+    return [[rs dataForColumn:fld] BSONValue];
 
   return nil;
 }
@@ -152,8 +180,10 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
     return [NSArray arrayWithObjects:object, _k, nil];
 
   NSMutableArray *array = [[NSMutableArray alloc] init];
-  for (NSString *field in fields)
-    [array addObject:[object valueForKey:field]];
+  for (NSString *field in fields) {
+    NSString *value = [object valueForKey:field];
+    [array addObject:[self storageValue:value forField:field]];
+  }
   [array addObject:_k];
   return [array autorelease];
 }
@@ -180,7 +210,8 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   [schema.fields setValue:@"TEXT" forKey:@"parent"];
   [schema.fields setValue:@"INTEGER" forKey:@"created"];
   [schema.fields setValue:@"INTEGER" forKey:@"committed"];
-  [schema.fields setValue:@"BLOB" forKey:@"attributes"];
+  [schema.fields setValue:@"dictionary" forKey:@"attributes"];
+  [schema.fields setValue:@"array" forKey:@"attributes"];
   return [schema autorelease];
 }
 
