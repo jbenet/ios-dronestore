@@ -14,6 +14,9 @@
 		D933733E1347411800C7FF19 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D933724C1347283500C7FF19 /* GHUnitIOS.framework */; };
 		D93373521347419E00C7FF19 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
 		D93373531347421700C7FF19 /* YAJL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BB61E712108403006F32AA /* YAJL.framework */; };
+		D93F849B13D2E2FB00181557 /* iDrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96896F413D1DACE00B7392F /* iDrone.framework */; };
+		D93F84B513D2E71100181557 /* iDrone.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D96896F413D1DACE00B7392F /* iDrone.framework */; };
+		D93F84B613D2F4D200181557 /* iDrone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96896F413D1DACE00B7392F /* iDrone.framework */; };
 		D95C239413CBC329004BCE48 /* DSAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01F13C365C90089E9F7 /* DSAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D95C239513CBC329004BCE48 /* DSAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF02013C365C90089E9F7 /* DSAttribute.m */; };
 		D95C239613CBC329004BCE48 /* DSKey.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF02113C365C90089E9F7 /* DSKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,23 +99,6 @@
 		D9EAF0A313C3758B0089E9F7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9EAF0A213C3758B0089E9F7 /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D95C239013CBC272004BCE48 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D95C238413CBC241004BCE48;
-			remoteInfo = iDrone;
-		};
-		D95C239213CBC274004BCE48 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D95C238413CBC241004BCE48;
-			remoteInfo = iDrone;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		D9EAF08113C36F4C0089E9F7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -121,6 +107,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D9EAF08213C36F550089E9F7 /* GHUnit.framework in CopyFiles */,
+				D93F84B513D2E71100181557 /* iDrone.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +214,7 @@
 				D93373521347419E00C7FF19 /* libsqlite3.0.dylib in Frameworks */,
 				D93373531347421700C7FF19 /* YAJL.framework in Frameworks */,
 				D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
+				D93F84B613D2F4D200181557 /* iDrone.framework in Frameworks */,
 				D9CD42D913D1341000CA3D75 /* BsonNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,6 +235,7 @@
 				D9EAF07E13C36EE70089E9F7 /* GHUnit.framework in Frameworks */,
 				D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */,
 				D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */,
+				D93F849B13D2E2FB00181557 /* iDrone.framework in Frameworks */,
 				D9CD42DC13D15B4100CA3D75 /* BsonNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +447,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D95C239313CBC274004BCE48 /* PBXTargetDependency */,
 			);
 			name = iDroneiOSTests;
 			productName = GHTests;
@@ -497,7 +485,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D95C239113CBC272004BCE48 /* PBXTargetDependency */,
 			);
 			name = iDroneMacTests;
 			productName = MacTests;
@@ -657,19 +644,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		D95C239113CBC272004BCE48 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D95C238413CBC241004BCE48 /* iDrone */;
-			targetProxy = D95C239013CBC272004BCE48 /* PBXContainerItemProxy */;
-		};
-		D95C239313CBC274004BCE48 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D95C238413CBC241004BCE48 /* iDrone */;
-			targetProxy = D95C239213CBC274004BCE48 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		D9337328134740DF00C7FF19 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -739,6 +713,7 @@
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
+					"\"$(SRCROOT)/release\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -772,6 +747,7 @@
 					"\"$(SRCROOT)/lib\"",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
+					"\"$(SRCROOT)/release\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -880,10 +856,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
+					"\"$(SRCROOT)/release\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -901,7 +875,8 @@
 					"\"$(SRCROOT)/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -916,10 +891,8 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Debug-framework\"",
-					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/idrone2-byblqxhvewoncvemnttpywhqfeja/Build/Products/Release-framework\"",
+					"\"$(SRCROOT)/release\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -934,7 +907,8 @@
 					"\"$(SRCROOT)/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;

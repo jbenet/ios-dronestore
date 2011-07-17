@@ -12,9 +12,18 @@
 //   Key('/ComedyGroup/MontyPython')
 //   Key('/ComedyGroup/MontyPython/Comedian/JohnCleese')
 
-#ifndef DSKey
-#define DSKey(...) ([DSKey keyWithString:__VA_ARGS__])
+#ifndef NSStringFmt
+#define NSStringFmt(fmt, ...) ([NSString stringWithFormat:fmt, __VA_ARGS__])
 #endif
+
+#ifndef DSKey
+#define DSKey(string) ([DSKey keyWithString:string])
+#endif
+
+#ifndef DSKeyFmt
+#define DSKeyFmt(...) ([DSKey keyWithString:NSStringFmt(__VA_ARGS__)])
+#endif
+
 
 @interface DSKey : NSObject {
   NSString *string;

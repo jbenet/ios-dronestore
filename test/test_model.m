@@ -61,7 +61,7 @@
 
 - (void) test_person {
   TestPerson *person = [[TestPerson alloc] initWithKeyName:@"HerpDerp"];
-  GHAssertTrue([person.key.string isEqualToString:@"/TestPerson/HerpDerp"],
+  GHAssertTrue([person.key.string isEqualToString:@"/Person/HerpDerp"],
     @"Key Check");
   GHAssertEqualStrings(person.first, @"", @"first");
   GHAssertEqualStrings(person.last, @"", @"last");

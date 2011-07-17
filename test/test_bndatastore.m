@@ -46,6 +46,7 @@
   [node.server connectToAddress:@"localhost:1362"];
 
   WAIT_WHILE(![node linkForName:service.name]);
+  GHAssertNotNil([node linkForName:service.name], @"Check the link is there.");
 
   DSBNDatastore *ds = [[DSBNDatastore alloc] initWithRemoteService:service];
 
@@ -205,6 +206,11 @@
   WAIT_WHILE(![node linkForName:service3.name]);
   WAIT_WHILE(![node linkForName:service4.name]);
   WAIT_WHILE(![node linkForName:service5.name]);
+  GHAssertNotNil([node linkForName:service1.name], @"Check the link is there.");
+  GHAssertNotNil([node linkForName:service2.name], @"Check the link is there.");
+  GHAssertNotNil([node linkForName:service3.name], @"Check the link is there.");
+  GHAssertNotNil([node linkForName:service4.name], @"Check the link is there.");
+  GHAssertNotNil([node linkForName:service5.name], @"Check the link is there.");
 
   srand((unsigned int)time(NULL)); // make sure rand is seeded.
 

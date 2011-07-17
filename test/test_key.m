@@ -5,12 +5,8 @@
 }
 @end
 
-#ifndef DSKEY
-#define DSKEY(str) [DSKey keyWithString:str]
-#endif
-
-#ifndef DSKEYSTR
-#define DSKEYSTR(str) [[DSKey keyWithString:str] string]
+#ifndef DSKeySTR
+#define DSKeySTR(str) [[DSKey keyWithString:str] string]
 #endif
 
 @implementation KeyTest
@@ -23,18 +19,23 @@
   string = [string absolutePathString];
   NSArray *compts = [string componentsSeparatedByString:@"/"];
 
-  GHAssertEqualStrings(string, DSKEYSTR(string), @"strs");
-  GHAssertTrue([DSKEY(string) isEqualToKey:DSKEY(string)], @"strs");
-  GHAssertTrue([DSKEY(string) compare:DSKEY(string)] == NSOrderedSame, @"strs");
-  GHAssertEqualStrings(DSKEY(string).name, [compts lastObject], @"strs");
+  GHAssertEqualStrings(string, DSKeySTR(string), @"strs");
+  GHAssertTrue([DSKeyFmt(@"/P/%@", string) isEqualToKey:
+    [DSKey(@"/P/") childWithKey:DSKey(string)]], @"strs");
+  GHAssertTrue([DSKeyFmt(@"/%@/C", string) isEqualToKey:
+    [DSKey(string) childWithString:@"C"]], @"strs");
+  GHAssertTrue([DSKey(string) compare:DSKey(string)] == NSOrderedSame, @"strs");
+  GHAssertTrue([DSKey(string) isEqualToKey:DSKey(string)], @"strs");
+  GHAssertTrue([DSKey(string) compare:DSKey(string)] == NSOrderedSame, @"strs");
+  GHAssertEqualStrings(DSKey(string).name, [compts lastObject], @"strs");
 
   if ([compts count] > 1) {
     NSString *secondToLast = [compts objectAtIndex:[compts count] - 2];
-    GHAssertEqualStrings(DSKEY(string).type, secondToLast, @"strs");
+    GHAssertEqualStrings(DSKey(string).type, secondToLast, @"strs");
   }
 
-  GHAssertTrue(([compts count] <= 2) == [DSKEY(string) isTopLevelKey], @"strs");
-  GHAssertTrue([DSKEY(string).parent isAncestorOfKey:DSKEY(string)], @"strs");
+  GHAssertTrue(([compts count] <= 2) == [DSKey(string) isTopLevelKey], @"strs");
+  GHAssertTrue([DSKey(string).parent isAncestorOfKey:DSKey(string)], @"strs");
 }
 
 - (void) test_basic {
@@ -52,8 +53,8 @@
 }
 
 - (void) test_ancestry {
-  DSKey *k1 = DSKEY(@"/A/B/C");
-  DSKey *k2 = DSKEY(@"/A/B/C/D");
+  DSKey *k1 = DSKey(@"/A/B/C");
+  DSKey *k2 = DSKey(@"/A/B/C/D");
 
   GHAssertEqualStrings(k1.string, @"/A/B/C", @"strings should equal");
   GHAssertEqualStrings(k2.string, @"/A/B/C/D", @"strings should equal");
