@@ -28,9 +28,9 @@
   [sr setValue:@"/ABCD" forKey:@"key"];
   [sr setValue:h1 forKey:@"hash"];
   [sr setValue:DSVersionBlankHash forKey:@"parent"];
-  [sr setValue:[NSNumber numberWithLongLong:nanotime_now().ns]
+  [sr setValue:[NSNumber numberWithLongLong:nanotime_utc_now().ns]
     forKey:@"committed"];
-  [sr setValue:[NSNumber numberWithLongLong:nanotime_now().ns]
+  [sr setValue:[NSNumber numberWithLongLong:nanotime_utc_now().ns]
     forKey:@"created"];
   [sr setValue:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSDictionary
     dictionaryWithObjectsAndKeys:@"herp", @"value", nil], @"str", nil]
@@ -43,9 +43,9 @@
   [sr setValue:@"/ABCD" forKey:@"key"];
   [sr setValue:h2 forKey:@"hash"];
   [sr setValue:h1 forKey:@"parent"];
-  [sr setValue:[NSNumber numberWithLongLong:nanotime_now().ns]
+  [sr setValue:[NSNumber numberWithLongLong:nanotime_utc_now().ns]
     forKey:@"committed"];
-  [sr setValue:[NSNumber numberWithLongLong:nanotime_now().ns]
+  [sr setValue:[NSNumber numberWithLongLong:nanotime_utc_now().ns]
     forKey:@"created"];
   [sr setValue:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSDictionary
     dictionaryWithObjectsAndKeys:@"derp", @"value", nil], @"str", nil]
@@ -58,9 +58,9 @@
   [sr setValue:@"/ABCD" forKey:@"key"];
   [sr setValue:h3 forKey:@"hash"];
   [sr setValue:h2 forKey:@"parent"];
-  [sr setValue:[NSNumber numberWithLongLong:nanotime_now().ns]
+  [sr setValue:[NSNumber numberWithLongLong:nanotime_utc_now().ns]
     forKey:@"committed"];
-  [sr setValue:[NSNumber numberWithLongLong:nanotime_now().ns]
+  [sr setValue:[NSNumber numberWithLongLong:nanotime_utc_now().ns]
     forKey:@"created"];
   [sr setValue:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSDictionary
     dictionaryWithObjectsAndKeys:@"lerp", @"value", nil], @"str", nil]
@@ -296,8 +296,8 @@
 
 
 - (void) test_filter_order {
-  NSNumber *t1 = [NSNumber numberWithLongLong:nanotime_now().ns];
-  NSNumber *t2 = [NSNumber numberWithLongLong:nanotime_now().ns];
+  NSNumber *t1 = [NSNumber numberWithLongLong:nanotime_utc_now().ns];
+  NSNumber *t2 = [NSNumber numberWithLongLong:nanotime_utc_now().ns];
 
   DSFilter *f1 = [DSFilter filter:@"key" op:DSCompOpGreaterThan value:@"/A"];
   DSFilter *f2 = [DSFilter filter:@"key" op:DSCompOpLessThan value:@"/A"];
@@ -374,7 +374,7 @@
   DSQuery *q2 = [[DSQuery alloc] initWithType:[TestPerson dstype]];
   DSQuery *q3 = [[DSQuery alloc] initWithType:[TestPerson dstype]];
 
-  NSNumber *now = [NSNumber numberWithLongLong:nanotime_now().ns];
+  NSNumber *now = [NSNumber numberWithLongLong:nanotime_utc_now().ns];
 
   q1.limit = 100;
   q2.offset = 200;

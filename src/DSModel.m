@@ -105,7 +105,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
     return;
   }
 
-  nanotime now = nanotime_now();
+  nanotime now = nanotime_utc_now();
   nanotime created_nt = ([version isBlank] ? now : version.created);
   NSNumber *committed_num = [NSNumber numberWithLongLong:now.ns];
   NSNumber *created_num = [NSNumber numberWithLongLong:created_nt.ns];

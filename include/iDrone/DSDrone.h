@@ -14,8 +14,6 @@
 
   NSString *droneid;
 
-  NSDateFormatter *dateFormatter;
-  NSTimeInterval systemTimeOffset;
 }
 
 @property (nonatomic, copy) NSString *droneid;

@@ -130,7 +130,7 @@
     return; // value has not changed. no need to update.
 
   // store our extra state.
-  NSNumber *now = [NSNumber numberWithLongLong:nanotime_now().ns];
+  NSNumber *now = [NSNumber numberWithLongLong:nanotime_utc_now().ns];
   [data setValue:now forKey:@"updated"];
 }
 

@@ -804,7 +804,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RELEASE_TARBALL_FILE = "release/$(TARGET_NAME).tar.gz";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv6 armv7 x86_64 i386";
+				VALID_ARCHS = "armv6 armv7 i386";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -844,7 +844,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RELEASE_TARBALL_FILE = "release/$(TARGET_NAME).tar.gz";
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "armv6 armv7 x86_64 i386";
+				VALID_ARCHS = "armv6 armv7 i386";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
