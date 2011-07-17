@@ -65,6 +65,7 @@
 - (NSObject *) valueForKey:(NSString *)key;
 - (void) setValue:(NSObject *)object forKey:(NSString *)key;
 
++ (void) rebindAttribute:(NSString *)attr toProperty:(NSString *)property;
 + (void) registerAttribute:(DSAttribute *)attr;
 + (void) registerAttributes;
 

@@ -103,7 +103,7 @@
   if ([attr.name isEqualToString:@"age"]) {
     p.age += 1;
   } else if ([attr.name isEqualToString:@"awesome"]) {
-    p.awesome += 0.00001;
+    p.awesomesauce += 0.00001;
   } else {
     NSString *oldVal = [attr valueForInstance:p];
     NSString *newVal = [NSString stringWithFormat:@"%@%d", oldVal, iteration];
@@ -185,7 +185,7 @@
     p.last = [NSString stringWithFormat:@"last%d", i];
     p.phone = [NSString stringWithFormat:@"phone%d", i];
     p.age = 0;
-    p.awesome = i / numPeople;
+    p.awesomesauce = i / numPeople;
     [p commit];
 
     DSDrone *d = [drones objectAtIndex:rand() % 5];
@@ -233,7 +233,7 @@
       GHAssertEqualStrings(p.last, o.last, @"last");
       GHAssertEqualStrings(p.phone, o.phone, @"phone");
       GHAssertTrue(p.age == o.age, @"age");
-      GHAssertTrue(fabs(p.awesome - o.awesome) < 0.00001, @"awesome");
+      GHAssertTrue(fabs(p.awesomesauce - o.awesomesauce) < 0.00001, @"awesome");
 
       GHAssertTrue([p.version isEqualToVersion:o.version], @"version");
 
@@ -256,7 +256,7 @@
       GHAssertEqualStrings(p.last, o.last, @"last");
       GHAssertEqualStrings(p.phone, o.phone, @"phone");
       GHAssertTrue(p.age == o.age, @"age");
-      GHAssertTrue(fabs(p.awesome - o.awesome) < 0.00001, @"awesome");
+      GHAssertTrue(fabs(p.awesomesauce - o.awesomesauce) < 0.00001, @"awesome");
 
       GHAssertTrue([p.version isEqualToVersion:o.version], @"version");
 

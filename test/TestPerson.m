@@ -4,7 +4,7 @@
 #import "DSMerge.h"
 
 @implementation TestPerson
-@synthesize first, last, phone, awesome, age;
+@synthesize first, last, phone, awesomesauce, age;
 
 + (void) registerAttributes {
 
@@ -17,6 +17,7 @@
   DSRegisterPrimitiveAttribute(age, int, 1, DSMaxMergeStrategy);
   DSRegisterPrimitiveAttribute(awesome, float, 0.1,DSLatestObjectMergeStrategy);
 
+  [self rebindAttribute:@"awesome" toProperty:@"awesomesauce"];
 }
 
 + (NSString *) dstype {

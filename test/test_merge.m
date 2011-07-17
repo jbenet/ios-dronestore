@@ -27,7 +27,7 @@
   GHAssertEqualStrings(person.last, @"", @"blank firstname");
   GHAssertEqualStrings(person.phone, @"0", @"blank firstname");
   GHAssertTrue(person.age == 1, @"blank age");
-  GHAssertTrue(fabs(person.awesome - 0.1) < 0.000001, @"blank awesone");
+  GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.000001, @"blank awesone");
 
   GHAssertTrue(person.version.isBlank, @"must have blank version");
   GHAssertFalse(person.isCommitted, @"must not be committed");
@@ -47,9 +47,9 @@
   GHAssertTrue(person.age == [[person.version valueForAttribute:@"age"]
     intValue], @"version: age");
   NSLog(@"float awesome: %f %f", [[person.version valueForAttribute:@"awesome"]
-    floatValue], person.awesome);
+    floatValue], person.awesomesauce);
   GHAssertTrue(fabs([[person.version valueForAttribute:@"awesome"]
-    floatValue] - person.awesome) < 0.000001, @"version: awesome");
+    floatValue] - person.awesomesauce) < 0.000001, @"version: awesome");
 
   for (DSAttribute *attr in [[TestPerson attributes] allValues]) {
     GHAssertEqualObjects([attr valueForInstance:person],
@@ -160,7 +160,7 @@
   [self __subtestPerson:p1 otherPerson:p2 diffAttrs:[NSArray
     arrayWithObjects:@"age", nil]];
 
-  p2.awesome = (float)60.0;
+  p2.awesomesauce = (float)60.0;
   [p2 commit];
   NSLog(@"committed %@", p1.version.hashstr);
 
@@ -200,10 +200,10 @@
   [self __subtestPerson:p1 otherPerson:p3 diffAttrs:nil];
   [self __subtestPerson:p1 otherPerson:p4 diffAttrs:nil];
 
-  p1.awesome = (float)0.1;
-  p2.awesome = (float)0.2;
-  p3.awesome = (float)0.3;
-  p4.awesome = (float)0.4;
+  p1.awesomesauce = (float)0.1;
+  p2.awesomesauce = (float)0.2;
+  p3.awesomesauce = (float)0.3;
+  p4.awesomesauce = (float)0.4;
 
   [p1 commit];
   [p2 commit];
@@ -226,32 +226,40 @@
   NSLog(@"p4 merge p3");
   [p4 mergeVersion:p3.version]; // 4 stays w  0.4
   [self __subtestPerson:p3 otherPerson:p4 diffAttrs:nil];
-  GHAssertTrue(fabs(p3.awesome - 0.4) < 0.000001, @"value is %f", p3.awesome);
-  GHAssertTrue(fabs(p4.awesome - 0.4) < 0.000001, @"value is %f", p4.awesome);
+  GHAssertTrue(fabs(p3.awesomesauce - 0.4) < 0.000001,
+    @"value is %f", p3.awesomesauce);
+  GHAssertTrue(fabs(p4.awesomesauce - 0.4) < 0.000001,
+    @"value is %f", p4.awesomesauce);
 
   NSLog(@"p1 merge p2");
   [p1 mergeVersion:p2.version]; // 1 gets 2s  0.2
   NSLog(@"p2 merge p1");
   [p2 mergeVersion:p1.version]; // 2 stays w  0.2
   [self __subtestPerson:p1 otherPerson:p2 diffAttrs:nil];
-  GHAssertTrue(fabs(p2.awesome - 0.2) < 0.000001, @"value is %f", p2.awesome);
-  GHAssertTrue(fabs(p1.awesome - 0.2) < 0.000001, @"value is %f", p1.awesome);
+  GHAssertTrue(fabs(p2.awesomesauce - 0.2) < 0.000001,
+    @"value is %f", p2.awesomesauce);
+  GHAssertTrue(fabs(p1.awesomesauce - 0.2) < 0.000001,
+    @"value is %f", p1.awesomesauce);
 
   NSLog(@"p1 merge p3");
   [p1 mergeVersion:p3.version]; // 1 stays w  0.2
   NSLog(@"p3 merge p1");
   [p3 mergeVersion:p1.version]; // 3 gets 1s  0.2
   [self __subtestPerson:p1 otherPerson:p3 diffAttrs:nil];
-  GHAssertTrue(fabs(p3.awesome - 0.2) < 0.000001, @"value is %f", p3.awesome);
-  GHAssertTrue(fabs(p1.awesome - 0.2) < 0.000001, @"value is %f", p1.awesome);
+  GHAssertTrue(fabs(p3.awesomesauce - 0.2) < 0.000001,
+    @"value is %f", p3.awesomesauce);
+  GHAssertTrue(fabs(p1.awesomesauce - 0.2) < 0.000001,
+    @"value is %f", p1.awesomesauce);
 
   NSLog(@"p3 merge p4");
   [p3 mergeVersion:p4.version]; // 3 stays w  0.2
   NSLog(@"p4 merge p3");
   [p4 mergeVersion:p3.version]; // 4 gets 3s  0.2
   [self __subtestPerson:p1 otherPerson:p3 diffAttrs:nil];
-  GHAssertTrue(fabs(p3.awesome - 0.2) < 0.000001, @"value is %f", p3.awesome);
-  GHAssertTrue(fabs(p4.awesome - 0.2) < 0.000001, @"value is %f", p4.awesome);
+  GHAssertTrue(fabs(p3.awesomesauce - 0.2) < 0.000001,
+    @"value is %f", p3.awesomesauce);
+  GHAssertTrue(fabs(p4.awesomesauce - 0.2) < 0.000001,
+    @"value is %f", p4.awesomesauce);
 
   [p1 release];
   [p2 release];

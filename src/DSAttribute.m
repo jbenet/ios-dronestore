@@ -8,7 +8,7 @@
 
 @implementation DSAttribute
 
-@synthesize name, type, strategy, defaultValue;
+@synthesize name, type, strategy, defaultValue, property;
 
 - (id) init {
   [NSException raise:@"DSAttributeInit" format:@"%@ must be inited with "
@@ -21,16 +21,14 @@
 
     name = [_name copy];
     type = _type;
-
-    _name = [NSString stringWithFormat:@"set%@:", [name capitalizedString]];
-    setter = NSSelectorFromString(_name); // - (void) setName:(type);
-    getter = NSSelectorFromString(name); // - (type) name;
+    self.property = name;
   }
   return self;
 }
 
 - (void) dealloc {
   [name release];
+  [property release];
   [strategy release];
   [defaultValue release];
   [super dealloc];
@@ -44,6 +42,16 @@
 
 
 //------------------------------------------------------------------------------
+
+- (void) setProperty:(NSString *)prop {
+  NSString *temp = [prop copy];
+  [property release];
+  property = temp;
+
+  temp = [NSString stringWithFormat:@"set%@:", [prop capitalizedString]];
+  setter = NSSelectorFromString(temp); // - (void) setName:(type);
+  getter = NSSelectorFromString(prop); // - (type) name;
+}
 
 - (void) setStrategy:(DSMergeStrategy *)_strategy {
   [_strategy retain];

@@ -41,9 +41,9 @@
 }
 
 
-
 @interface DSAttribute : NSObject {
   NSString *name;
+  NSString *property;
 
   Class type;
   DSMergeStrategy *strategy;
@@ -56,8 +56,10 @@
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) Class type;
+@property (nonatomic, copy) NSString *property;
 @property (nonatomic, retain) DSMergeStrategy *strategy;
 @property (nonatomic, retain) id defaultValue;
+
 
 // ADD Defaults.
 - (id) initWithName:(NSString *)name type:(Class)type;

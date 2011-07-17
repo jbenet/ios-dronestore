@@ -69,7 +69,7 @@
   GHAssertTrue(person.age == 1, @"age");
 
   // dumb float point math.
-  GHAssertTrue(fabs(person.awesome - 0.1) < 0.00000001, @"awesome");
+  GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.00000001, @"awesome");
   GHAssertTrue(person.version.isBlank, @"must not have blank version");
   GHAssertFalse(person.isCommitted, @"must be committed");
 
@@ -86,7 +86,7 @@
   GHAssertTrue(person.age == 1, @"age");
 
   // dumb float point math.
-  GHAssertTrue(fabs(person.awesome - 0.1) < 0.00000001, @"awesome");
+  GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.00000001, @"awesome");
 
 
   person.first = @"Herp";
@@ -117,7 +117,7 @@
     intValue] == 5, @"version: age");
 
   // dumb float point math.
-  GHAssertTrue(fabs(person.awesome - 0.1) < 0.00000001, @"awesome");
+  GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.00000001, @"awesome");
 
   GHAssertEqualStrings([person.version valueForAttribute:@"first"], @"Herp",
     @"version: first");

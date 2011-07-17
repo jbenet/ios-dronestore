@@ -214,7 +214,10 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 }
 
 //------------------------------------------------------------------------------
-
++ (void) rebindAttribute:(NSString *)attr toProperty:(NSString *)property {
+  NSMutableDictionary *attrs = [dsAttributeRegistry valueForKey:[self dstype]];
+  ((DSAttribute *)[attrs valueForKey:attr]).property = property;
+}
 
 + (void) registerAttribute:(DSAttribute *)attr {
 
