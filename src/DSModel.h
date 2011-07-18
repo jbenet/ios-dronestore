@@ -10,6 +10,7 @@
 @class DSKey;
 @class DSVersion;
 @class DSAttribute;
+@class DSModelAttribute;
 @class DSModel;
 
 @protocol DSModel<NSObject>
@@ -23,6 +24,8 @@
 
 - (BOOL) isEqualToModel:(DSModel *)model;
 @end
+
+@protocol DSModelContainer;
 
 @interface DSModel : NSObject <DSModel> {
   DSKey *key;
@@ -62,8 +65,8 @@
 - (NSMutableDictionary *) mutableDataForAttribute:(NSString *)attrName;
 - (void) setData:(NSDictionary *)dict forAttribute:(NSString *)attrName;
 
-- (NSObject *) valueForKey:(NSString *)key;
-- (void) setValue:(NSObject *)object forKey:(NSString *)key;
+// Override this for DSModelAttributes
+- (id<DSModelContainer>) modelContainerForAttribute:(DSModelAttribute *)attr;
 
 + (void) rebindAttribute:(NSString *)attr toProperty:(NSString *)property;
 + (void) registerAttribute:(DSAttribute *)attr;
@@ -76,6 +79,12 @@
 
 + (Class) modelWithDSType:(NSString *)type;
 
+@end
+
+
+@protocol DSModelContainer
+- (void) addModel:(DSModel *)model;
+- (DSModel *) modelForKey:(DSKey *)key;
 @end
 
 

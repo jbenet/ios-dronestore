@@ -196,6 +196,13 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   }
 }
 
+
+//------------------------------------------------------------------------------
+
+- (id<DSModelContainer>) modelContainerForAttribute:(DSModelAttribute *)attr {
+  return nil;
+}
+
 //------------------------------------------------------------------------------
 
 - (NSObject *) valueForKey:(NSString *)_key {

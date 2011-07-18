@@ -67,6 +67,8 @@
   GHAssertEqualStrings(person.last, @"", @"last");
   GHAssertEqualStrings(person.phone, @"0", @"phone");
   GHAssertTrue(person.age == 1, @"age");
+  GHAssertNil(person.father, @"father");
+  GHAssertNil(person.mother, @"mother");
 
   // dumb float point math.
   GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.00000001, @"awesome");
@@ -89,10 +91,15 @@
   GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.00000001, @"awesome");
 
 
+  TestPerson *father = [[TestPerson alloc] initWithKeyName:@"DadDerp"];
+  TestPerson *mother = [[TestPerson alloc] initWithKeyName:@"MomDerp"];
+
   person.first = @"Herp";
   person.last = @"Derp";
   person.phone = @"1235674444";
   person.age = 5;
+  person.father = father;
+  person.mother = mother;
 
   oldHash = person.version.hashstr;
   [person commit];
@@ -116,6 +123,11 @@
   GHAssertTrue([[[[person class] attributeNamed:@"age"] valueForInstance:person]
     intValue] == 5, @"version: age");
 
+  GHAssertEqualStrings([[[person class] attributeNamed:@"father"]
+    valueForInstance:person], father.key.string, @"attr: father");
+  GHAssertEqualStrings([[[person class] attributeNamed:@"mother"]
+    valueForInstance:person], mother.key.string, @"attr: mother");
+
   // dumb float point math.
   GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.00000001, @"awesome");
 
@@ -126,8 +138,14 @@
   GHAssertEqualStrings([person.version valueForAttribute:@"phone"],
     @"1235674444", @"version: phone");
 
+  GHAssertEqualStrings([person.version valueForAttribute:@"father"],
+    father.key.string, @"version: phone");
+  GHAssertEqualStrings([person.version valueForAttribute:@"mother"],
+    mother.key.string, @"version: phone");
+
   GHAssertEqualStrings([[person class] dstype], person.version.type,
     @"version type");
+
 
   person.first = @"Herpington";
 
@@ -146,6 +164,11 @@
   GHAssertEqualStrings([person.version valueForAttribute:@"phone"],
     @"1235674444", @"version: phone");
 
+  GHAssertEqualStrings([person.version valueForAttribute:@"father"],
+    father.key.string, @"version: phone");
+  GHAssertEqualStrings([person.version valueForAttribute:@"mother"],
+    mother.key.string, @"version: phone");
+
 
   GHAssertTrue([[person.version valueForAttribute:@"age"] intValue] == 5,
     @"version: age");
@@ -153,6 +176,8 @@
   GHAssertTrue(fabs([[person.version valueForAttribute:@"awesome"] floatValue] -
     0.1) < 0.00000001,  @"version: age");
 
+  [father release];
+  [mother release];
 }
 
 

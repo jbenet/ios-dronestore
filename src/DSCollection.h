@@ -5,13 +5,14 @@
 // @author jbenet@cs.stanford.edu
 //
 
+#import "DSModel.h"
+
 @class DSKey;
-@class DSModel;
 @class DSCollection;
 
 struct pthread_rwlock_t;
 
-@interface DSCollection : NSObject <NSFastEnumeration> {
+@interface DSCollection : NSObject <NSFastEnumeration, DSModelContainer> {
 
   NSMutableDictionary *models;
   NSMutableArray *ordered;
@@ -39,6 +40,8 @@ struct pthread_rwlock_t;
 - (void) addCollection:(DSCollection *)collection;
 - (void) addModelsInArray:(NSArray *)array;
 
+// alias for insertModel:, complies with DSModelContainer
+- (void) addModel:(DSModel *)model;
 - (void) insertModel:(DSModel *)model;
 - (void) insertModel:(DSModel *)model atIndex:(NSUInteger)index;
 

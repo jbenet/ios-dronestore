@@ -14,11 +14,14 @@
 
 
 #ifndef WAIT_WHILE
-#define WAIT_WHILE(condition) \
-  for (int i = 0; (condition) && i < 10000; i++) \
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate \
-      dateWithTimeIntervalSinceNow:0.5]];
-    // [NSThread sleepForTimeInterval:0.5]; // main thread apparently.
+#define WAIT_WHILE(condition)                                         \
+  for (int i = 0; (condition) && i < 5; i++) {                    \
+    NSDate *date = [NSDate date];                                     \
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate                  \
+      dateWithTimeIntervalSinceNow:0.5]];                             \
+    NSTimeInterval remW = 0.5 - fabs([date timeIntervalSinceNow]);    \
+    [NSThread sleepForTimeInterval:remW];                             \
+  }
 #endif
 
 @interface BNDatastoreTest : GHTestCase {
@@ -60,6 +63,10 @@
   person.last = @"B";
   [person commit];
 
+  TestPerson *father = [[TestPerson alloc] initWithKeyName:@"Father"];
+  person.father = father;
+  [person commit];
+
   GHAssertFalse([drone contains:person.key], @"Should not contain it");
   GHAssertNil([drone get:person.key], @"Should not contain it");
 
@@ -89,10 +96,16 @@
   [person2 commit];
 
 
+  TestPerson *mother = [[TestPerson alloc] initWithKeyName:@"Mother"];
+  person2.mother = mother;
+  [person2 commit];
+
   GHAssertTrue([drone contains:person2.key], @"should contain it");
   GHAssertFalse([person isEqualToModel:person2], @"!eq.");
   GHAssertFalse([[drone get:person2.key] isEqualToModel:person2], @"!eq.");
   GHAssertNotEqualStrings(person2.first, person.first, @"should not eq.");
+  GHAssertTrue(person2.father == person.father, @"should not eq.");
+  GHAssertFalse(person2.mother == person.mother, @"should not eq.");
 
   person2 = [drone merge:person2];
 
@@ -100,6 +113,10 @@
   GHAssertFalse([person isEqualToModel:person2], @"!eq.");
   GHAssertTrue([[drone get:person2.key] isEqualToModel:person2], @"should eq.");
 
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] father]
+    isEqualToModel:father], @"eq.");
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] mother]
+    isEqualToModel:mother], @"eq.");
 
   DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
   DSCollection *result = [drone query:query];
@@ -131,6 +148,11 @@
     p.age += 1;
   } else if ([attr.name isEqualToString:@"awesome"]) {
     p.awesomesauce += 0.001;
+  } else if ([attr isKindOfClass:[DSModelAttribute class]]) {
+    NSString *str2 = [NSString stringWithFormat:@"%d", (rand() % people)];
+    DSKey *key2 = [TestPerson keyWithName:str2];
+    TestPerson *op = [d get:key2];
+    [attr setValue:op.key.string forInstance:p];
   } else {
     NSString *oldVal = [attr valueForInstance:p];
     NSString *newVal = [NSString stringWithFormat:@"%@%d", oldVal, iteration];

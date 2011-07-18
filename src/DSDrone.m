@@ -126,6 +126,17 @@
 }
 
 
+
+
+- (void) addModel:(DSModel *)model {
+  [self merge:model];
+}
+
+- (DSModel *) modelForKey:(DSKey *)key {
+  return [self get:key];
+}
+
+
 @end
 
 

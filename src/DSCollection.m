@@ -103,6 +103,11 @@
     [self insertModel:model];
 }
 
+- (void) addModel:(DSModel *)model
+{
+  [self insertModel:model];
+}
+
 - (void) insertModel:(DSModel *)model
 {
   if (model.key == nil || [model.key.string length] < 1) {

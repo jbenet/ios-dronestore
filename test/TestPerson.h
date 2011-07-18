@@ -1,12 +1,17 @@
 
 #import "DSModel.h"
 
+@class DSCollection;
+
 @interface TestPerson : DSModel {
   NSString *first;
   NSString *last;
   NSString *phone;
   float awesomesauce;
   int age;
+
+  TestPerson *father;
+  TestPerson *mother;
 }
 
 @property (nonatomic, copy) NSString *first;
@@ -14,4 +19,11 @@
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, assign) float awesomesauce;
 @property (nonatomic, assign) int age;
+
+
+@property (nonatomic, retain) TestPerson *father;
+@property (nonatomic, retain) TestPerson *mother;
+
++ (DSCollection *) allPeople;
+
 @end

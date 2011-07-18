@@ -29,6 +29,15 @@
   [self registerAttribute:attr];  \
 }
 
+#define DSRegisterModelAttribute(NAME, TYPE, STRAT) { \
+  DSModelAttribute *attr; \
+  attr = [DSModelAttribute attributeWithName:@__STRINGIFY(NAME) \
+    type:[TYPE class]]; \
+  attr.strategy = [STRAT strategy]; \
+  attr.defaultValue = @""; \
+  [self registerAttribute:attr];  \
+}
+
 #define DSRegisterPrimitiveAttribute(NAME, TYPE, VALUE, STRAT) { \
   DSPrimitiveAttribute *attr; \
   attr = [DSPrimitiveAttribute attributeWithName:@__STRINGIFY(NAME) \
@@ -76,6 +85,12 @@
 
 + (id) attributeWithName:(NSString *)name type:(Class)type;
 
+@end
+
+
+// Transparently store a property as a model instance,
+// with the attribute value as its key.
+@interface DSModelAttribute : DSAttribute  {}
 @end
 
 

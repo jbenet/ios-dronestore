@@ -1,6 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DSAttribute.h"
+#import "DSKey.h"
 #import "DSMerge.h"
 #import "DSModel.h"
 #import "DSComparable.h"
@@ -71,9 +72,9 @@
 //------------------------------------------------------------------------------
 
 
-- (void) __invokeSetValue:(NSValue *)value forInstance:(DSModel *)instance {
+- (void) __invokeSetValue:(NSObject *)value forInstance:(DSModel *)instance {
 
-  if (![value isKindOfClass:type]) {
+  if (value && ![value isKindOfClass:type]) {
     [NSException raise:@"DSInvalidType" format:@"%@ is not an instance of %@ "
       "and cannot be set on %@.%@", value, type, [instance class], name];
   }
@@ -118,6 +119,8 @@
   NSDictionary *data = [instance dataForAttribute:name];
   id<DSComparable> prop_val = [self valueForInstance:instance];
   id<DSComparable> data_val = [data valueForKey:@"value"];
+  if (prop_val == data_val)
+    return;
   if (!prop_val || !data_val || [prop_val compare:data_val] != NSOrderedSame)
     [self setValue:prop_val forInstance:instance];
 }
@@ -136,6 +139,62 @@
 }
 
 @end
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+
+@implementation DSModelAttribute
+
+//------------------------------------------------------------------------------
+
+- (void) __invokeSetValue:(NSString *)value forInstance:(DSModel *)instance {
+
+  if (value == nil) {
+    [super __invokeSetValue:nil forInstance:instance];
+    return;
+  }
+
+  if (![value isKindOfClass:[NSString class]]) {
+    [NSException raise:@"DSInvalidType" format:@"%@ not an NSString and cannot "
+      "be set on %@.%@", value, [instance class], name];
+  }
+
+  if ([value length] == 0) { // empty key.
+    [super __invokeSetValue:nil forInstance:instance];
+    return;
+  }
+
+  DSKey *key = [DSKey keyWithString:value];
+
+  if (![key.type isEqualToString:[type dstype]]) {
+    [NSException raise:@"DSInvalidType" format:@"%@ represents a DSKey of type "
+      "%@, not %@, and cannot be set on %@.%@", value, key.type,
+      [type dstype], [instance class], name];
+  }
+
+  id<DSModelContainer> container = [instance modelContainerForAttribute:self];
+  if (container == nil) {
+    [NSException raise:@"DSInvalidValue" format:@"%@ modelContainer for "
+      "attribute %@ is nil and cannot be set on %@.%@. Did you forget to "
+      "override modelContainerForAttribute:?", instance, self, [instance class],
+      name];
+  }
+
+  DSModel *entity = [container modelForKey:key];
+  [super __invokeSetValue:entity forInstance:instance];
+}
+
+
+- (id) valueForInstance:(DSModel *)instance {
+  DSModel *entity = [super valueForInstance:instance];
+  if (entity == nil)
+    return @""; // empty key.
+  return entity.key.string;
+}
+
+@end
+
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------

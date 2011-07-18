@@ -1,5 +1,6 @@
 
 #import <Foundation/Foundation.h>
+#import "DSModel.h"
 
 // Drone represents the logical unit of storage in dronestore.
 // Each drone consists of a datastore (or set of datastores) and an id.
@@ -14,7 +15,7 @@
 @class DSCollection;
 @protocol DSModel;
 
-@interface DSDrone : NSObject {
+@interface DSDrone : NSObject <DSModelContainer> {
   DSKey *droneid;
   DSDatastore *datastore;
 }
@@ -35,7 +36,6 @@
 
 - (DSVersion *) putVersion:(DSVersion *)version;
 - (DSModel *) mergeVersion:(DSVersion *)version;
-
 
 @end
 

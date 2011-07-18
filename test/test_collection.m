@@ -45,9 +45,9 @@
 
   collection = [[DSCollection alloc] init];
 
-  [collection insertModel:a];
-  [collection insertModel:b];
-  [collection insertModel:c];
+  [collection addModel:a];
+  [collection addModel:b];
+  [collection addModel:c];
   [collection insertModel:d];
   [collection insertModel:e];
   NSLog(@"SetUp");
@@ -148,7 +148,7 @@
 - (void) testInsert {
   [self testRemove];
 
-  [collection insertModel:a];
+  [collection addModel:a];
   GHAssertTrue([collection count] == 1, @"Collection Count == 1");
   GHAssertEquals(a, [collection modelAtIndex:0], @" modelAtIndex ");
 
@@ -167,8 +167,10 @@
 - (void) testDuplicateInsert {
   [collection insertModel:a];
   [collection insertModel:a];
+  [collection addModel:a];
+  [collection addModel:b];
   [collection insertModel:a];
-  [collection insertModel:b];
+  [collection insertModel:a];
   [collection insertModel:c atIndex:3];
   [collection insertModel:a atIndex:4];
   [collection insertModel:a];
