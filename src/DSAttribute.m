@@ -6,6 +6,7 @@
 #import "DSModel.h"
 #import "DSComparable.h"
 #import "NSValue+ObjCTypeSize.h"
+#import "DSCollection.h"
 
 @implementation DSAttribute
 
@@ -121,7 +122,7 @@
   id<DSComparable> data_val = [data valueForKey:@"value"];
   if (prop_val == data_val)
     return;
-  if (!prop_val || !data_val || [prop_val compare:data_val] != NSOrderedSame)
+  if (!prop_val || !data_val || ![prop_val isEqual:data_val])
     [self setValue:prop_val forInstance:instance];
 }
 
@@ -133,8 +134,16 @@
 }
 
 - (NSDictionary *) dataForInstance:(DSModel *)instance {
+  NSDictionary *data = [instance dataForAttribute:name];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-  [dict addEntriesFromDictionary:[instance dataForAttribute:name]];
+  for (NSString *key in data) {
+    NSObject *val = [data valueForKey:key];
+    if ([val respondsToSelector:@selector(mutableCopyWithZone:)])
+      val = [val mutableCopy];
+    else
+      val = [val copy];
+    [dict setValue:val forKey:key];
+  }
   return [dict autorelease];
 }
 
@@ -194,6 +203,73 @@
 }
 
 @end
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+
+@implementation DSCollectionAttribute
+
+//------------------------------------------------------------------------------
+
+- (void) __invokeSetValue:(NSArray *)value forInstance:(DSModel *)instance {
+
+  if (value == nil) {
+    [super __invokeSetValue:nil forInstance:instance];
+    return;
+  }
+
+  if (![value isKindOfClass:[NSArray class]]) {
+    [NSException raise:@"DSInvalidType" format:@"%@ not an NSArray and cannot "
+      "be set on %@.%@", value, [instance class], name];
+  }
+
+  id<DSModelContainer> container = [instance modelContainerForAttribute:self];
+  if (container == nil) {
+    [NSException raise:@"DSInvalidValue" format:@"%@ modelContainer for "
+      "attribute %@ is nil and cannot be set on %@.%@. Did you forget to "
+      "override modelContainerForAttribute:?", instance, self, [instance class],
+      name];
+  }
+
+  DSCollection *collection = [DSCollection collection];
+  for (NSString *keystr in value) {
+    DSKey *key = [DSKey keyWithString:keystr];
+    DSModel *entity = [container modelForKey:key];
+
+    if (!entity) {
+      [NSException raise:@"DSInvalidKey" format:@"%@ is a DSKey without a "
+        "corresponding object, and cannot be set on %@.%@", key,
+        [instance class], name];
+    }
+
+    if (![entity isKindOfClass:type]) {
+      [NSException raise:@"DSInvalidType" format:@"%@ is not of type %@ "
+        "and cannot be added to %@.%@", entity, [type dstype],
+        [instance class], name];
+    }
+
+    [collection addModel:entity];
+  }
+
+  [instance performSelector:setter withObject:collection];
+}
+
+
+- (id) valueForInstance:(DSModel *)instance {
+  DSCollection *collection = [super valueForInstance:instance];
+  if (collection == nil)
+    return [NSArray array]; // empty collection.
+
+  NSMutableArray *array = [NSMutableArray array];
+  for (DSKey *key in collection)
+    [array addObject:key.string];
+  return array;
+}
+
+@end
+
 
 
 //------------------------------------------------------------------------------

@@ -214,6 +214,11 @@
   return arc4random() % [ordered count];
 }
 
+#pragma mark -- comparison --
+
+- (BOOL) isEqualToCollection:(DSCollection *)collection {
+  return [ordered isEqualToArray:[collection keys]];
+}
 
 #pragma mark -- Sorting --
 

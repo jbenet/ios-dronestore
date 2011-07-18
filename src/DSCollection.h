@@ -62,6 +62,7 @@ struct pthread_rwlock_t;
 - (NSUInteger) randomIndex;
 
 - (void) sortUsingSelector:(SEL)selector;
+- (BOOL) isEqualToCollection:(DSCollection *)collection;
 
 + (DSCollection *) collection;
 + (DSCollection *) collectionWithArray:(NSArray *)array;

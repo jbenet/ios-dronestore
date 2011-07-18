@@ -8,6 +8,7 @@ static DSCollection *allPeople = nil;
 
 @implementation TestPerson
 @synthesize first, last, phone, awesomesauce, age, father, mother;
+@synthesize children, titles, computers;
 
 - (id) initWithVersion:(DSVersion *)_version {
   if ((self = [super initWithVersion:_version])) {
@@ -29,6 +30,14 @@ static DSCollection *allPeople = nil;
 
   DSRegisterModelAttribute(father, TestPerson, DSLatestMergeStrategy);
   DSRegisterModelAttribute(mother, TestPerson, DSLatestMergeStrategy);
+
+  DSRegisterCollectionAttribute(children, TestPerson, DSLatestMergeStrategy);
+
+  DSRegisterAttribute(titles, NSMutableArray, [NSMutableArray array],
+    DSLatestMergeStrategy);
+  DSRegisterAttribute(computers, NSMutableDictionary,
+    [NSMutableDictionary dictionary], DSLatestMergeStrategy);
+
 
   [self rebindAttribute:@"awesome" toProperty:@"awesomesauce"];
 }

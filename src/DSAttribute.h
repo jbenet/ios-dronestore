@@ -38,6 +38,15 @@
   [self registerAttribute:attr];  \
 }
 
+#define DSRegisterCollectionAttribute(NAME, TYPE, STRAT) { \
+  DSCollectionAttribute *attr; \
+  attr = [DSCollectionAttribute attributeWithName:@__STRINGIFY(NAME) \
+    type:[TYPE class]]; \
+  attr.strategy = [STRAT strategy]; \
+  attr.defaultValue = [NSArray array]; \
+  [self registerAttribute:attr];  \
+}
+
 #define DSRegisterPrimitiveAttribute(NAME, TYPE, VALUE, STRAT) { \
   DSPrimitiveAttribute *attr; \
   attr = [DSPrimitiveAttribute attributeWithName:@__STRINGIFY(NAME) \
@@ -91,6 +100,12 @@
 // Transparently store a property as a model instance,
 // with the attribute value as its key.
 @interface DSModelAttribute : DSAttribute  {}
+@end
+
+
+// Transparently store model instances, with the attribute value as an
+// array of their keys.
+@interface DSCollectionAttribute : DSAttribute  {}
 @end
 
 

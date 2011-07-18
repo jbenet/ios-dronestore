@@ -66,7 +66,7 @@
 - (void) setData:(NSDictionary *)dict forAttribute:(NSString *)attrName;
 
 // Override this for DSModelAttributes
-- (id<DSModelContainer>) modelContainerForAttribute:(DSModelAttribute *)attr;
+- (id<DSModelContainer>) modelContainerForAttribute:(DSAttribute *)attr;
 
 + (void) rebindAttribute:(NSString *)attr toProperty:(NSString *)property;
 + (void) registerAttribute:(DSAttribute *)attr;

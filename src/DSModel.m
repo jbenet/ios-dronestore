@@ -143,10 +143,16 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
     [attributeData setValue:[NSMutableDictionary dictionary] forKey:attr.name];
 
     NSDictionary *data = [version dataForAttribute:attr.name];
-    if (data)
+    if (data) {
       [attr setData:data forInstance:self];
-    else
-      [attr setDefaultValue:attr.defaultValue forInstance:self];
+    } else {
+      
+      NSObject *value = attr.defaultValue;
+      if ([value respondsToSelector:@selector(mutableCopyWithZone:)])
+        [attr setDefaultValue:[value mutableCopy] forInstance:self];
+      else
+        [attr setDefaultValue:[value copy] forInstance:self];
+    }
   }
 
 }
@@ -199,7 +205,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 //------------------------------------------------------------------------------
 
-- (id<DSModelContainer>) modelContainerForAttribute:(DSModelAttribute *)attr {
+- (id<DSModelContainer>) modelContainerForAttribute:(DSAttribute *)attr {
   return nil;
 }
 

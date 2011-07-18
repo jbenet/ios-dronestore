@@ -126,7 +126,7 @@
 
   id<DSComparable> curr = [data valueForKey:@"value"];
   id<DSComparable> prev = [instance.version valueForAttribute:attribute.name];
-  if (curr && prev && [curr compare:prev] == NSOrderedSame)
+  if (curr && prev && [curr isEqual:prev])
     return; // value has not changed. no need to update.
 
   // store our extra state.

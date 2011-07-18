@@ -10,10 +10,7 @@
 #import "DSCollection.h"
 
 #import "NSString+SHA.h"
-
-@interface DroneTest : GHTestCase {
-}
-@end
+#import "test_drone.h"
 
 @implementation DroneTest
 
@@ -23,12 +20,15 @@
 
 
 - (void) test_basic {
-
   DSDatastore *ds = [[DSDictionaryDatastore alloc] init];
   DSDrone *drone = [[DSDrone alloc] initWithId:DSKey(@"/DroneA/")
     andDatastore:ds];
   [ds release];
 
+  [self subtest_basic: drone];
+}
+
+- (void) subtest_basic:(DSDrone *)drone {
 
   TestPerson *person = [[TestPerson alloc] initWithKeyName:@"A"];
   person.first = @"A";
@@ -37,6 +37,16 @@
 
   TestPerson *father = [[TestPerson alloc] initWithKeyName:@"Father"];
   person.father = father;
+
+  TestPerson *son1 = [[TestPerson alloc] initWithKeyName:@"Son1Derp"];
+  TestPerson *son2 = [[TestPerson alloc] initWithKeyName:@"Son2Derp"];
+  TestPerson *son3 = [[TestPerson alloc] initWithKeyName:@"Son3Derp"];
+
+  [person.children addModel:son1];
+  [person.children addModel:son2];
+
+  [person.computers setValue:@"MBP" forKey:@"Ithil"];
+  [person.computers setValue:@"MBP" forKey:@"Osgiliath"];
   [person commit];
 
   GHAssertFalse([drone contains:person.key], @"Should not contain it");
@@ -65,6 +75,12 @@
   GHAssertTrue([[drone get:person2.key] isEqualToModel:person2], @"should eq.");
 
   person2.first = @"C";
+  [person2.children addModel:son3];
+  [person2.titles addObject:@"Hurr"];
+  [person2.titles addObject:@"Durr"];
+  [person2.computers setValue:@"iPhone 4" forKey:@"Witchking"];
+  [person2.computers setValue:@"iPad 2" forKey:@"Imladris"];
+
 
   TestPerson *mother = [[TestPerson alloc] initWithKeyName:@"Mother"];
   person2.mother = mother;
@@ -87,6 +103,13 @@
     isEqualToModel:father], @"eq.");
   GHAssertTrue([[(TestPerson *)[drone get:person2.key] mother]
     isEqualToModel:mother], @"eq.");
+
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] children]
+    isEqualToCollection:person2.children], @"eq.");
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] titles]
+    isEqualToArray:person2.titles], @"eq.");
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] computers]
+    isEqualToDictionary:person2.computers], @"eq.");
 
 
   DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
@@ -117,12 +140,23 @@
     p.age += 1;
   } else if ([attr.name isEqualToString:@"awesome"]) {
     p.awesomesauce += 0.00001;
+  } else if ([attr.name isEqualToString:@"titles"]) {
+    [p.titles addObject:[NSString stringWithFormat:@"%d", iteration]];
+  } else if ([attr.name isEqualToString:@"computers"]) {
+    NSString *i = [NSString stringWithFormat:@"%d", iteration];
+    [p.computers setValue:i forKey:i];
+  } else if ([attr.name isEqualToString:@"children"]) {
+    NSString *str2 = [NSString stringWithFormat:@"%d", (rand() % people)];
+    DSKey *key2 = [TestPerson keyWithName:str2];
+    TestPerson *op = [d get:key2];
+    if (op)
+      [p.children addModel:op];
   } else if ([attr isKindOfClass:[DSModelAttribute class]]) {
     NSString *str2 = [NSString stringWithFormat:@"%d", (rand() % people)];
     DSKey *key2 = [TestPerson keyWithName:str2];
     TestPerson *op = [d get:key2];
     [attr setValue:op.key.string forInstance:p];
-  } else {
+  } else if ([attr isKindOfClass:[NSString class]]) {
     NSString *oldVal = [attr valueForInstance:p];
     NSString *newVal = [NSString stringWithFormat:@"%@%d", oldVal, iteration];
     [attr setValue:newVal forInstance:p];
@@ -152,49 +186,9 @@
   [drone2 merge:p];
 }
 
-- (void) test_stress {
+- (void) subtest_stress:(NSArray *)drones people:(int)numPeople {
 
   srand((unsigned int)time(NULL)); // make sure rand is seeded.
-
-  int numPeople = 10;
-
-  // DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/")
-  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  // DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/")
-  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  // DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/")
-  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  // DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/")
-  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-  // DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/")
-  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
-
-  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_1"];
-  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_2"];
-  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_3"];
-  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_4"];
-  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_5"];
-
-  SQLSchema *s1 = [SQLSchema versionTableNamed:@"test_db_1"];
-  SQLSchema *s2 = [SQLSchema versionTableNamed:@"test_db_2"];
-  SQLSchema *s3 = [SQLSchema versionTableNamed:@"test_db_3"];
-  SQLSchema *s4 = [SQLSchema versionTableNamed:@"test_db_4"];
-  SQLSchema *s5 = [SQLSchema versionTableNamed:@"test_db_5"];
-
-  DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithSchema:s1];
-  DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithSchema:s2];
-  DSFMDBDatastore *f3 = [[DSFMDBDatastore alloc] initWithSchema:s3];
-  DSFMDBDatastore *f4 = [[DSFMDBDatastore alloc] initWithSchema:s4];
-  DSFMDBDatastore *f5 = [[DSFMDBDatastore alloc] initWithSchema:s5];
-
-
-  DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/") andDatastore:f1];
-  DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/") andDatastore:f2];
-  DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/") andDatastore:f3];
-  DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/") andDatastore:f4];
-  DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/") andDatastore:f5];
-
-  NSArray *drones = [NSArray arrayWithObjects:d1, d2, d3, d4, d5, nil];
 
   for (int i = 0; i < numPeople; i++) {
     NSString *str = [NSString stringWithFormat:@"%d", i];
@@ -282,14 +276,60 @@
   }
   [query release];
 
+}
+
+
+- (void) test_stress {
+
+  // DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+  // DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/")
+  //   andDatastore:[[[DSDictionaryDatastore alloc] init] autorelease]];
+
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_1"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_2"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_3"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_4"];
+  [DSFMDBDatastore deleteDatabaseNamed:@"test_db_5"];
+
+  SQLSchema *s1 = [SQLSchema versionTableNamed:@"test_db_1"];
+  SQLSchema *s2 = [SQLSchema versionTableNamed:@"test_db_2"];
+  SQLSchema *s3 = [SQLSchema versionTableNamed:@"test_db_3"];
+  SQLSchema *s4 = [SQLSchema versionTableNamed:@"test_db_4"];
+  SQLSchema *s5 = [SQLSchema versionTableNamed:@"test_db_5"];
+
+  DSFMDBDatastore *f1 = [[DSFMDBDatastore alloc] initWithSchema:s1];
+  DSFMDBDatastore *f2 = [[DSFMDBDatastore alloc] initWithSchema:s2];
+  DSFMDBDatastore *f3 = [[DSFMDBDatastore alloc] initWithSchema:s3];
+  DSFMDBDatastore *f4 = [[DSFMDBDatastore alloc] initWithSchema:s4];
+  DSFMDBDatastore *f5 = [[DSFMDBDatastore alloc] initWithSchema:s5];
+
+
+  DSDrone *d1 = [[DSDrone alloc] initWithId:DSKey(@"/Drone1/") andDatastore:f1];
+  DSDrone *d2 = [[DSDrone alloc] initWithId:DSKey(@"/Drone2/") andDatastore:f2];
+  DSDrone *d3 = [[DSDrone alloc] initWithId:DSKey(@"/Drone3/") andDatastore:f3];
+  DSDrone *d4 = [[DSDrone alloc] initWithId:DSKey(@"/Drone4/") andDatastore:f4];
+  DSDrone *d5 = [[DSDrone alloc] initWithId:DSKey(@"/Drone5/") andDatastore:f5];
+
+  int numPeople = 10;
+  NSArray *drones = [NSArray arrayWithObjects:d1, d2, d3, d4, d5, nil];
+
+  [self subtest_stress:drones people:numPeople];
+
 
   [d1 release];
   [d2 release];
   [d3 release];
   [d4 release];
   [d5 release];
-}
 
+}
 
 
 
