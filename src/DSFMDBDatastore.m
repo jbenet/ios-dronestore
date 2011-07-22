@@ -497,12 +497,18 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   // Add the select clause
   [string appendFormat:@"SELECT * FROM %@ ", table];
 
-  // Add the WHERE clause
+  // Maybe add the beginning of the WHERE clause (type)
+  BOOL first = YES;
+  if (type) {
+    [string appendFormat:@"WHERE type = '%@' ", type];
+    first = NO;
+  }
+
+  // Add the rest of the WHERE clause
   if ([filters count] > 0) {
-    BOOL first = YES;
-    for (DSFilter *filter in filters) {
+    for (DSFilter *ftr in filters) {
       [string appendString:(first ? @"WHERE " : @",")];
-      [string appendFormat:@" %@ %@ %@ ", filter.field, filter.op, filter.value];
+      [string appendFormat:@" %@ %@ '%@' ", ftr.field, ftr.op, ftr.value];
       first = NO;
     }
   }
