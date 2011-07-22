@@ -76,7 +76,14 @@
 
 - (void) __invokeSetValue:(NSObject *)value forInstance:(DSModel *)instance {
 
+  if (value == [NSNull null])
+    value = nil;
+
+
+
   if (value && ![value isKindOfClass:type]) {
+    // add initWithString thing here?
+
     [NSException raise:@"DSInvalidType" format:@"%@ is not an instance of %@ "
       "and cannot be set on %@.%@", value, type, [instance class], name];
   }
@@ -160,7 +167,7 @@
 
 - (void) __invokeSetValue:(NSString *)value forInstance:(DSModel *)instance {
 
-  if (value == nil) {
+  if (value == nil || (NSNull *)value == [NSNull null]) {
     [super __invokeSetValue:nil forInstance:instance];
     return;
   }
