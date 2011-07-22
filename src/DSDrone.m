@@ -86,6 +86,9 @@
 }
 
 - (DSCollection *) query:(DSQuery *)query {
+  if (query == nil)
+    return nil;
+
   NSArray *array = [datastore query:query];
   DSCollection *collection = [[DSCollection alloc] init];
   for (NSDictionary *data in array)

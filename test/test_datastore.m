@@ -43,7 +43,7 @@
 
   [self subtestStores:stores ensureCount:0];
 
-  DSQuery *query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  DSQuery *query = [[DSQuery alloc] initWithType:nil];
   for (DSDatastore *sn in stores) {
     NSArray *result = [sn query:query];
     GHAssertTrue([result count] == 0, @"query count");
@@ -64,7 +64,7 @@
 
   [self subtestStores:stores ensureCount:numElems];
 
-  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  query = [[DSQuery alloc] initWithType:nil];
   for (DSDatastore *sn in stores) {
     NSArray *result = [sn query:query];
     GHAssertTrue([result count] == numElems, @"query count");
@@ -86,7 +86,7 @@
 
   [self subtestStores:stores ensureCount:numElems];
 
-  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  query = [[DSQuery alloc] initWithType:nil];
   for (DSDatastore *sn in stores) {
     NSArray *result = [sn query:query];
     GHAssertTrue([result count] == numElems, @"query count");
@@ -111,7 +111,7 @@
 
   [self subtestStores:stores ensureCount:numElems];
 
-  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  query = [[DSQuery alloc] initWithType:nil];
   for (DSDatastore *sn in stores) {
     NSArray *result = [sn query:query];
     GHAssertTrue([result count] == numElems, @"query count");
@@ -135,7 +135,7 @@
 
   [self subtestStores:stores ensureCount:0];
 
-  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  query = [[DSQuery alloc] initWithType:nil];
   for (DSDatastore *sn in stores) {
     NSArray *result = [sn query:query];
     GHAssertTrue([result count] == 0, @"query count");
@@ -153,7 +153,7 @@
 
   [self subtestStores:stores ensureCount:0];
 
-  query = [[DSQuery alloc] initWithType:@"dsioafjdiosafjas"];
+  query = [[DSQuery alloc] initWithType:nil];
   for (DSDatastore *sn in stores) {
     NSArray *result = [sn query:query];
     GHAssertTrue([result count] == 0, @"query count");
