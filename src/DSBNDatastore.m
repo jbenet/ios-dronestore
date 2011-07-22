@@ -30,25 +30,16 @@
 
 //------------------------------------------------------------------------------
 
-- (BNMessage *) messageWithCommand:(NSString *)command value:(NSObject *)value
-  andToken:(NSString *)token {
-  BNMessage *message = [[[BNMessage alloc] init] autorelease];
-  [message.contents setValue:command forKey:@"command"];
-  [message.contents setValue:value forKey:@"value"];
-  [message.contents setValue:token forKey:@"token"];
-
-  return message;
-}
-
 - (NSObject *) runCommand:(NSString *)command withValue:(NSObject *)value {
 
   // Get the message ready
   NSString *token = [NSString stringWithFormat:@"%d", ++lastToken_];
   [token retain];
 
-  BNMessage *message;
-  message = [self messageWithCommand:command value:value andToken:token];
-  [message retain];
+  BNMessage *message = [[BNMessage alloc] init];
+  [message.contents setValue:command forKey:@"command"];
+  [message.contents setValue:value forKey:@"value"];
+  [message.contents setValue:token forKey:@"token"];
 
   // Put this as the placeholder response to check against.
   // When the response returns, it will replace it.
@@ -83,6 +74,7 @@
   [message autorelease];
   [token autorelease];
 
+  [response retain];
   // Pcikup our garbage... Delete the entry.
   @synchronized(responsesByToken_) {
     [responsesByToken_ setValue:nil forKey:token];
@@ -93,6 +85,7 @@
     return nil;
   }
 
+  [response autorelease];
   // errored out at our response.
   if ([response.contents valueForKey:@"error"]) {
     DebugLog(@"DSBNDatastore %@ %@ received error %@", command, value,
