@@ -79,17 +79,16 @@
   if (value == [NSNull null])
     value = nil;
 
-
+  if (value && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
+    value = [[[type alloc] initWithSerializedValue:value] autorelease];
+  }
 
   if (value && ![value isKindOfClass:type]) {
-    // add initWithString thing here?
-
     [NSException raise:@"DSInvalidType" format:@"%@ is not an instance of %@ "
       "and cannot be set on %@.%@", value, type, [instance class], name];
   }
 
   [instance performSelector:setter withObject:value];
-
 }
 
 - (void) setValue:(id)value forInstance:(DSModel *)instance {
@@ -115,7 +114,13 @@
 }
 
 - (id) valueForInstance:(DSModel *)instance {
-  return [instance performSelector:getter];
+  id object = [instance performSelector:getter];
+
+  if (object && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
+    object = [object serializedValue];
+  }
+
+  return object;
 }
 
 //------------------------------------------------------------------------------
@@ -219,11 +224,10 @@
 
 @implementation DSCollectionAttribute
 
-//------------------------------------------------------------------------------
 
 - (void) __invokeSetValue:(NSArray *)value forInstance:(DSModel *)instance {
 
-  if (value == nil) {
+  if (value == nil || (NSNull *)value == [NSNull null]) {
     [super __invokeSetValue:nil forInstance:instance];
     return;
   }
@@ -274,6 +278,121 @@
   for (DSKey *key in collection)
     [array addObject:key.string];
   return array;
+}
+
+@end
+
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+@implementation DSDictionaryAttribute
+
+
+- (void) __invokeSetValue:(NSArray *)value forInstance:(DSModel *)instance {
+
+  if (value == nil || (NSNull *)value == [NSNull null]) {
+    [super __invokeSetValue:nil forInstance:instance];
+    return;
+  }
+
+  if (![value isKindOfClass:[NSDictionary class]]) {
+    [NSException raise:@"DSInvalidType" format:@"%@ not an NSDictionary and "
+      "cannot be set on %@.%@", value, [instance class], name];
+  }
+
+  NSMutableDictionary *dictToSet = [NSMutableDictionary dictionary];
+  for (NSString *key in value) {
+    NSObject *dValue = [value valueForKey:key];
+
+    if (dValue && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
+      dValue = [[[type alloc] initWithSerializedValue:dValue] autorelease];
+    }
+
+    if (dValue && ![dValue isKindOfClass:type]) {
+      [NSException raise:@"DSInvalidType" format:@"%@ is not an instance of %@ "
+        "and cannot be set on %@.%@", dValue, type, [instance class], name];
+    }
+
+    [dictToSet setValue:dValue forKey:key];
+  }
+
+  [instance performSelector:setter withObject:dictToSet];
+}
+
+
+- (id) valueForInstance:(DSModel *)instance {
+  NSDictionary *dict = [instance performSelector:getter];
+  if (dict == nil)
+    return [NSDictionary dictionary]; // empty dictionary.
+
+  NSMutableDictionary *dictToGet = [NSMutableDictionary dictionary];
+  for (NSString *key in dict) {
+    NSObject<DSSerializableValue> *value = [dict valueForKey:key];
+
+    if (value && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
+      value = [value serializedValue];
+    }
+
+    [dictToGet setValue:value forKey:key];
+  }
+  return dictToGet;
+}
+
+@end
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+@implementation DSArrayAttribute
+
+
+- (void) __invokeSetValue:(NSArray *)value forInstance:(DSModel *)instance {
+
+  if (value == nil || (NSNull *)value == [NSNull null]) {
+    [super __invokeSetValue:nil forInstance:instance];
+    return;
+  }
+
+  if (![value isKindOfClass:[NSArray class]]) {
+    [NSException raise:@"DSInvalidType" format:@"%@ not an NSArray and "
+      "cannot be set on %@.%@", value, [instance class], name];
+  }
+
+  NSMutableArray *arrayToSet = [NSMutableArray array];
+  for (NSObject *dValue in value) {
+
+    if (dValue && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
+      dValue = [[[type alloc] initWithSerializedValue:dValue] autorelease];
+    }
+
+    if (dValue && ![dValue isKindOfClass:type]) {
+      [NSException raise:@"DSInvalidType" format:@"%@ is not an instance of %@ "
+        "and cannot be set on %@.%@", dValue, type, [instance class], name];
+    }
+
+    [arrayToSet addObject:dValue];
+  }
+
+  [instance performSelector:setter withObject:arrayToSet];
+}
+
+
+- (id) valueForInstance:(DSModel *)instance {
+  NSArray *array = [instance performSelector:getter];
+  if (array == nil)
+    return [NSArray array]; // empty dictionary.
+
+  NSMutableArray *arrayToGet = [NSMutableArray array];
+  for (NSObject<DSSerializableValue> *value in array) {
+
+    if (value && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
+      value = [value serializedValue];
+    }
+
+    [arrayToGet addObject:value];
+  }
+  return arrayToGet;
 }
 
 @end

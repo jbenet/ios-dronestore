@@ -20,43 +20,57 @@
 #define PRINTTHIS(text) \
     NSLog(PASTE( @, STRINGIFY(text)));
 
-#define DSRegisterAttribute(NAME, TYPE, VALUE, STRAT) { \
-  DSAttribute *attr; \
-  attr = [DSAttribute attributeWithName:@__STRINGIFY(NAME) \
-    type:[TYPE class]]; \
-  attr.strategy = [STRAT strategy]; \
-  attr.defaultValue = VALUE; \
-  [self registerAttribute:attr];  \
+
+
+#define DSRegisterAttributeClass(CLS, NAME, TYPE, VALUE, STRAT) {             \
+  CLS *attr = [CLS attributeWithName:@__STRINGIFY(NAME) type:[TYPE class]];   \
+  attr.strategy = [STRAT strategy];                                           \
+  attr.defaultValue = VALUE;                                                  \
+  [self registerAttribute:attr];                                              \
 }
 
-#define DSRegisterModelAttribute(NAME, TYPE, STRAT) { \
-  DSModelAttribute *attr; \
-  attr = [DSModelAttribute attributeWithName:@__STRINGIFY(NAME) \
-    type:[TYPE class]]; \
-  attr.strategy = [STRAT strategy]; \
-  attr.defaultValue = @""; \
-  [self registerAttribute:attr];  \
+#define DSRegisterAttribute(NAME, TYPE, VALUE, STRAT) {                       \
+  DSRegisterAttributeClass(DSAttribute, NAME, TYPE, VALUE, STRAT);            \
 }
 
-#define DSRegisterCollectionAttribute(NAME, TYPE, STRAT) { \
-  DSCollectionAttribute *attr; \
-  attr = [DSCollectionAttribute attributeWithName:@__STRINGIFY(NAME) \
-    type:[TYPE class]]; \
-  attr.strategy = [STRAT strategy]; \
-  attr.defaultValue = [NSArray array]; \
-  [self registerAttribute:attr];  \
+#define DSRegisterModelAttribute(NAME, TYPE, STRAT) {                         \
+  DSRegisterAttributeClass(DSModelAttribute, NAME,TYPE, @"", STRAT);          \
 }
 
-#define DSRegisterPrimitiveAttribute(NAME, TYPE, VALUE, STRAT) { \
-  DSPrimitiveAttribute *attr; \
-  attr = [DSPrimitiveAttribute attributeWithName:@__STRINGIFY(NAME) \
-    objCType:@encode(TYPE)]; \
-  attr.strategy = [STRAT strategy]; \
-  TYPE buf = VALUE; \
-  attr.defaultValue = [[NSValue classForObjCType:@encode(TYPE)] \
-    value:&buf withObjCType:@encode(TYPE)]; \
-  [self registerAttribute:attr];  \
+#define DSRegisterCollectionAttribute(NAME, TYPE, STRAT) {                    \
+  DSRegisterAttributeClass(DSCollectionAttribute, NAME, TYPE,                 \
+    [NSArray array], STRAT);                                                  \
 }
+
+#define DSRegisterDictionaryAttribute(NAME, TYPE, STRAT) {                    \
+  DSRegisterAttributeClass(DSDictionaryAttribute, NAME, TYPE,                 \
+    [NSDictionary dictionary], STRAT);                                        \
+}
+
+#define DSRegisterArrayAttribute(NAME, TYPE, STRAT) {                         \
+  DSRegisterAttributeClass(DSArrayAttribute, NAME, TYPE,                      \
+    [NSArray array], STRAT);                                                  \
+}
+
+#define DSRegisterPrimitiveAttribute(NAME, TYPE, VALUE, STRAT) {              \
+  DSPrimitiveAttribute *attr = [DSPrimitiveAttribute                          \
+    attributeWithName:@__STRINGIFY(NAME) objCType:@encode(TYPE)];             \
+  attr.strategy = [STRAT strategy];                                           \
+  TYPE buf = VALUE;                                                           \
+  attr.defaultValue = [[NSValue classForObjCType:@encode(TYPE)]               \
+    value:&buf withObjCType:@encode(TYPE)];                                   \
+  [self registerAttribute:attr];                                              \
+}
+
+
+
+// Object should be of type: NSArray, NSDictionary, NSString, NSNumber
+@protocol DSSerializableValue <NSCopying>
+- (id) initWithSerializedValue:(NSObject *)object;
+- (NSObject *) serializedValue;
+@end
+
+
 
 
 @interface DSAttribute : NSObject {
@@ -109,11 +123,17 @@
 @end
 
 
+// Store a mapping of values
+@interface DSDictionaryAttribute : DSAttribute {}
+@end
+
+// store a set of values
+@interface DSArrayAttribute : DSAttribute {}
+@end
+
 
 @interface DSPrimitiveAttribute : DSAttribute  {
-
   const char *objCType;
-
 }
 
 // for type, use @encode(int) or @encode(float), et-cetera.

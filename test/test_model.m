@@ -140,6 +140,45 @@
 
   oldHash = person.version.hashstr;
   [person commit];
+
+
+  [person.titles2 addObject:@"Hurr"];
+  [person.titles2 addObject:@"Durr"];
+
+  [person.computers2 setValue:@"MBP" forKey:@"Ithil"];
+  [person.computers2 setValue:@"MBP" forKey:@"Osgiliath"];
+  [person.computers2 setValue:@"iPhone 4" forKey:@"Witchking"];
+  [person.computers2 setValue:@"iPad 2" forKey:@"Imladris"];
+
+  oldHash = person.version.hashstr;
+  [person commit];
+
+
+
+  TestCompany *company1 = [[[TestCompany alloc] init] autorelease];
+  company1.name = @"TrollCo";
+  company1.url = @"www.trolldom.com";
+  company1.employees = 9001;
+
+  TestCompany *company2 = [[[TestCompany alloc] init] autorelease];
+  company2.name = @"HappyCo";
+  company2.url = @"www.happyco.com";
+  company2.employees = -50;
+
+  TestCompany *company3 = [[[TestCompany alloc] init] autorelease];
+  company3.name = @"PhysCo";
+  company3.url = @"www.physco.com";
+  company3.employees = 413290;
+
+
+  person.company = company1;
+  [person.previousCompanies addObject:company2];
+  [person.clientCompanies setValue:company2 forKey:@"Happs"];
+
+  oldHash = person.version.hashstr;
+  [person commit];
+
+
   GHAssertEqualStrings(person.version.parent, oldHash, @"parent hash");
   GHAssertNotEqualStrings(person.version.hashstr, oldHash, @"parent hash");
   GHAssertFalse(person.version.isBlank, @"must not have blank version");
@@ -159,6 +198,10 @@
   GHAssertTrue([person.titles containsObject:@"Hurr"], @"titles");
   GHAssertTrue([person.titles containsObject:@"Durr"], @"titles");
 
+  GHAssertTrue([person.titles2 count] == 2,  @"titles");
+  GHAssertTrue([person.titles2 containsObject:@"Hurr"], @"titles");
+  GHAssertTrue([person.titles2 containsObject:@"Durr"], @"titles");
+
   GHAssertTrue([person.computers count] == 4, @"computers");
   GHAssertEqualStrings([person.computers valueForKey:@"Ithil"], @"MBP",
     @"computers");
@@ -168,6 +211,22 @@
     @"computers");
   GHAssertEqualStrings([person.computers valueForKey:@"Imladris"], @"iPad 2",
     @"computers");
+
+  GHAssertTrue([person.computers2 count] == 4, @"computers");
+  GHAssertEqualStrings([person.computers2 valueForKey:@"Ithil"], @"MBP",
+    @"computers");
+  GHAssertEqualStrings([person.computers2 valueForKey:@"Osgiliath"], @"MBP",
+    @"computers");
+  GHAssertEqualStrings([person.computers2 valueForKey:@"Witchking"],
+    @"iPhone 4", @"computers");
+  GHAssertEqualStrings([person.computers2 valueForKey:@"Imladris"],
+    @"iPad 2", @"computers");
+
+
+  GHAssertEqualObjects(person.company, company1,  @"company");
+  GHAssertTrue([person.previousCompanies containsObject:company2], @"prevcos");
+  GHAssertNotNil([person.clientCompanies valueForKey:@"Happs"], @"prevcos");
+
 
 
   GHAssertEqualStrings([[[person class] attributeNamed:@"first"]
@@ -198,9 +257,36 @@
 
   GHAssertTrue(([[[[person class] attributeNamed:@"computers"]
     valueForInstance:person] isEqualToDictionary:
-    [NSDictionary dictionaryWithObjectsAndKeys:@"MBP", @"Ithil", @"MBP", 
+    [NSDictionary dictionaryWithObjectsAndKeys:@"MBP", @"Ithil", @"MBP",
     @"Osgiliath", @"iPhone 4", @"Witchking", @"iPad 2", @"Imladris", nil]]),
     @"attr: computers");
+
+  GHAssertTrue(([[[[person class] attributeNamed:@"titles2"]
+    valueForInstance:person] isEqualToArray:
+   [NSArray arrayWithObjects:@"Hurr", @"Durr", nil]]), @"attr: titles2");
+
+  GHAssertTrue(([[[[person class] attributeNamed:@"computers2"]
+    valueForInstance:person] isEqualToDictionary:
+    [NSDictionary dictionaryWithObjectsAndKeys:@"MBP", @"Ithil", @"MBP",
+    @"Osgiliath", @"iPhone 4", @"Witchking", @"iPad 2", @"Imladris", nil]]),
+    @"attr: computers2");
+
+
+  GHAssertEqualObjects([[[person class] attributeNamed:@"company"]
+    valueForInstance:person], [company1 serializedValue],
+    @"attr: company");
+
+  GHAssertTrue(([[[[person class] attributeNamed:@"previousCompanies"]
+    valueForInstance:person] isEqualToArray:
+   [NSArray arrayWithObjects:[company2 serializedValue], nil]]),
+     @"attr: previousCompanies");
+
+   GHAssertTrue(([[[[person class] attributeNamed:@"clientCompanies"]
+     valueForInstance:person] isEqualToDictionary:
+     [NSDictionary dictionaryWithObjectsAndKeys:[company2 serializedValue],
+     @"Happs", nil]]), @"attr: clientCompanies");
+
+
 
 
   // dumb float point math.
@@ -221,6 +307,8 @@
   GHAssertTrue([[person.version valueForAttribute:@"children"]
     isEqualToArray:childrenkeyarr], @"attr: children");
 
+
+
   GHAssertTrue(([[person.version valueForAttribute:@"titles"] isEqualToArray:
     [NSArray arrayWithObjects:@"Hurr", @"Durr", nil]]), @"attr: titles");
 
@@ -229,6 +317,29 @@
     @"Ithil", @"MBP", @"Osgiliath", @"iPhone 4", @"Witchking", @"iPad 2",
     @"Imladris", nil]]), @"attr: computers");
 
+  GHAssertTrue(([[person.version valueForAttribute:@"titles2"] isEqualToArray:
+    [NSArray arrayWithObjects:@"Hurr", @"Durr", nil]]), @"attr: titles2");
+
+  GHAssertTrue(([[person.version valueForAttribute:@"computers2"]
+    isEqualToDictionary: [NSDictionary dictionaryWithObjectsAndKeys:@"MBP",
+    @"Ithil", @"MBP", @"Osgiliath", @"iPhone 4", @"Witchking", @"iPad 2",
+    @"Imladris", nil]]), @"attr: computers2");
+
+
+
+  GHAssertEqualObjects([person.version valueForAttribute:@"company"],
+    [company1 serializedValue], @"attr: company");
+
+  GHAssertTrue(([[person.version valueForAttribute:@"previousCompanies"]
+    isEqualToArray:[NSArray arrayWithObjects:[company2 serializedValue], nil]]),
+     @"attr: previousCompanies");
+
+   GHAssertTrue(([[person.version valueForAttribute:@"clientCompanies"]
+     isEqualToDictionary: [NSDictionary dictionaryWithObjectsAndKeys:
+    [company2 serializedValue], @"Happs", nil]]), @"attr: clientCompanies");
+
+
+
   GHAssertEqualStrings([[person class] dstype], person.version.type,
     @"version type");
 
@@ -236,9 +347,16 @@
   person.first = @"Herpington";
   [person.titles addObject:@"Murr"];
   [person.computers setValue:@"Tower" forKey:@"Barad Dur"];
+  [person.titles2 addObject:@"Murr"];
+  [person.computers2 setValue:@"Tower" forKey:@"Barad Dur"];
+
+  person.company = company3;
+  [person.previousCompanies addObject:company1];
+  [person.clientCompanies setValue:company1 forKey:@"BosTroll"];
 
   oldHash = person.version.hashstr;
   [person commit];
+
   GHAssertEqualStrings(person.version.parent, oldHash, @"parent hash");
   GHAssertNotEqualStrings(person.version.hashstr, oldHash, @"parent hash");
   GHAssertFalse(person.version.isBlank, @"must not have blank version");
@@ -260,14 +378,42 @@
   GHAssertTrue([[person.version valueForAttribute:@"children"]
     isEqualToArray:childrenkeyarr], @"attr: children");
 
+
+
   GHAssertTrue(([[person.version valueForAttribute:@"titles"] isEqualToArray:
-   [NSArray arrayWithObjects:@"Hurr", @"Durr", @"Murr", nil]]), 
+   [NSArray arrayWithObjects:@"Hurr", @"Durr", @"Murr", nil]]),
     @"attr: titles");
 
   GHAssertTrue(([[person.version valueForAttribute:@"computers"]
     isEqualToDictionary: [NSDictionary dictionaryWithObjectsAndKeys:@"MBP",
     @"Ithil", @"MBP", @"Osgiliath", @"iPhone 4", @"Witchking", @"iPad 2",
     @"Imladris", @"Tower", @"Barad Dur", nil]]), @"attr: computers");
+
+  GHAssertTrue(([[person.version valueForAttribute:@"titles2"] isEqualToArray:
+   [NSArray arrayWithObjects:@"Hurr", @"Durr", @"Murr", nil]]),
+    @"attr: titles2");
+
+  GHAssertTrue(([[person.version valueForAttribute:@"computers2"]
+    isEqualToDictionary: [NSDictionary dictionaryWithObjectsAndKeys:@"MBP",
+    @"Ithil", @"MBP", @"Osgiliath", @"iPhone 4", @"Witchking", @"iPad 2",
+    @"Imladris", @"Tower", @"Barad Dur", nil]]), @"attr: computers2");
+
+
+
+  GHAssertEqualObjects([person.version valueForAttribute:@"company"],
+    [company3 serializedValue], @"attr: company");
+
+  GHAssertTrue(([[person.version valueForAttribute:@"previousCompanies"]
+    isEqualToArray:[NSArray arrayWithObjects:[company2 serializedValue],
+    [company1 serializedValue], nil]]), @"attr: previousCompanies");
+
+   GHAssertTrue(([[person.version valueForAttribute:@"clientCompanies"]
+     isEqualToDictionary: [NSDictionary dictionaryWithObjectsAndKeys:
+    [company2 serializedValue], @"Happs", [company1 serializedValue],
+    @"BosTroll", nil]]), @"attr: clientCompanies");
+
+
+
 
   GHAssertEqualStrings([[person class] dstype], person.version.type,
     @"version type");

@@ -78,8 +78,12 @@
   [person2.children addModel:son3];
   [person2.titles addObject:@"Hurr"];
   [person2.titles addObject:@"Durr"];
+  [person2.titles2 addObject:@"Hurr"];
+  [person2.titles2 addObject:@"Durr"];
   [person2.computers setValue:@"iPhone 4" forKey:@"Witchking"];
   [person2.computers setValue:@"iPad 2" forKey:@"Imladris"];
+  [person2.computers2 setValue:@"iPhone 4" forKey:@"Witchking"];
+  [person2.computers2 setValue:@"iPad 2" forKey:@"Imladris"];
 
 
   TestPerson *mother = [[TestPerson alloc] initWithKeyName:@"Mother"];
@@ -108,8 +112,12 @@
     isEqualToCollection:person2.children], @"eq.");
   GHAssertTrue([[(TestPerson *)[drone get:person2.key] titles]
     isEqualToArray:person2.titles], @"eq.");
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] titles2]
+    isEqualToArray:person2.titles2], @"eq.");
   GHAssertTrue([[(TestPerson *)[drone get:person2.key] computers]
     isEqualToDictionary:person2.computers], @"eq.");
+  GHAssertTrue([[(TestPerson *)[drone get:person2.key] computers2]
+    isEqualToDictionary:person2.computers2], @"eq.");
 
 
   DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
@@ -136,15 +144,31 @@
   if (p == nil)
     return; //
 
+  NSString *iter = [NSString stringWithFormat:@"%d", iteration];
+
+  TestCompany *c = [[[TestCompany alloc] init] autorelease];
+  c.name = iter;
+  c.url = iter;
+  c.employees = iteration;
+
+
   if ([attr.name isEqualToString:@"age"]) {
     p.age += 1;
   } else if ([attr.name isEqualToString:@"awesome"]) {
     p.awesomesauce += 0.00001;
-  } else if ([attr.name isEqualToString:@"titles"]) {
-    [p.titles addObject:[NSString stringWithFormat:@"%d", iteration]];
-  } else if ([attr.name isEqualToString:@"computers"]) {
-    NSString *i = [NSString stringWithFormat:@"%d", iteration];
-    [p.computers setValue:i forKey:i];
+
+  } else if ([attr.name hasPrefix:@"titles"]) {
+    [[attr valueForInstance:p] addObject:iter];
+  } else if ([attr.name hasPrefix:@"computers"]) {
+    [[attr valueForInstance:p] setValue:iter forKey:iter];
+
+  } else if ([attr.name isEqualToString:@"company"]) {
+    p.company = c;
+  } else if ([attr.name isEqualToString:@"previousCompanies"]) {
+    [p.previousCompanies addObject:c];
+  } else if ([attr.name isEqualToString:@"clientCompanies"]) {
+    [p.clientCompanies setValue:c forKey:c.name];
+
   } else if ([attr.name isEqualToString:@"children"]) {
     NSString *str2 = [NSString stringWithFormat:@"%d", (rand() % people)];
     DSKey *key2 = [TestPerson keyWithName:str2];
