@@ -77,6 +77,19 @@
   return [self compare:key] == NSOrderedSame;
 }
 
+- (BOOL) isEqual:(NSObject *)object {
+  if ([object isKindOfClass:[DSKey class]])
+    return [self isEqualToKey:(DSKey *)object];
+  return [super isEqual:object];
+}
+
+- (NSUInteger) hash {
+  static NSUInteger base_hash = 0;
+  if (base_hash == 0)
+    base_hash = [[self class] hash];
+  return base_hash + [string hash];
+}
+
 - (NSComparisonResult) compare:(DSKey *)key {
   return [string compare:key.string];
 }
