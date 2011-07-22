@@ -196,6 +196,8 @@
 
 - (id) randomModel
 {
+  if ([ordered count] == 0)
+    return nil;
   return [self modelAtIndex: arc4random() % [ordered count]];
 }
 
