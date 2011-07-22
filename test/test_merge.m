@@ -29,6 +29,15 @@
   GHAssertTrue(person.age == 1, @"blank age");
   GHAssertTrue(fabs(person.awesomesauce - 0.1) < 0.000001, @"blank awesone");
 
+  GHAssertTrue([person.titles count] == 0, @"blank titles");
+  GHAssertTrue([person.titles2 count] == 0, @"blank titles");
+  GHAssertTrue([person.computers count] == 0, @"blank comps");
+  GHAssertTrue([person.computers2 count] == 0, @"blank comps");
+
+  GHAssertNil(person.company, @"blank company");
+  GHAssertTrue([person.previousCompanies count] == 0, @"blank prevcos");
+  GHAssertTrue([person.clientCompanies count] == 0, @"blank clientcos");
+
   GHAssertTrue(person.version.isBlank, @"must have blank version");
   GHAssertFalse(person.isCommitted, @"must not be committed");
 

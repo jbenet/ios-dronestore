@@ -80,7 +80,7 @@
     value = nil;
 
   if (value && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
-    value = [[[type alloc] initWithSerializedValue:value] autorelease];
+    value = [type objectWithSerializedValue:value];
   }
 
   if (value && ![value isKindOfClass:type]) {
@@ -306,7 +306,7 @@
     NSObject *dValue = [value valueForKey:key];
 
     if (dValue && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
-      dValue = [[[type alloc] initWithSerializedValue:dValue] autorelease];
+      dValue = [type objectWithSerializedValue:dValue];
     }
 
     if (dValue && ![dValue isKindOfClass:type]) {
@@ -363,7 +363,7 @@
   for (NSObject *dValue in value) {
 
     if (dValue && [type conformsToProtocol:@protocol(DSSerializableValue)]) {
-      dValue = [[[type alloc] initWithSerializedValue:dValue] autorelease];
+      dValue = [type objectWithSerializedValue:dValue];
     }
 
     if (dValue && ![dValue isKindOfClass:type]) {

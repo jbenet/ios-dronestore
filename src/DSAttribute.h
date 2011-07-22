@@ -66,8 +66,8 @@
 
 // Object should be of type: NSArray, NSDictionary, NSString, NSNumber
 @protocol DSSerializableValue <NSCopying>
-- (id) initWithSerializedValue:(NSObject *)object;
-- (NSObject *) serializedValue;
++ (id) objectWithSerializedValue:(id)dict;
+- (id) serializedValue;
 @end
 
 

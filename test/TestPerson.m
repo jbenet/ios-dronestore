@@ -10,14 +10,12 @@ static DSCollection *allPeople = nil;
 @implementation TestCompany
 @synthesize name, url, employees;
 
-- (id) initWithSerializedValue:(NSObject *)object {
-  if ((self = [super init])) {
-    NSDictionary *dict = (NSDictionary *)object;
-    name = [dict valueForKey:@"name"];
-    url = [dict valueForKey:@"url"];
-    employees = [[dict valueForKey:@"employees"] intValue];
-  }
-  return self;
++ (id) objectWithSerializedValue:(NSDictionary *)dict {
+  TestCompany *company = [[[TestCompany alloc] init] autorelease];
+  company.name = [dict valueForKey:@"name"];
+  company.url = [dict valueForKey:@"url"];
+  company.employees = [[dict valueForKey:@"employees"] intValue];
+  return company;
 }
 
 - (NSObject *) serializedValue {
@@ -92,8 +90,7 @@ static DSCollection *allPeople = nil;
   DSRegisterDictionaryAttribute(computers2, NSString, DSLatestMergeStrategy);
 
 
-  DSRegisterAttribute(company, TestCompany, [NSNull null],
-    DSLatestMergeStrategy);
+  DSRegisterAttribute(company, TestCompany, nil, DSLatestMergeStrategy);
   DSRegisterArrayAttribute(previousCompanies, TestCompany,
     DSLatestMergeStrategy);
   DSRegisterDictionaryAttribute(clientCompanies, TestCompany,
