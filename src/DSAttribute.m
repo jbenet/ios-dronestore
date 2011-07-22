@@ -50,7 +50,8 @@
   [property release];
   property = temp;
 
-  temp = [NSString stringWithFormat:@"set%@:", [prop capitalizedString]];
+  temp = [NSString stringWithFormat:@"set%@:",
+    [prop firstLetterCapitalizedString]];
   setter = NSSelectorFromString(temp); // - (void) setName:(type);
   getter = NSSelectorFromString(prop); // - (type) name;
 }
@@ -532,4 +533,13 @@
 
 @end
 
+@implementation NSString (DSAttribute)
+
+- (NSString *) firstLetterCapitalizedString {
+  return [self stringByReplacingCharactersInRange:NSMakeRange(0, 1)
+    withString:[[self substringToIndex:1] uppercaseString]];
+}
+
+
+@end
 

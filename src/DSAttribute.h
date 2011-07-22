@@ -132,3 +132,7 @@
 + (id) value:(const void *)buf withObjCType:(const char *)type;
 @end
 
+
+@interface NSString (DSAttribute)
+- (NSString *) firstLetterCapitalizedString;
+@end
