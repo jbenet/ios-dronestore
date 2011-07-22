@@ -107,7 +107,7 @@ const const NSString *DSVersionBlankHash =
     return [(NSDictionary *)obj valueForKey:key];
 
   else if (obj)
-    DSLog(@"[%@] malformed data for attribute %@", self.key, attrName);
+    NSLog(@"[%@] malformed data for attribute %@", self.key, attrName);
 
   return nil;
 }
