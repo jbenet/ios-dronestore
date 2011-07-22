@@ -45,11 +45,9 @@
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   [dict addEntriesFromDictionary:data];
 
-  DSSerialRep *rep = [[DSSerialRep alloc] initWithDictionary:dict];
-  DSVersion *version = [[DSVersion alloc] initWithSerialRep:rep];
+  DSSerialRep *rp = [[[DSSerialRep alloc] initWithDictionary:dict] autorelease];
+  DSVersion *version = [[[DSVersion alloc] initWithSerialRep:rp] autorelease];
   DSModel *instance = [DSModel modelWithVersion:version];
-  [version release];
-  [rep release];
   return instance;
 }
 
