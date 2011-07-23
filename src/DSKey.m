@@ -97,10 +97,12 @@
 //------------------------------------------------------------------------------
 
 + (DSKey *) keyWithString:(NSString *)string {
+  if (string == nil)
+    return nil;
+
   return [[[DSKey alloc] initWithString:string] autorelease];
 }
 
-//------------------------------------------------------------------------------
 
 @end
 
