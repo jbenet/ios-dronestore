@@ -61,6 +61,8 @@ struct pthread_rwlock_t;
 - (NSUInteger) indexOfModel:(DSModel *)model;
 - (NSUInteger) randomIndex;
 
+- (void) reverseOrder;
+- (void) sortUsingDescriptors:(NSArray *)array;
 - (void) sortUsingSelector:(SEL)selector;
 - (BOOL) isEqualToCollection:(DSCollection *)collection;
 

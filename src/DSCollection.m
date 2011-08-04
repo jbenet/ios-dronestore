@@ -224,6 +224,27 @@
 
 #pragma mark -- Sorting --
 
+- (void) reverseOrder
+{
+  @synchronized(self) {
+    NSArray *array = [NSArray arrayWithArray:ordered];
+    NSEnumerator *reversed = [array reverseObjectEnumerator];
+    [ordered removeAllObjects];
+    for (DSKey *key in reversed)
+      [ordered addObject:key];
+  }
+}
+
+- (void) sortUsingDescriptors:(NSArray *)array
+{
+  @synchronized(self) {
+    NSArray *models_ = [[self models] sortedArrayUsingDescriptors:array];
+    [ordered removeAllObjects];
+    for (DSModel *model in models_)
+      [ordered addObject:model.key];
+  }
+}
+
 - (void) sortUsingSelector:(SEL)selector
 {
   @synchronized(self) {
