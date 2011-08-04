@@ -160,6 +160,12 @@
   id<DSComparable> local_value = [local valueForAttribute:attribute.name];
   id<DSComparable> remote_value = [remote valueForAttribute:attribute.name];
 
+  if (remote_value == nil)
+    return nil;
+
+  if (local_value == nil)
+    return [remote dataForAttribute:attribute.name];
+
   if ([remote_value compare:local_value] == NSOrderedDescending)
     return [remote dataForAttribute:attribute.name];
   return nil;
