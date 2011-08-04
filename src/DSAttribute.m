@@ -147,14 +147,15 @@
 }
 
 - (NSDictionary *) dataForInstance:(DSModel *)instance {
-  NSDictionary *data = [instance dataForAttribute:name];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-  for (NSString *key in data) {
+  NSDictionary *data = [instance dataForAttribute:name];
+  NSArray *keys = [data allKeys];
+  for (NSString *key in keys) {
     NSObject *val = [data valueForKey:key];
     if ([val respondsToSelector:@selector(mutableCopyWithZone:)])
-      val = [val mutableCopy];
+      val = [[val mutableCopy] autorelease];
     else
-      val = [val copy];
+      val = [[val copy] autorelease];
     [dict setValue:val forKey:key];
   }
   return [dict autorelease];
