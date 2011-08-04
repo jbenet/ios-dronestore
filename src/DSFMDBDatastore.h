@@ -60,5 +60,6 @@ struct pthread_mutex_t;
 @end
 
 @interface DSQuery (SQL)
-- (NSString *) SQLQueryWithTable:(NSString *)table;
+- (NSString *) SQLQueryWithSchema:(SQLSchema *)schema;
+- (DSQuery *) queryWithoutFieldsInSQLSchema:(SQLSchema *)schema;
 @end

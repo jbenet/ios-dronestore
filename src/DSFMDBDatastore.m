@@ -113,7 +113,7 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 - (NSString *) query:(DSQuery *)query {
   [self check];
 
-  return [query SQLQueryWithTable:table];
+  return [query SQLQueryWithSchema:self];
 }
 
 - (NSString *) storageForField:(NSString *)fld {
@@ -266,11 +266,12 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   NSString *path = [[self class] pathForName:schema.table];
   fmdb_ = [[FMDatabase alloc] initWithPath:path];
   fmdb_.logsErrors = YES;
-  [fmdb_ setBusyRetryTimeout:10];
+  [fmdb_ setBusyRetryTimeout:50];
 //  fmdb.traceExecution = YES;
 
-  if (![fmdb_ open])
+  if (![fmdb_ open]) {
     DSLog(@"fmdb error: failed to open sqlite database.");
+  }
 
   pthread_mutex_unlock(&lock_);
 
@@ -311,8 +312,9 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 
   [fmdb_ executeUpdate:[schema update] withArgumentsInArray:values];
 
-  if ([fmdb_ changes] > 1)
+  if ([fmdb_ changes] > 1) {
     DSLog(@"fmdb error: update modified more than one row.");
+  }
 
   bool success = ![fmdb_ hadError] && [fmdb_ changes] > 0;
 
@@ -462,7 +464,13 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 }
 
 - (NSArray *) query:(DSQuery *)query {
-  return [self runQuery:[schema query:query]];
+  DSQuery *manualQuery = [query queryWithoutFieldsInSQLSchema:schema];
+  NSArray *sqlResults = [self runQuery:[schema query:query]];
+
+  if (!manualQuery || [manualQuery.filters count] == 0)
+    return sqlResults; // we're done!
+
+  return [manualQuery operateOnArray:sqlResults];
 }
 
 //------------------------------------------------------------------------------
@@ -491,11 +499,11 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
 
 @implementation DSQuery (SQL)
 
-- (NSString *) SQLQueryWithTable:(NSString *)table {
+- (NSString *) SQLQueryWithSchema:(SQLSchema *)schema {
   NSMutableString *string = [[NSMutableString alloc] init];
 
   // Add the select clause
-  [string appendFormat:@"SELECT * FROM %@ ", table];
+  [string appendFormat:@"SELECT * FROM %@ ", schema.table];
 
   // Maybe add the beginning of the WHERE clause (type)
   BOOL first = YES;
@@ -507,6 +515,10 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   // Add the rest of the WHERE clause
   if ([filters count] > 0) {
     for (DSFilter *ftr in filters) {
+
+      if (![schema.fields valueForKey:ftr.field])
+        continue; // we're gonna have to narrow this down manually :(
+
       [string appendString:(first ? @"WHERE " : @",")];
       [string appendFormat:@" %@ %@ '%@' ", ftr.field, ftr.op, ftr.value];
       first = NO;
@@ -536,6 +548,26 @@ static NSString *kQ_TABLE = @"SELECT name FROM sqlite_master WHERE name=?";
   [string appendString:@";"];
 
   return [string autorelease];
+}
+
+
+- (DSQuery *) queryWithoutFieldsInSQLSchema:(SQLSchema *)schema {
+  DSQuery *query = [[DSQuery alloc] initWithType:type];
+
+  for (DSFilter *ftr in filters) {
+    if ( ! [schema.fields valueForKey:ftr.field])
+      [query addFilter:ftr];
+  }
+
+  // Copy over other fields.
+  for (DSOrder *order in orders)
+    [query addOrder:order];
+
+  query.limit = limit;
+  query.offset = offset;
+  query.keysonly = keysonly;
+
+  return [query autorelease];
 }
 
 @end
