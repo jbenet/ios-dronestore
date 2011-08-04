@@ -109,22 +109,30 @@
   if (new_version == nil)
     return nil;
 
+  [new_version retain];
+
   DSModel *curr_instance = [self get:new_version.key];
   if (curr_instance == nil) {
+
     [self putVersion:new_version];
-    return [DSModel modelWithVersion:new_version];
+    curr_instance = [DSModel modelWithVersion:new_version];
+
+  } else {
+
+    // NOTE: semantically, we must merge into the current instance in the drone
+    //  so that merge strategies favor the incumbent version.
+    [curr_instance mergeVersion:new_version];
+
+    // store it back
+    curr_instance = [self put:curr_instance];
   }
 
-  // NOTE: semantically, we must merge into the current instance in the drone
-  //  so that merge strategies favor the incumbent version.
-  [curr_instance mergeVersion:new_version];
-
-  // store it back
-  return [self put:curr_instance];
+  [new_version release];
+  return curr_instance;
 }
 
 
-
+#pragma mark Model Container
 
 - (void) addModel:(DSModel *)model {
   [self merge:model];
