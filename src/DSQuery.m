@@ -16,6 +16,11 @@ NSObject * __extractValueForField(NSObject *object, NSString *field) {
       && [object valueForKey:field] != nil) {
     value = [(id)object valueForKey:field];
   }
+  else if ([object isKindOfClass:[NSDictionary class]]
+      && [object valueForKey:@"attributes"] != nil) {
+    value = [[object valueForKey:@"attributes"] valueForKey:field];
+    value = [value valueForKey:@"value"];
+  }
   else if ([object respondsToSelector:NSSelectorFromString(field)]) {
     value = [object performSelector:NSSelectorFromString(field)];
   }
