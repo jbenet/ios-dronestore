@@ -9,6 +9,7 @@
 @implementation DSMerge
 
 + (void) mergeInstance:(DSModel *)instance withVersion:(DSVersion *)version {
+  [version retain];
 
   if (!instance.isCommitted) {
     [NSException raise:@"DSMergeInvalid" format:@"Cannot merge an uncommitted"
@@ -26,6 +27,13 @@
     }
   }
 
+  // nothing changed. we're done.
+  if ([mergeData count] == 0) {
+    [mergeData release];
+    [version release];
+    return;
+  }
+
   // Only merge it in if everything went ok.
   for (NSString *attrName in mergeData) {
     data = [mergeData valueForKey:attrName];
@@ -34,6 +42,7 @@
   }
 
   [mergeData release];
+  [version release];
 
   [instance commit];
 }
