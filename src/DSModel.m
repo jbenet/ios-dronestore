@@ -25,8 +25,9 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 }
 
 - (id) initWithKeyName:(NSString *)keyName andParent:(DSKey *)parent {
-  DSKey *_key = [[self class] keyWithName:keyName];
-  return [self initWithVersion:[DSVersion blankVersionWithKey:_key]];
+  DSKey *childKey = [[self class] keyWithName:keyName];
+  DSKey *parentKey = [parent childWithKey:childKey];
+  return [self initWithVersion:[DSVersion blankVersionWithKey:parentKey]];
 }
 
 - (id) initWithVersion:(DSVersion *)_version {
@@ -40,9 +41,15 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   return self;
 }
 
-+ (DSModel *) modelWithVersion:(DSVersion *)version {
++ (id) modelWithVersion:(DSVersion *)version {
   Class model = [self modelWithDSType:version.type];
   return [[[model alloc] initWithVersion:version] autorelease];
+}
+
++ (id) modelWithDictionary:(NSDictionary *)data {
+  DSSerialRep *rp = [[[DSSerialRep alloc] initWithDictionary:data] autorelease];
+  DSVersion *version = [[[DSVersion alloc] initWithSerialRep:rp] autorelease];
+  return [[self class] modelWithVersion:version];
 }
 
 - (void) dealloc {
@@ -146,12 +153,13 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
     if (data) {
       [attr setData:data forInstance:self];
     } else {
-      
+
       NSObject *value = attr.defaultValue;
       if ([value respondsToSelector:@selector(mutableCopyWithZone:)])
-        [attr setDefaultValue:[value mutableCopy] forInstance:self];
+        value = [[value mutableCopy] autorelease];
       else
-        [attr setDefaultValue:[value copy] forInstance:self];
+        value = [[value copy] autorelease];
+      [attr setDefaultValue:value forInstance:self];
     }
   }
 

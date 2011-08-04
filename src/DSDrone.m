@@ -44,11 +44,7 @@
 - (DSModel *) instanceFromDatastoreData:(NSDictionary *)data {
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   [dict addEntriesFromDictionary:data];
-
-  DSSerialRep *rp = [[[DSSerialRep alloc] initWithDictionary:dict] autorelease];
-  DSVersion *version = [[[DSVersion alloc] initWithSerialRep:rp] autorelease];
-  DSModel *instance = [DSModel modelWithVersion:version];
-  return instance;
+  return [DSModel modelWithDictionary:dict];
 }
 
 //------------------------------------------------------------------------------
@@ -93,6 +89,7 @@
   DSCollection *collection = [[DSCollection alloc] init];
   for (NSDictionary *data in array)
     [collection insertModel:[self instanceFromDatastoreData:data]];
+
   return [collection autorelease];
 }
 

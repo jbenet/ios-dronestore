@@ -45,8 +45,9 @@
 - (id) initWithKeyName:(NSString *)keyname;
 - (id) initWithKeyName:(NSString *)keyname andParent:(DSKey *)parent;
 - (id) initWithVersion:(DSVersion *)version;
-+ (DSModel *) modelWithVersion:(DSVersion *)version;
 
++ (id) modelWithVersion:(DSVersion *)version;
++ (id) modelWithDictionary:(NSDictionary *)dictionary;
 
 
 - (void) commit;
