@@ -256,6 +256,124 @@
 
 }
 
+- (void) test_tiered_sync {
+
+  DSDatastore *s1 = [[[DSDictionaryDatastore alloc] init] autorelease];
+  DSDatastore *s2 = [[[DSDictionaryDatastore alloc] init] autorelease];
+  DSDatastore *s3 = [[[DSDictionaryDatastore alloc] init] autorelease];
+
+  DSTieredDatastore *ts = [[[DSTieredSyncDatastore alloc] init] autorelease];
+
+  [ts addDatastore:s1];
+  [ts addDatastore:s2];
+  [ts addDatastore:s3];
+
+  DSKey *k1 = DSKey(@"1");
+  DSKey *k2 = DSKey(@"2");
+  DSKey *k3 = DSKey(@"3");
+  DSKey *k4 = DSKey(@"4");
+
+  [s1 put:@"1" forKey:k1];
+  [s2 put:@"2" forKey:k2];
+  [s3 put:@"3" forKey:k3];
+
+  // k1
+  GHAssertTrue([s1 contains:k1], @"s1k1");
+  GHAssertFalse([s2 contains:k1], @"s2k1");
+  GHAssertFalse([s3 contains:k1], @"s3k1");
+  GHAssertTrue([ts contains:k1], @"tsk1");
+
+  GHAssertEqualStrings([s1 get:k1], @"1", @"s1k1");
+  GHAssertNil([s2 get:k1], @"s2k1");
+  GHAssertNil([s3 get:k1], @"s3k1");
+  GHAssertEqualStrings([ts get:k1], @"1", @"tsk1");
+
+  // k2
+  GHAssertFalse([s1 contains:k2], @"s1k2");
+  GHAssertTrue([s2 contains:k2], @"s2k2");
+  GHAssertFalse([s3 contains:k2], @"s3k2");
+  GHAssertTrue([ts contains:k2], @"tsk2");
+
+  GHAssertNil([s1 get:k2], @"s1k2");
+  GHAssertEqualStrings([s2 get:k2], @"2", @"s2k2");
+  GHAssertNil([s3 get:k2], @"s3k2");
+  GHAssertEqualStrings([ts get:k2], @"2", @"tsk2");
+
+  //k3
+  GHAssertFalse([s1 contains:k3], @"s1k3");
+  GHAssertFalse([s2 contains:k3], @"s2k3");
+  GHAssertTrue([s3 contains:k3], @"s3k3");
+  GHAssertTrue([ts contains:k3], @"tsk3");
+
+  GHAssertNil([s1 get:k3], @"s1k3");
+  GHAssertNil([s2 get:k3], @"s2k3");
+  GHAssertEqualStrings([s3 get:k3], @"3", @"s3k3");
+  GHAssertEqualStrings([ts get:k3], @"3", @"tsk3");
+
+  //k4
+  GHAssertFalse([s1 contains:k4], @"s1k4");
+  GHAssertFalse([s2 contains:k4], @"s2k4");
+  GHAssertFalse([s3 contains:k4], @"s3k4");
+  GHAssertFalse([ts contains:k4], @"tsk4");
+
+  GHAssertNil([s1 get:k4], @"s1k4");
+  GHAssertNil([s2 get:k4], @"s2k4");
+  GHAssertNil([s3 get:k4], @"s3k4");
+  GHAssertNil([ts get:k4], @"tsk4");
+
+  //delete
+  [ts delete:k1];
+  [ts delete:k2];
+  [ts delete:k3];
+  [ts delete:k4];
+
+  GHAssertFalse([s1 contains:k1], @"s1k4");
+  GHAssertFalse([s2 contains:k2], @"s2k4");
+  GHAssertFalse([s3 contains:k3], @"s3k4");
+
+  GHAssertFalse([ts contains:k1], @"tsk4");
+  GHAssertFalse([ts contains:k2], @"tsk4");
+  GHAssertFalse([ts contains:k3], @"tsk4");
+
+  // test synced
+
+  DSKey *k5 = DSKey(@"5");
+  [s1 put:@"1" forKey:k5];
+  [s2 put:@"2" forKey:k5];
+  [s3 put:@"3" forKey:k5];
+
+  GHAssertTrue([s1 contains:k5], @"s1k1");
+  GHAssertTrue([s2 contains:k5], @"s1k1");
+  GHAssertTrue([s3 contains:k5], @"s1k1");
+  GHAssertTrue([ts contains:k5], @"s1k1");
+
+  GHAssertEqualStrings([s1 get:k5], @"1", @"s1k5");
+  GHAssertEqualStrings([s2 get:k5], @"2", @"s2k5");
+  GHAssertEqualStrings([s3 get:k5], @"3", @"s3k5");
+  GHAssertEqualStrings([ts get:k5], @"3", @"tsk5");
+
+  GHAssertEqualStrings([s1 get:k5], @"1", @"s1k5");
+  GHAssertEqualStrings([s2 get:k5], @"2", @"s2k5");
+  GHAssertEqualStrings([s3 get:k5], @"3", @"s3k5");
+  GHAssertEqualStrings([ts get:k5], @"3", @"tsk5");
+
+  [ts put:@"5" forKey:k5];
+  GHAssertEqualStrings([s1 get:k5], @"5", @"s1k5");
+  GHAssertEqualStrings([s2 get:k5], @"5", @"s2k5");
+  GHAssertEqualStrings([s3 get:k5], @"5", @"s3k5");
+  GHAssertEqualStrings([ts get:k5], @"5", @"tsk5");
+
+  [ts delete:k5];
+
+  GHAssertFalse([s1 contains:k5], @"s1k5");
+  GHAssertFalse([s2 contains:k5], @"s2k5");
+  GHAssertFalse([s3 contains:k5], @"s3k5");
+  GHAssertFalse([ts contains:k5], @"tsk5");
+
+  [self subtestStores:[NSArray arrayWithObject:ts] withNumElems:1000];
+
+}
+
 - (void) testAddedUpCounts:(NSArray *)stores equals:(long)countToEq {
   long count = 0;
   for (DSDatastore *sn in stores)

@@ -237,4 +237,29 @@
   [other release];
 }
 
+- (void) testSorting {
+  GHAssertEquals(a, [collection modelAtIndex:0], @" order 0");
+  GHAssertEquals(b, [collection modelAtIndex:1], @" order 1");
+  GHAssertEquals(c, [collection modelAtIndex:2], @" order 2");
+  GHAssertEquals(d, [collection modelAtIndex:3], @" order 3");
+  GHAssertEquals(e, [collection modelAtIndex:4], @" order 4");
+
+  [collection reverseOrder];
+
+  GHAssertEquals(e, [collection modelAtIndex:0], @" order 0");
+  GHAssertEquals(d, [collection modelAtIndex:1], @" order 1");
+  GHAssertEquals(c, [collection modelAtIndex:2], @" order 2");
+  GHAssertEquals(b, [collection modelAtIndex:3], @" order 3");
+  GHAssertEquals(a, [collection modelAtIndex:4], @" order 4");
+
+  [collection sortUsingSelector:@selector(key)];
+
+  GHAssertEquals(a, [collection modelAtIndex:0], @" order 0");
+  GHAssertEquals(b, [collection modelAtIndex:1], @" order 1");
+  GHAssertEquals(c, [collection modelAtIndex:2], @" order 2");
+  GHAssertEquals(d, [collection modelAtIndex:3], @" order 3");
+  GHAssertEquals(e, [collection modelAtIndex:4], @" order 4");
+
+}
+
 @end

@@ -33,6 +33,7 @@
   TestPerson *person = [[TestPerson alloc] initWithKeyName:@"A"];
   person.first = @"A";
   person.last = @"B";
+  person.age = 50;
   [person commit];
 
   TestPerson *father = [[TestPerson alloc] initWithKeyName:@"Father"];
@@ -120,6 +121,7 @@
     isEqualToDictionary:person2.computers2], @"eq.");
 
 
+
   DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
   DSCollection *result = [drone query:query];
   GHAssertTrue([result count] == 1, @"query count");
@@ -129,6 +131,31 @@
     @"should eq.");
 
   [query release];
+
+
+  NSNumber *fifty = [NSNumber numberWithInt:50];
+  query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  [query addFilter:[DSFilter filter:@"age" op:DSCompOpGreaterThan value:fifty]];
+
+  result = [drone query:query];
+
+  GHAssertTrue([result count] == 0, @"query count");
+  [query release];
+
+
+
+  query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  [query addFilter:[DSFilter filter:@"age" op:DSCompOpEqual value:fifty]];
+
+  result = [drone query:query];
+
+  GHAssertTrue([result count] == 1, @"query count");
+  GHAssertTrue([person2 isEqualToModel:[result modelAtIndex:0]],
+    @"should eq.");
+  GHAssertTrue([person2 isEqualToModel:[result modelForKey:person2.key]],
+    @"should eq.");
+  [query release];
+
 
   [drone release];
 }
@@ -277,6 +304,44 @@
   }
 
   DSQuery *query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  for (DSDrone *drone in drones) {
+    DSCollection *result = [drone query:query];
+    GHAssertTrue([result count] == numPeople, @"query count");
+
+    for (int i = 0; i < numPeople; i++) {
+      DSKey *k = [TestPerson keyWithName:[NSString stringWithFormat:@"%d", i]];
+      TestPerson *p = [[drones objectAtIndex:0] get:k];
+
+      TestPerson *o = [result modelForKey:p.key];
+
+      GHAssertTrue([p isEqualToModel:o], @"equal");
+      GHAssertEqualStrings(p.first, o.first, @"first");
+      GHAssertEqualStrings(p.last, o.last, @"last");
+      GHAssertEqualStrings(p.phone, o.phone, @"phone");
+      GHAssertTrue(p.age == o.age, @"age");
+      GHAssertTrue(fabs(p.awesomesauce - o.awesomesauce) < 0.00001, @"awesome");
+
+      GHAssertTrue([p.version isEqualToVersion:o.version], @"version");
+
+    }
+  }
+  [query release];
+
+  query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  [query addFilter:[DSFilter filter:@"first" op:DSCompOpEqual value:@"firs"]];
+  for (DSDrone *drone in drones) {
+    DSCollection *result = [drone query:query];
+    NSLog(@"result: %@", [result models]);
+    for (TestPerson *person in [result models])
+      NSLog(@"first: %@", person.first);
+
+    GHAssertTrue([result count] == 0, @"query count");
+  }
+  [query release];
+
+  query = [[DSQuery alloc] initWithModel:[TestPerson class]];
+  [query addFilter:[DSFilter filter:@"first" op:DSCompOpGreaterThan
+    value:@"first"]];
   for (DSDrone *drone in drones) {
     DSCollection *result = [drone query:query];
     GHAssertTrue([result count] == numPeople, @"query count");
