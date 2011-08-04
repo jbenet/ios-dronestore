@@ -162,10 +162,46 @@
   return NO;
 }
 - (NSArray *) query:(DSQuery *)query {
-  DSDatastore *store = [stores objectAtIndex:[stores count] - 1];
+  DSDatastore *store = [stores lastObject];
   return [store query:query];
 }
 @end
+
+
+
+@implementation DSTieredSyncDatastore
+- (id) init {
+  if ((self = [super init])) {
+    synced = [[NSMutableSet alloc] init];
+  }
+  return self;
+}
+- (void) dealloc {
+  [synced release];
+  [super dealloc];
+}
+- (id) reverseGet:(DSKey *)key {
+  NSObject *val = nil;
+  NSEnumerator *reversed = [stores reverseObjectEnumerator];
+  for (DSDatastore *store in reversed) {
+    val = [store get:key];
+    if (val)
+      break;
+  }
+  return val;
+}
+- (id) get:(DSKey *)key {
+  if (![synced containsObject:key])
+    return [self reverseGet:key];
+  return [super get:key];
+}
+- (void) put:(NSObject *)object forKey:(DSKey *)key {
+  [super put:object forKey:key];
+  [synced addObject:key];
+}
+@end
+
+
 
 
 // WARNING: adding or removing datastores while running may severely affect

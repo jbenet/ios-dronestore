@@ -92,6 +92,12 @@
 @end
 
 
+@interface DSTieredSyncDatastore : DSTieredDatastore {
+  NSMutableSet *synced;
+}
+@end
+
+
 // Represents a collection of datastore shards.
 // A datastore is selected based on a sharding function.
 //
