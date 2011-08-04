@@ -142,6 +142,9 @@
   return [self get:key];
 }
 
+- (void) removeModel:(DSModel *)model {
+  [self delete:model.key];
+}
 
 @end
 
