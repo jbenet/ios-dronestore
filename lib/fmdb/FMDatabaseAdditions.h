@@ -11,10 +11,10 @@
 
 
 - (int)intForQuery:(NSString*)objs, ...;
-- (long)longForQuery:(NSString*)objs, ...; 
+- (long)longForQuery:(NSString*)objs, ...;
 - (BOOL)boolForQuery:(NSString*)objs, ...;
 - (double)doubleForQuery:(NSString*)objs, ...;
-- (NSString*)stringForQuery:(NSString*)objs, ...; 
+- (NSString*)stringForQuery:(NSString*)objs, ...;
 - (NSData*)dataForQuery:(NSString*)objs, ...;
 - (NSDate*)dateForQuery:(NSString*)objs, ...;
 
@@ -27,5 +27,7 @@
 - (FMResultSet*)getSchema;
 - (FMResultSet*)getTableSchema:(NSString*)tableName;
 - (BOOL)columnExists:(NSString*)tableName columnName:(NSString*)columnName;
+
+- (BOOL)validateSQL:(NSString*)sql error:(NSError**)error;
 
 @end
