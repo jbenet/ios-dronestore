@@ -85,6 +85,7 @@
 
 @protocol DSModelContainer
 - (void) addModel:(DSModel *)model;
+- (void) removeModel:(DSModel *)model;
 - (DSModel *) modelForKey:(DSKey *)key;
 @end
 
