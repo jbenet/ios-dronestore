@@ -115,11 +115,11 @@
       "%@ with invalid key.", self];
   }
 
-  if ([self containsModel:model])
-    return;
+  if (![self containsModel:model])
+    [ordered addObject:model.key];
 
+  // set it regardless (replacing instance)
   [models setValue:model forKey:model.key.string];
-  [ordered addObject:model.key];
 }
 
 - (void) insertModel:(DSModel *)model atIndex:(NSUInteger)index
