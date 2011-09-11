@@ -7,8 +7,11 @@
   NSMutableDictionary *responsesByToken_;
   BNRemoteService *service_;
   int lastToken_;
+
+  NSTimeInterval timeoutTimeInterval;
 }
 
+@property (nonatomic, assign) NSTimeInterval timeoutTimeInterval;
 
 - (id) initWithRemoteService:(BNRemoteService *)servie;
 

@@ -3,6 +3,8 @@
 
 @implementation DSBNDatastore
 
+@synthesize timeoutTimeInterval;
+
 - (id) init {
   return [self initWithRemoteService:nil];
 }
@@ -18,6 +20,7 @@
     service_.delegate = self;
     responsesByToken_ = [[NSMutableDictionary alloc] init];
     lastToken_ = 0;
+    timeoutTimeInterval = 5.000;
   }
   return self;
 }
@@ -52,7 +55,7 @@
 
   BNMessage *response = nil;
   NSTimeInterval busyWaitInterval = 0.025;
-  NSTimeInterval totalWaitTimeout = 5.000;
+  NSTimeInterval totalWaitTimeout = self.timeoutTimeInterval;
   int maxBusyWaitIterations = (int)(totalWaitTimeout / busyWaitInterval);
 
   NSRunLoop *loop = [NSRunLoop currentRunLoop];
@@ -163,7 +166,7 @@
     return nil;
   }
 
-  NSLog(@"GET: %@", object);
+  // NSLog(@"GET %@: %@", key, object);
 
   return object;
 }
