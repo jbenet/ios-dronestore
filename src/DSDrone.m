@@ -149,6 +149,10 @@
   [self delete:model.key];
 }
 
+- (void) removeModelForKey:(DSKey *)key {
+  [self delete:key];
+}
+
 @end
 
 
