@@ -139,7 +139,7 @@
 - (id) get:(DSKey *)key {
   for (DSDatastore *store in stores) {
     NSObject *val = [store get:key];
-    if (val)
+    if (val && val != [NSNull null])
       return val;
   }
   return nil;
@@ -185,7 +185,7 @@
   NSEnumerator *reversed = [stores reverseObjectEnumerator];
   for (DSDatastore *store in reversed) {
     val = [store get:key];
-    if (val)
+    if (val && val != [NSNull null])
       break;
   }
   return val;

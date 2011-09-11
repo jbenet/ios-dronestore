@@ -42,6 +42,9 @@
 
 
 - (DSModel *) instanceFromDatastoreData:(NSDictionary *)data {
+  if (!data || (NSNull *)data == [NSNull null])
+    return nil;
+
   NSMutableDictionary *dict = [NSMutableDictionary dictionary];
   [dict addEntriesFromDictionary:data];
   return [DSModel modelWithDictionary:dict];
@@ -55,7 +58,7 @@
     return nil;
 
   NSDictionary *data = [datastore get:key];
-  if (data == nil)
+  if (data == nil || (NSNull *)data == [NSNull null])
     return nil;
 
   return [self instanceFromDatastoreData:data];
