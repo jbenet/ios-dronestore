@@ -44,13 +44,9 @@
 		D95C23AC13CBC34C004BCE48 /* NSValue+ObjCTypeSize.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF0B113C526BD0089E9F7 /* NSValue+ObjCTypeSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D95C23AD13CBC34C004BCE48 /* NSValue+ObjCTypeSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF0B213C526BD0089E9F7 /* NSValue+ObjCTypeSize.m */; };
 		D95C23B013CBC34C004BCE48 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BE3C122194F7005A6BEC /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D95C23B113CBC34C004BCE48 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF00913C365980089E9F7 /* nanotime.c */; };
-		D95C23B213CBC34C004BCE48 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF00A13C365980089E9F7 /* nanotime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D95C23B313CBC34C004BCE48 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BE3D122194F7005A6BEC /* NSData+Base64.m */; };
 		D95C23B413CBC34C004BCE48 /* NSData+AES256.h in Headers */ = {isa = PBXBuildFile; fileRef = D953BDD61221884A005A6BEC /* NSData+AES256.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D95C23B513CBC34C004BCE48 /* NSData+AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = D953BDD71221884A005A6BEC /* NSData+AES256.m */; };
-		D95C23B613CBC34C004BCE48 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D95C23B713CBC34C004BCE48 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */; };
 		D95C23B813CBC34C004BCE48 /* NSString+SHA.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EAF01213C365A10089E9F7 /* NSString+SHA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D95C23B913CBC34C004BCE48 /* NSString+SHA.m in Sources */ = {isa = PBXBuildFile; fileRef = D9EAF01313C365A10089E9F7 /* NSString+SHA.m */; };
 		D95C23BA13CBC34C004BCE48 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D95106A01179098200288D3B /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,6 +83,10 @@
 		D97AB75A13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
+		D992DD96141CEA98009A98B0 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D992DD92141CEA98009A98B0 /* nanotime.c */; };
+		D992DD97141CEA98009A98B0 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D992DD93141CEA98009A98B0 /* nanotime.h */; };
+		D992DD98141CEA98009A98B0 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D992DD94141CEA98009A98B0 /* NSDate+Nanotime.h */; };
+		D992DD99141CEA98009A98B0 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D992DD95141CEA98009A98B0 /* NSDate+Nanotime.m */; };
 		D9CD42D313D1335300CA3D75 /* DSBNDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9CD42D113D1335200CA3D75 /* DSBNDatastore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9CD42D413D1335300CA3D75 /* DSBNDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CD42D213D1335200CA3D75 /* DSBNDatastore.m */; };
 		D9CD42D613D1339400CA3D75 /* test_bndatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CD42D513D1339400CA3D75 /* test_bndatastore.m */; };
@@ -151,15 +151,15 @@
 		D97AB77913CA2EB5006A65D3 /* test_collection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_collection.m; sourceTree = "<group>"; };
 		D97AB77C13CA2EC5006A65D3 /* test_query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_query.m; sourceTree = "<group>"; };
 		D97AB78913CA418A006A65D3 /* DSComparable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSComparable.h; sourceTree = "<group>"; };
+		D992DD92141CEA98009A98B0 /* nanotime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanotime.c; sourceTree = "<group>"; };
+		D992DD93141CEA98009A98B0 /* nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanotime.h; sourceTree = "<group>"; };
+		D992DD94141CEA98009A98B0 /* NSDate+Nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nanotime.h"; sourceTree = "<group>"; };
+		D992DD95141CEA98009A98B0 /* NSDate+Nanotime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Nanotime.m"; sourceTree = "<group>"; };
 		D9BB61E712108403006F32AA /* YAJL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJL.framework; path = lib/YAJL.framework; sourceTree = "<group>"; };
 		D9CD42D113D1335200CA3D75 /* DSBNDatastore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBNDatastore.h; sourceTree = "<group>"; };
 		D9CD42D213D1335200CA3D75 /* DSBNDatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBNDatastore.m; sourceTree = "<group>"; };
 		D9CD42D513D1339400CA3D75 /* test_bndatastore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test_bndatastore.m; sourceTree = "<group>"; };
 		D9CD42D813D1340F00CA3D75 /* BsonNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BsonNetwork.framework; sourceTree = "<group>"; };
-		D9EAF00913C365980089E9F7 /* nanotime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nanotime.c; sourceTree = "<group>"; };
-		D9EAF00A13C365980089E9F7 /* nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanotime.h; sourceTree = "<group>"; };
-		D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Nanotime.h"; sourceTree = "<group>"; };
-		D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Nanotime.m"; sourceTree = "<group>"; };
 		D9EAF01213C365A10089E9F7 /* NSString+SHA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SHA.h"; sourceTree = "<group>"; };
 		D9EAF01313C365A10089E9F7 /* NSString+SHA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHA.m"; sourceTree = "<group>"; };
 		D9EAF01F13C365C90089E9F7 /* DSAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSAttribute.h; sourceTree = "<group>"; };
@@ -327,15 +327,12 @@
 				D9EAF09613C371D30089E9F7 /* GHUnitTestMain.m */,
 				D9EAF09813C371F30089E9F7 /* GHUnitIOSTestMain.m */,
 				D953BE3C122194F7005A6BEC /* NSData+Base64.h */,
-				D9EAF00913C365980089E9F7 /* nanotime.c */,
-				D9EAF00A13C365980089E9F7 /* nanotime.h */,
 				D953BE3D122194F7005A6BEC /* NSData+Base64.m */,
 				D953BDD61221884A005A6BEC /* NSData+AES256.h */,
 				D953BDD71221884A005A6BEC /* NSData+AES256.m */,
-				D9EAF01013C365A10089E9F7 /* NSDate+Nanotime.h */,
-				D9EAF01113C365A10089E9F7 /* NSDate+Nanotime.m */,
 				D9EAF01213C365A10089E9F7 /* NSString+SHA.h */,
 				D9EAF01313C365A10089E9F7 /* NSString+SHA.m */,
+				D992DD91141CEA98009A98B0 /* nanotime */,
 				D951069D1179098200288D3B /* fmdb */,
 			);
 			includeInIndex = 1;
@@ -365,6 +362,17 @@
 				D95C23C213CBC456004BCE48 /* iDrone-Info.plist */,
 			);
 			path = resources;
+			sourceTree = "<group>";
+		};
+		D992DD91141CEA98009A98B0 /* nanotime */ = {
+			isa = PBXGroup;
+			children = (
+				D992DD92141CEA98009A98B0 /* nanotime.c */,
+				D992DD93141CEA98009A98B0 /* nanotime.h */,
+				D992DD94141CEA98009A98B0 /* NSDate+Nanotime.h */,
+				D992DD95141CEA98009A98B0 /* NSDate+Nanotime.m */,
+			);
+			path = nanotime;
 			sourceTree = "<group>";
 		};
 		D9EAF01E13C365C90089E9F7 /* src */ = {
@@ -422,14 +430,14 @@
 				D95C23AB13CBC329004BCE48 /* iDrone.h in Headers */,
 				D95C23AC13CBC34C004BCE48 /* NSValue+ObjCTypeSize.h in Headers */,
 				D95C23B013CBC34C004BCE48 /* NSData+Base64.h in Headers */,
-				D95C23B213CBC34C004BCE48 /* nanotime.h in Headers */,
 				D95C23B413CBC34C004BCE48 /* NSData+AES256.h in Headers */,
-				D95C23B613CBC34C004BCE48 /* NSDate+Nanotime.h in Headers */,
 				D95C23B813CBC34C004BCE48 /* NSString+SHA.h in Headers */,
 				D95C23BA13CBC34C004BCE48 /* FMDatabase.h in Headers */,
 				D9CD42D313D1335300CA3D75 /* DSBNDatastore.h in Headers */,
 				D95C23BC13CBC34C004BCE48 /* FMDatabaseAdditions.h in Headers */,
 				D95C23BE13CBC34C004BCE48 /* FMResultSet.h in Headers */,
+				D992DD97141CEA98009A98B0 /* nanotime.h in Headers */,
+				D992DD98141CEA98009A98B0 /* NSDate+Nanotime.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,15 +618,15 @@
 				D95C23A813CBC329004BCE48 /* DSCollection.m in Sources */,
 				D95C23AA13CBC329004BCE48 /* DSQuery.m in Sources */,
 				D95C23AD13CBC34C004BCE48 /* NSValue+ObjCTypeSize.m in Sources */,
-				D95C23B113CBC34C004BCE48 /* nanotime.c in Sources */,
 				D95C23B313CBC34C004BCE48 /* NSData+Base64.m in Sources */,
 				D95C23B513CBC34C004BCE48 /* NSData+AES256.m in Sources */,
-				D95C23B713CBC34C004BCE48 /* NSDate+Nanotime.m in Sources */,
 				D95C23B913CBC34C004BCE48 /* NSString+SHA.m in Sources */,
 				D95C23BB13CBC34C004BCE48 /* FMDatabase.m in Sources */,
 				D95C23BD13CBC34C004BCE48 /* FMDatabaseAdditions.m in Sources */,
 				D95C23BF13CBC34C004BCE48 /* FMResultSet.m in Sources */,
 				D9CD42D413D1335300CA3D75 /* DSBNDatastore.m in Sources */,
+				D992DD96141CEA98009A98B0 /* nanotime.c in Sources */,
+				D992DD99141CEA98009A98B0 /* NSDate+Nanotime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +793,7 @@
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "resources/iDrone-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -827,6 +836,7 @@
 				);
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "resources/iDrone-Prefix.pch";
 				GCC_VERSION = 4.2;
