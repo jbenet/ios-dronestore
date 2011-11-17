@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'iDrone' target in the 'iDrone' project
+//
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#endif
