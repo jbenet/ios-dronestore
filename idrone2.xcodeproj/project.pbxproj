@@ -84,8 +84,8 @@
 		D97AB75B13C75B1C006A65D3 /* bson-objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97AB75713C75B1C006A65D3 /* bson-objc.framework */; };
 		D97AB76713C791EF006A65D3 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D951076411797CD300288D3B /* libsqlite3.0.dylib */; };
 		D992DD96141CEA98009A98B0 /* nanotime.c in Sources */ = {isa = PBXBuildFile; fileRef = D992DD92141CEA98009A98B0 /* nanotime.c */; };
-		D992DD97141CEA98009A98B0 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D992DD93141CEA98009A98B0 /* nanotime.h */; };
-		D992DD98141CEA98009A98B0 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D992DD94141CEA98009A98B0 /* NSDate+Nanotime.h */; };
+		D992DD97141CEA98009A98B0 /* nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D992DD93141CEA98009A98B0 /* nanotime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D992DD98141CEA98009A98B0 /* NSDate+Nanotime.h in Headers */ = {isa = PBXBuildFile; fileRef = D992DD94141CEA98009A98B0 /* NSDate+Nanotime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D992DD99141CEA98009A98B0 /* NSDate+Nanotime.m in Sources */ = {isa = PBXBuildFile; fileRef = D992DD95141CEA98009A98B0 /* NSDate+Nanotime.m */; };
 		D9CD42D313D1335300CA3D75 /* DSBNDatastore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9CD42D113D1335200CA3D75 /* DSBNDatastore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9CD42D413D1335300CA3D75 /* DSBNDatastore.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CD42D213D1335200CA3D75 /* DSBNDatastore.m */; };
@@ -428,6 +428,8 @@
 				D95C23A713CBC329004BCE48 /* DSCollection.h in Headers */,
 				D95C23A913CBC329004BCE48 /* DSQuery.h in Headers */,
 				D95C23AB13CBC329004BCE48 /* iDrone.h in Headers */,
+				D992DD97141CEA98009A98B0 /* nanotime.h in Headers */,
+				D992DD98141CEA98009A98B0 /* NSDate+Nanotime.h in Headers */,
 				D95C23AC13CBC34C004BCE48 /* NSValue+ObjCTypeSize.h in Headers */,
 				D95C23B013CBC34C004BCE48 /* NSData+Base64.h in Headers */,
 				D95C23B413CBC34C004BCE48 /* NSData+AES256.h in Headers */,
@@ -436,8 +438,6 @@
 				D9CD42D313D1335300CA3D75 /* DSBNDatastore.h in Headers */,
 				D95C23BC13CBC34C004BCE48 /* FMDatabaseAdditions.h in Headers */,
 				D95C23BE13CBC34C004BCE48 /* FMResultSet.h in Headers */,
-				D992DD97141CEA98009A98B0 /* nanotime.h in Headers */,
-				D992DD98141CEA98009A98B0 /* NSDate+Nanotime.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
