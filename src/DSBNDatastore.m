@@ -100,8 +100,7 @@
 
   // no error and no value? malformed...
   if (!responseValue) {
-    DebugLog(@"DSBNDatastore %@ %@ invalid response", command, value,
-      response.contents);
+    DebugLog(@"DSBNDatastore %@ %@ invalid response", command, value);
     return nil;
   }
 
