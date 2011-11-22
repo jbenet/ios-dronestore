@@ -253,11 +253,14 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
       "derived from %@", attr.strategy, [DSMergeStrategy class]];
   }
 
-  NSMutableDictionary *attrs = [dsAttributeRegistry valueForKey:[self dstype]];
-  if (!attrs) {
-    [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
-      "registry for %@ is missing. (did you call [super registerAttributes] "
-      "first?).", self];
+  NSMutableDictionary *attrs = nil;
+  @synchronized(dsAttributeRegistry) {
+    attrs = [dsAttributeRegistry valueForKey:[self dstype]];
+    if (!attrs) {
+      [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
+        "registry for %@ is missing. (did you call [super registerAttributes] "
+        "first?).", self];
+    }
   }
 
   DSLog(@"[%@] registered attribute %@", self, attr.name);
