@@ -274,22 +274,40 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 
 + (void) initialize {
 
-  if (dsModelRegistry == nil)
-    dsModelRegistry = [[NSMutableDictionary alloc] init];
-  if (dsAttributeRegistry == nil)
-    dsAttributeRegistry = [[NSMutableDictionary alloc] init];
+  if (dsModelRegistry == nil) {
+    @synchronized(dsModelRegistry) {
+      if (dsModelRegistry == nil) {
+        dsModelRegistry = [[NSMutableDictionary alloc] init];
+      }
+    }
+  }
 
-  [self registerAttributes];
+  if (dsAttributeRegistry == nil) {
+    @synchronized(dsAttributeRegistry) {
+      if (dsAttributeRegistry == nil) {
+        dsAttributeRegistry = [[NSMutableDictionary alloc] init];
+      }
+    }
+  }
 
   NSString *dstype = [self dstype];
 
-  if ([dsAttributeRegistry valueForKey:dstype] == nil) {
-    [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
-    "registry for %@ is missing. (did you override [DSModel "
-    "registerAttributes] without calling [super registerAttributes]?).", self];
+  @synchronized(dsAttributeRegistry) {
+    [self registerAttributes];
+    id attrs = [dsAttributeRegistry valueForKey:dstype];
+    if (attrs == nil) {
+      [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
+      "registry for %@ is missing. (did you override [DSModel "
+      "registerAttributes] without calling [super registerAttributes]?).", self];
+    }
   }
-  [dsModelRegistry setValue:[self class] forKey:dstype];
 
+  @synchronized(dsModelRegistry) {
+    id modelValue = [self class];
+    [dsModelRegistry setValue:modelValue forKey:dstype];
+    NSLog(@"DSRegistered: %@ -- (class: %@, className: %@)",
+      dstype, modelValue, NSStringFromClass(self));
+  }
 }
 //------------------------------------------------------------------------------
 
