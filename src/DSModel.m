@@ -328,7 +328,13 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 + (Class) modelWithDSType:(NSString *)type {
   //TODO(jbenet): synch here? shouldnt need to... its basically immutable now.
   [NSClassFromString(type) dstype]; // attempt to force "initialize"
-  return [dsModelRegistry valueForKey:type];
+
+  Class model = [dsModelRegistry valueForKey:type];
+  if (model == nil) {
+    [NSException raise:@"DSInvalidVersionType" format:@"could not create class "
+      "from version type '%@'", type];
+  }
+  return model;
 }
 
 //------------------------------------------------------------------------------
