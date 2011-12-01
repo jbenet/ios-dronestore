@@ -305,7 +305,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   @synchronized(dsModelRegistry) {
     id modelValue = [self class];
     [dsModelRegistry setValue:modelValue forKey:dstype];
-    NSLog(@"DSRegistered: %@ -- (class: %@, className: %@)",
+    DSLog(@"DSRegistered: %@ -- (class: %@, className: %@)",
       dstype, modelValue, NSStringFromClass(self));
   }
 }
