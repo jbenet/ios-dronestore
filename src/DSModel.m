@@ -272,10 +272,12 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 }
 
 
-+ (void) initialize {
++ (void) initialize
+{
+  Class dsModel = [DSModel class];
 
   if (dsModelRegistry == nil) {
-    @synchronized(dsModelRegistry) {
+    @synchronized(dsModel) {
       if (dsModelRegistry == nil) {
         dsModelRegistry = [[NSMutableDictionary alloc] init];
       }
@@ -283,7 +285,7 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
   }
 
   if (dsAttributeRegistry == nil) {
-    @synchronized(dsAttributeRegistry) {
+    @synchronized(dsModel) {
       if (dsAttributeRegistry == nil) {
         dsAttributeRegistry = [[NSMutableDictionary alloc] init];
       }
