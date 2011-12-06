@@ -272,24 +272,44 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 }
 
 
-+ (void) initialize {
++ (void) initialize
+{
+  Class dsModel = [DSModel class];
 
-  if (dsModelRegistry == nil)
-    dsModelRegistry = [[NSMutableDictionary alloc] init];
-  if (dsAttributeRegistry == nil)
-    dsAttributeRegistry = [[NSMutableDictionary alloc] init];
+  if (dsModelRegistry == nil) {
+    @synchronized(dsModel) {
+      if (dsModelRegistry == nil) {
+        dsModelRegistry = [[NSMutableDictionary alloc] init];
+      }
+    }
+  }
 
-  [self registerAttributes];
+  if (dsAttributeRegistry == nil) {
+    @synchronized(dsModel) {
+      if (dsAttributeRegistry == nil) {
+        dsAttributeRegistry = [[NSMutableDictionary alloc] init];
+      }
+    }
+  }
 
   NSString *dstype = [self dstype];
 
-  if ([dsAttributeRegistry valueForKey:dstype] == nil) {
-    [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
-    "registry for %@ is missing. (did you override [DSModel "
-    "registerAttributes] without calling [super registerAttributes]?).", self];
+  @synchronized(dsAttributeRegistry) {
+    [self registerAttributes];
+    id attrs = [dsAttributeRegistry valueForKey:dstype];
+    if (attrs == nil) {
+      [NSException raise:@"DSAttributeRegisteryMissing" format:@"Attribute "
+      "registry for %@ is missing. (did you override [DSModel "
+      "registerAttributes] without calling [super registerAttributes]?).", self];
+    }
   }
-  [dsModelRegistry setValue:[self class] forKey:dstype];
 
+  @synchronized(dsModelRegistry) {
+    id modelValue = [self class];
+    [dsModelRegistry setValue:modelValue forKey:dstype];
+    DSLog(@"DSRegistered: %@ -- (class: %@, className: %@)",
+      dstype, modelValue, NSStringFromClass(self));
+  }
 }
 //------------------------------------------------------------------------------
 
@@ -310,7 +330,13 @@ static NSMutableDictionary *dsAttributeRegistry = nil;
 + (Class) modelWithDSType:(NSString *)type {
   //TODO(jbenet): synch here? shouldnt need to... its basically immutable now.
   [NSClassFromString(type) dstype]; // attempt to force "initialize"
-  return [dsModelRegistry valueForKey:type];
+
+  Class model = [dsModelRegistry valueForKey:type];
+  if (model == nil) {
+    [NSException raise:@"DSInvalidVersionType" format:@"could not create class "
+      "from version type '%@'", type];
+  }
+  return model;
 }
 
 //------------------------------------------------------------------------------
